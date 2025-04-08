@@ -156,7 +156,7 @@ class ATETestLookup:
 
 def main():
     # Replace with your actual testprogram directory
-    testprogram_dir = "C:/Users/rejav/Documents/SilTest-side-projects/GitHub/ATE_Debug_Assisntant-Semantic_Mapper/sample_testprogram_elmos_v52241b/program"
+    testprogram_dir = "C:/Users/rejav/Documents/SilTest-side-projects/GitHub/ATE_Debug_Assisntant-Semantic_Mapper/sample_testprogram_elmos_v52241b"
     
     # Create a sample test directory and file for demonstration if they don't exist
     if not os.path.exists(testprogram_dir):
@@ -207,7 +207,7 @@ def main():
         lookup.create_embeddings()
         
         # Search for a specific test name
-        test_name = "smps_ps_err"
+        test_name = "DNL min"#"(L4ADC)Hist DNL min static"#"smps_ps_err"
         print(f"\nSearching for test: {test_name}")
         
         # Using embeddings (semantic search)
