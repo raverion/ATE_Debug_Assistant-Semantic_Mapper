@@ -14,12 +14,19 @@ class ATETestLookup:
             testprogram_dir: Path to the directory containing testprogram source files
         """
         self.testprogram_dir = testprogram_dir
-        self.model = SentenceTransformer('all-MiniLM-L6-v2')
+        # Try to load with specific version compatibility
+        try:
+            self.model = SentenceTransformer('all-MiniLM-L6-v2')
+        except Exception as e:
+            print(f"Error initializing SentenceTransformer: {e}")
+            print("Please make sure you have installed the correct versions:")
+            print("pip install sentence-transformers==2.2.2 transformers==4.30.0 torch==2.0.1")
+            raise e
+            
         self.function_info = []  # Will store (file_path, function_name, function_content)
         self.function_embeddings = None
         
-    ##def scan_files(self, file_extensions: List[str] = ['.c', '.cpp', '.h', '.py']):
-    def scan_files(self, file_extensions: List[str] = ['.cpp', '.h']):
+    def scan_files(self, file_extensions: List[str] = ['.c', '.cpp', '.h', '.py']):
         """
         Scan all files with given extensions in the testprogram directory and extract functions.
         
@@ -131,39 +138,103 @@ class ATETestLookup:
                 results.append((file_path, function_name))
         return results
 
-# Usage example
+    def extract_function_content(self, file_path, function_name):
+        """
+        Extract the content of a specific function from a file.
+        
+        Args:
+            file_path: Path to the file containing the function
+            function_name: Name of the function to extract
+            
+        Returns:
+            String containing the function content or None if not found
+        """
+        for path, fname, content in self.function_info:
+            if path == file_path and fname == function_name:
+                return content
+        return None
+
 def main():
     # Replace with your actual testprogram directory
-    ##testprogram_dir = "./testprogram"
     testprogram_dir = "C:/Users/rejav/Documents/SilTest-side-projects/GitHub/ATE_Debug_Assisntant-Semantic_Mapper/sample_testprogram_elmos_v52241b/program"
     
-    # Create the ATE test lookup tool
-    lookup = ATETestLookup(testprogram_dir)
+    # Create a sample test directory and file for demonstration if they don't exist
+    if not os.path.exists(testprogram_dir):
+        os.makedirs(testprogram_dir)
+        with open(os.path.join(testprogram_dir, "sample_test.c"), "w") as f:
+            f.write("""
+            #include <stdio.h>
+            
+            // Function that measures SMPS power supply error
+            int measure_smps_ps_err(int channel) {
+                // Initialize measurement equipment
+                int result = 0;
+                
+                // Perform smps_ps_err test
+                result = perform_measurement(channel, "smps_ps_err");
+                
+                return result;
+            }
+            
+            int perform_measurement(int channel, char* test_name) {
+                // This is a simulated function
+                return 0;
+            }
+            """)
+        
+        with open(os.path.join(testprogram_dir, "another_test.py"), "w") as f:
+            f.write("""
+            def test_power_supply():
+                # This function tests various power supply parameters
+                print("Testing power supply")
+                
+                # Test SMPS error conditions
+                error_val = check_smps_ps_err()
+                return error_val
+                
+            def check_smps_ps_err():
+                # This function specifically checks for SMPS power supply errors
+                print("Checking SMPS power supply errors")
+                return 0
+            """)
     
-    # Scan files and create embeddings
-    lookup.scan_files()
-    lookup.create_embeddings()
-    
-    # Search for a specific test name
-    test_name = "smps_ps_err"
-    print(f"\nSearching for test: {test_name}")
-    
-    # Using embeddings (semantic search)
-    results = lookup.find_test(test_name)
-    print("\nTop matches (using embeddings):")
-    for file_path, function_name, score in results:
-        print(f"File: {file_path}")
-        print(f"Function: {function_name}")
-        print(f"Similarity: {score:.4f}")
-        print("-" * 50)
-    
-    # Using regex (direct pattern matching)
-    print("\nDirect matches (using regex):")
-    direct_matches = lookup.search_by_regex(test_name)
-    for file_path, function_name in direct_matches:
-        print(f"File: {file_path}")
-        print(f"Function: {function_name}")
-        print("-" * 50)
+    try:
+        # Create the ATE test lookup tool
+        lookup = ATETestLookup(testprogram_dir)
+        
+        # Scan files and create embeddings
+        lookup.scan_files()
+        lookup.create_embeddings()
+        
+        # Search for a specific test name
+        test_name = "smps_ps_err"
+        print(f"\nSearching for test: {test_name}")
+        
+        # Using embeddings (semantic search)
+        results = lookup.find_test(test_name)
+        print("\nTop matches (using embeddings):")
+        for file_path, function_name, score in results:
+            print(f"File: {file_path}")
+            print(f"Function: {function_name}")
+            print(f"Similarity: {score:.4f}")
+            
+            # Print a snippet of the function content
+            function_content = lookup.extract_function_content(file_path, function_name)
+            if function_content:
+                print("Function snippet:")
+                snippet = function_content[:200] + "..." if len(function_content) > 200 else function_content
+                print(snippet)
+            print("-" * 50)
+        
+        # Using regex (direct pattern matching)
+        print("\nDirect matches (using regex):")
+        direct_matches = lookup.search_by_regex(test_name)
+        for file_path, function_name in direct_matches:
+            print(f"File: {file_path}")
+            print(f"Function: {function_name}")
+            print("-" * 50)
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 if __name__ == "__main__":
     main()
