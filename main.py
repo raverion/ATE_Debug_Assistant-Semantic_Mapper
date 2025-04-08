@@ -18,7 +18,8 @@ class ATETestLookup:
         self.function_info = []  # Will store (file_path, function_name, function_content)
         self.function_embeddings = None
         
-    def scan_files(self, file_extensions: List[str] = ['.c', '.cpp', '.h', '.py']):
+    ##def scan_files(self, file_extensions: List[str] = ['.c', '.cpp', '.h', '.py']):
+    def scan_files(self, file_extensions: List[str] = ['.cpp', '.h']):
         """
         Scan all files with given extensions in the testprogram directory and extract functions.
         
@@ -133,7 +134,8 @@ class ATETestLookup:
 # Usage example
 def main():
     # Replace with your actual testprogram directory
-    testprogram_dir = "./testprogram"
+    ##testprogram_dir = "./testprogram"
+    testprogram_dir = "C:/Users/rejav/Documents/SilTest-side-projects/GitHub/ATE_Debug_Assisntant-Semantic_Mapper/sample_testprogram_elmos_v52241b/program"
     
     # Create the ATE test lookup tool
     lookup = ATETestLookup(testprogram_dir)
