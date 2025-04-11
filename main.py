@@ -113,16 +113,34 @@ class ATETestLookup:
                 self.code_blocks.append((file_path, 'function', func_name, func_content, start_line, end_line))
         
         elif file_path.endswith(('.c', '.cpp', '.h')):
-            # C/C++ function pattern - simplified for brevity
-            pattern = r'(?:\w+(?:\s*[*&])?)\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\([^)]*\)\s*\{(?:[^{}]|(?R))*\}'
+            # C/C++ function pattern - simplified, without recursive pattern matching
+            # Look for function declarations with opening brace
+            pattern = r'(?:\w+(?:\s*[*&])?)\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\([^)]*\)\s*\{'
             
             for match in re.finditer(pattern, content):
                 func_name = match.group(1)
-                if func_name not in ['if', 'for', 'while', 'switch']:
-                    func_content = match.group(0)
+                start_pos = match.start()
+                
+                # Skip if the function name is a C/C++ keyword
+                if func_name in ['if', 'for', 'while', 'switch']:
+                    continue
+                
+                # Find the matching closing brace
+                # This is a simple approach that might not handle all nested braces correctly
+                open_braces = 1
+                pos = match.end()
+                while open_braces > 0 and pos < len(content):
+                    if content[pos] == '{':
+                        open_braces += 1
+                    elif content[pos] == '}':
+                        open_braces -= 1
+                    pos += 1
+                
+                if open_braces == 0:
+                    func_content = content[start_pos:pos]
                     
                     # Calculate line numbers
-                    start_line = content[:match.start()].count('\n') + 1
+                    start_line = content[:start_pos].count('\n') + 1
                     end_line = start_line + func_content.count('\n')
                     
                     self.code_blocks.append((file_path, 'function', func_name, func_content, start_line, end_line))
@@ -147,17 +165,30 @@ class ATETestLookup:
         
         elif file_path.endswith(('.cpp', '.h')):
             # C++ class pattern
-            pattern = r'class\s+([a-zA-Z_][a-zA-Z0-9_]*)[^{]*\{(?:[^{}]|(?R))*\}'
+            pattern = r'class\s+([a-zA-Z_][a-zA-Z0-9_]*)[^{]*\{'
             
             for match in re.finditer(pattern, content):
                 class_name = match.group(1)
-                class_content = match.group(0)
+                start_pos = match.start()
                 
-                # Calculate line numbers
-                start_line = content[:match.start()].count('\n') + 1
-                end_line = start_line + class_content.count('\n')
+                # Find the matching closing brace
+                open_braces = 1
+                pos = match.end()
+                while open_braces > 0 and pos < len(content):
+                    if content[pos] == '{':
+                        open_braces += 1
+                    elif content[pos] == '}':
+                        open_braces -= 1
+                    pos += 1
                 
-                self.code_blocks.append((file_path, 'class', class_name, class_content, start_line, end_line))
+                if open_braces == 0:
+                    class_content = content[start_pos:pos]
+                    
+                    # Calculate line numbers
+                    start_line = content[:start_pos].count('\n') + 1
+                    end_line = start_line + class_content.count('\n')
+                    
+                    self.code_blocks.append((file_path, 'class', class_name, class_content, start_line, end_line))
     
     def _extract_variables(self, file_path: str, content: str):
         """
@@ -297,8 +328,11 @@ class ATETestLookup:
                 results['exact_matches'].append((file_path, count))
         
         # 4. Regex pattern matching for partial matches or variations
-        # This can find test names that appear as part of other words or with different separators
-        pattern = r'[\w_]*' + re.escape(test_name).replace('_', '[\W_]?') + r'[\w_]*'
+        # Fix the escape sequence issue
+        escaped_test_name = re.escape(test_name)
+        # Use raw string for \W character class
+        pattern = r'[\w_]*' + escaped_test_name.replace('_', r'[\W_]?') + r'[\w_]*'
+        
         for file_path, content in self.file_info:
             matches = re.findall(pattern, content, re.IGNORECASE)
             if matches:
@@ -533,7 +567,7 @@ def main():
         lookup.create_embeddings()
         
         # Search for a specific test name
-        test_name = "smps_ps_err"
+        test_name = "smps_ps_err"  # Changed to a test that exists in the sample files
         print(f"\nComprehensive search for test: {test_name}")
         
         results = lookup.find_test(test_name)
