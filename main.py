@@ -17,6 +17,7 @@ class ATETestLookup:
         # Try to load with specific version compatibility
         try:
             self.model = SentenceTransformer('all-MiniLM-L6-v2')
+            print("Initializing: SentenceTransformer('all-MiniLM-L6-v2')")
         except Exception as e:
             print(f"Error initializing SentenceTransformer: {e}")
             print("Please make sure you have installed the correct versions:")
@@ -559,16 +560,17 @@ def main():
             """)
     
     try:
+        
+        # Search for a specific test name
+        test_name = "f_osc_3"
+        print(f"\nComprehensive search for test: {test_name}")
+
         # Create the ATE test lookup tool
         lookup = ATETestLookup(testprogram_dir)
         
         # Scan files and create embeddings
         lookup.scan_files()
         lookup.create_embeddings()
-        
-        # Search for a specific test name
-        test_name = "smps_ps_err"  # Changed to a test that exists in the sample files
-        print(f"\nComprehensive search for test: {test_name}")
         
         results = lookup.find_test(test_name)
         
