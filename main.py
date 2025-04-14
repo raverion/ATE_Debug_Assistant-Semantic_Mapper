@@ -1,8 +1,8 @@
 import os
 import re
+import pickle
 from typing import Dict, List, Tuple, Counter
 import numpy as np
-from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 
 class ATETestLookup:
@@ -14,15 +14,7 @@ class ATETestLookup:
             testprogram_dir: Path to the directory containing testprogram source files
         """
         self.testprogram_dir = testprogram_dir
-        # Try to load with specific version compatibility
-        try:
-            print("Initializing: SentenceTransformer('all-MiniLM-L6-v2')")
-            self.model = SentenceTransformer('all-MiniLM-L6-v2')
-        except Exception as e:
-            print(f"Error initializing SentenceTransformer: {e}")
-            print("Please make sure you have installed the correct versions:")
-            print("pip install sentence-transformers==2.2.2 transformers==4.30.0 torch==2.0.1")
-            raise e
+        self.model = self._get_cached_model()
             
         self.file_info = []  # Will store (file_path, file_content)
         self.file_embeddings = None
@@ -30,6 +22,48 @@ class ATETestLookup:
         # Store info about code blocks for more specific lookup
         self.code_blocks = []  # Will store (file_path, block_type, block_name, block_content, start_line, end_line)
         self.code_block_embeddings = None
+    
+    def _get_cached_model(self, model_name='all-MiniLM-L6-v2', cache_path='sentence_transformer_cache.pkl'):
+        """
+        Load the SentenceTransformer model from cache if available, otherwise initialize and cache it.
+        
+        Args:
+            model_name: Name of the sentence transformer model to use
+            cache_path: Path to store the cached model
+            
+        Returns:
+            The loaded SentenceTransformer model
+        """
+        if os.path.exists(cache_path):
+            print(f"Loading SenteceTransformer model from cache: '{cache_path}'")
+            try:
+                with open(cache_path, 'rb') as f:
+                    return pickle.load(f)
+            except Exception as e:
+                print(f"Error loading cached model: {e}")
+                print("Will initialize a new model instead.")
+        
+        # If cache doesn't exist or couldn't be loaded, initialize the model
+        print(f"Initializing SentenceTransformer model: '{model_name}'")
+        try:
+            # Import only when needed
+            from sentence_transformers import SentenceTransformer
+            model = SentenceTransformer(model_name)
+            
+            # Save the model to cache
+            print(f"Saving model to cache: {cache_path}")
+            try:
+                with open(cache_path, 'wb') as f:
+                    pickle.dump(model, f)
+            except Exception as e:
+                print(f"Error caching model: {e}")
+            
+            return model
+        except Exception as e:
+            print(f"Error initializing SentenceTransformer: {e}")
+            print("Please make sure you have installed the correct versions:")
+            print("pip install sentence-transformers==2.2.2 transformers==4.30.0 torch==2.0.1")
+            raise e
         
     def scan_files(self, file_extensions: List[str] = ['.c', '.cpp', '.h', '.py']):
         """
@@ -434,10 +468,9 @@ def main():
         print("Specified testprogram directory does not exist.")
     
     try:
-        
         # Search for a specific test name
         test_name = "f_osc_3"
-        print(f"\nComprehensive search for test: {test_name}")
+        print(f"\nComprehensive search for test: '{test_name}'")
 
         # Create the ATE test lookup tool
         lookup = ATETestLookup(testprogram_dir)
