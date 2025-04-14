@@ -16,8 +16,8 @@ class ATETestLookup:
         self.testprogram_dir = testprogram_dir
         # Try to load with specific version compatibility
         try:
-            self.model = SentenceTransformer('all-MiniLM-L6-v2')
             print("Initializing: SentenceTransformer('all-MiniLM-L6-v2')")
+            self.model = SentenceTransformer('all-MiniLM-L6-v2')
         except Exception as e:
             print(f"Error initializing SentenceTransformer: {e}")
             print("Please make sure you have installed the correct versions:")
@@ -430,134 +430,8 @@ def main():
     # Replace with your actual testprogram directory
     testprogram_dir = "C:/Users/rejav/Documents/SilTest-side-projects/GitHub/ATE_Debug_Assisntant-Semantic_Mapper/sample_testprogram_elmos_v52241b"
     
-    # Create a sample test directory and file for demonstration if they don't exist
     if not os.path.exists(testprogram_dir):
-        os.makedirs(testprogram_dir)
-        
-        # Create a C file with the test name in various contexts
-        with open(os.path.join(testprogram_dir, "smps_test.c"), "w") as f:
-            f.write("""
-            #include <stdio.h>
-            
-            // Constants for SMPS testing
-            #define SMPS_PS_ERR_THRESHOLD 0.05
-            #define MAX_SMPS_RETRIES 3
-            
-            // Global variables
-            float g_smps_ps_err_value = 0.0;
-            
-            // Function that measures SMPS power supply error
-            int measure_smps_ps_err(int channel) {
-                // Initialize measurement equipment
-                int result = 0;
-                
-                printf("Starting SMPS PS error measurement on channel %d\\n", channel);
-                
-                // Perform smps_ps_err test
-                result = perform_measurement(channel, "smps_ps_err");
-                
-                // Store the measurement for later reference
-                g_smps_ps_err_value = result * 0.001;
-                
-                return result;
-            }
-            
-            // Supporting function for power supply testing
-            int perform_measurement(int channel, char* test_name) {
-                // This is just a simulated function
-                printf("Performing measurement: %s\\n", test_name);
-                return 42;  // Simulated measurement value
-            }
-            
-            // Test handler function
-            void run_power_supply_tests() {
-                int smps_results[3];
-                
-                // Run SMPS tests
-                smps_results[0] = measure_smps_ps_err(1);
-                
-                // Process results
-                if (g_smps_ps_err_value > SMPS_PS_ERR_THRESHOLD) {
-                    printf("SMPS PS Error exceeded threshold!\\n");
-                }
-            }
-            """)
-        
-        # Create another C file with fewer references to the test
-        with open(os.path.join(testprogram_dir, "test_utils.c"), "w") as f:
-            f.write("""
-            #include <stdio.h>
-            
-            // Test utility functions
-            
-            // Log test results to file
-            void log_test_result(char* test_name, int result) {
-                printf("Logging result for %s: %d\\n", test_name, result);
-                // In a real implementation, this would write to a log file
-            }
-            
-            // Get test limits
-            typedef struct {
-                float low_limit;
-                float high_limit;
-            } test_limits_t;
-            
-            test_limits_t get_test_limits(char* test_name) {
-                test_limits_t limits;
-                
-                // Set default limits
-                limits.low_limit = -1.0;
-                limits.high_limit = 1.0;
-                
-                // Test-specific limits
-                if (strcmp(test_name, "smps_ps_err") == 0) {
-                    limits.low_limit = -0.05;
-                    limits.high_limit = 0.05;
-                }
-                
-                return limits;
-            }
-            """)
-        
-        # Create a Python file with the test name in various contexts
-        with open(os.path.join(testprogram_dir, "smps_analyzer.py"), "w") as f:
-            f.write("""
-            # SMPS Power Supply Analysis Module
-            
-            class PowerSupplyAnalyzer:
-                def __init__(self):
-                    self.test_results = {}
-                    self.smps_ps_err_threshold = 0.05
-                
-                def analyze_smps_ps_err(self, measurement_data):
-                    \"\"\"
-                    Analyze SMPS power supply error measurements
-                    \"\"\"
-                    print("Analyzing SMPS PS error data")
-                    
-                    # Process the measurement data
-                    error_value = max(measurement_data)
-                    
-                    # Store result
-                    self.test_results['smps_ps_err'] = error_value
-                    
-                    # Return pass/fail status
-                    return error_value <= self.smps_ps_err_threshold
-                
-                def get_test_result(self, test_name):
-                    \"\"\"
-                    Get result for a specific test
-                    \"\"\"
-                    return self.test_results.get(test_name, None)
-            
-            # Utility functions
-            def process_data_file(filename):
-                # In a real implementation, this would read from a data file
-                test_data = {
-                    'smps_ps_err': [0.01, 0.02, 0.015, 0.03]
-                }
-                return test_data
-            """)
+        print("Specified testprogram directory does not exist.")
     
     try:
         
