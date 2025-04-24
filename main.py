@@ -407,12 +407,13 @@ class ATETestLookup:
         
         print("Embeddings created successfully")
     
-    def find_test(self, test_name: str, top_n: int = 5) -> Dict:
+    def find_test(self, test_name: str, test_number: str = None, top_n: int = 5) -> Dict:
         """
         Comprehensive search for the test name across all files and code blocks.
         
         Args:
             test_name: The ATE test name to look up
+            test_number: The test number to look for (optional)
             top_n: Number of top matches to return
             
         Returns:
@@ -422,10 +423,11 @@ class ATETestLookup:
             'file_semantic_matches': [],
             'code_block_semantic_matches': [],
             'exact_matches': [],
-            'regex_matches': []
+            'regex_matches': [],
+            'test_number_matches': []
         }
         
-        # Clean test name to focus on core identifier (remove common prefixes/suffixes that might be noise)
+        # Clean test name to focus on core identifier
         cleaned_test_name = self._clean_test_name(test_name)
         
         # 1. Semantic search on whole files
@@ -478,9 +480,7 @@ class ATETestLookup:
                 results['exact_matches'].append((file_path, count, occurrences))
         
         # 4. Regex pattern matching for partial matches or variations
-        # Fix the escape sequence issue
         escaped_test_name = re.escape(test_name)
-        # Use raw string for \W character class
         pattern = r'[\w_]*' + escaped_test_name.replace('_', r'[\W_]?') + r'[\w_]*'
         
         for file_path, content in self.file_info:
@@ -497,11 +497,22 @@ class ATETestLookup:
                 
                 results['regex_matches'].append((file_path, len(matches), match_lines, matches[:5]))
         
+        # 5. Test number matching (new functionality)
+        if test_number:
+            for file_path, content in self.file_info:
+                if test_number in content:
+                    # Count occurrences and get line numbers
+                    count = content.count(test_number)
+                    lines = content.split('\n')
+                    line_numbers = [i+1 for i, line in enumerate(lines) if test_number in line]
+                    results['test_number_matches'].append((file_path, count, line_numbers))
+        
         # Sort results by relevance
         results['file_semantic_matches'].sort(key=lambda x: x[1], reverse=True)
         results['code_block_semantic_matches'].sort(key=lambda x: x[5], reverse=True)
         results['exact_matches'].sort(key=lambda x: x[1], reverse=True)
         results['regex_matches'].sort(key=lambda x: x[1], reverse=True)
+        results['test_number_matches'].sort(key=lambda x: x[1], reverse=True)
         
         # Calculate overall most relevant files with improved weighting
         file_scores = {}
@@ -512,7 +523,7 @@ class ATETestLookup:
         
         # Add scores from exact matches with higher weight
         for file_path, count, _ in results['exact_matches']:
-            file_scores[file_path] = file_scores.get(file_path, 0) + count * 2.5  # Exact matches weighted higher
+            file_scores[file_path] = file_scores.get(file_path, 0) + count * 2.5
         
         # Add scores from regex matches
         for file_path, count, _, _ in results['regex_matches']:
@@ -520,14 +531,27 @@ class ATETestLookup:
         
         # Add scores from code block matches with element type weights
         for file_path, block_type, block_name, _, _, score in results['code_block_semantic_matches']:
-            # Adjust based on block type (already weighted in the scoring above)
             element_boost = 1.0
             
-            # Additional boost if the block name exactly matches the test name
             if block_name and (block_name == test_name or block_name == cleaned_test_name):
-                element_boost = 3.0  # Significant boost for direct name matches
+                element_boost = 3.0
             
             file_scores[file_path] = file_scores.get(file_path, 0) + score * element_boost
+        
+        # NEW: Significant boost for files that contain both test name and test number
+        if test_number:
+            test_number_files = {file_path for file_path, _, _ in results['test_number_matches']}
+            test_name_files = {file_path for file_path, _, _ in results['exact_matches']}
+            
+            # Files that contain both get a major boost
+            files_with_both = test_number_files & test_name_files
+            for file_path in files_with_both:
+                file_scores[file_path] = file_scores.get(file_path, 0) + 10.0  # Large boost
+            
+            # Files with just the test number get a moderate boost
+            files_with_number_only = test_number_files - test_name_files
+            for file_path in files_with_number_only:
+                file_scores[file_path] = file_scores.get(file_path, 0) + 3.0
         
         # Sort files by overall relevance score
         most_relevant_files = sorted(file_scores.items(), key=lambda x: x[1], reverse=True)
@@ -688,9 +712,10 @@ def main():
         print("Specified testprogram directory does not exist.")
     
     try:
-        # Search for a specific test name
-        test_name = "v_source_off"
-        print(f"\nComprehensive search for test: '{test_name}'")
+        # Search for a specific test name and number
+        test_name = "v_source_off_hys"
+        test_number = "8865"  # Example test number
+        print(f"\nComprehensive search for test: '{test_name}' (number: {test_number})")
 
         # Create the ATE test lookup tool
         lookup = ATETestLookup(testprogram_dir)
@@ -699,7 +724,7 @@ def main():
         lookup.scan_files()
         lookup.create_embeddings()
         
-        results = lookup.find_test(test_name)
+        results = lookup.find_test(test_name, test_number)
         
         # Display the most relevant files first
         print("\n--- MOST RELEVANT FILES (OVERALL RANKING) ---")
@@ -711,44 +736,60 @@ def main():
             line_numbers = lookup.find_test_locations(file_path, test_name)
             if line_numbers:
                 print(f"Test name appears on lines: {', '.join(map(str, line_numbers))}")
+            
+            # Show where the test number appears in this file
+            if test_number:
+                number_lines = lookup.find_test_locations(file_path, test_number)
+                if number_lines:
+                    print(f"Test number appears on lines: {', '.join(map(str, number_lines))}")
                 
-                # Analyze how the test is used in this file
-                usage_analysis = lookup.analyze_test_usage(file_path, test_name)
+            # Analyze how the test is used in this file
+            usage_analysis = lookup.analyze_test_usage(file_path, test_name)
+            
+            # Print detailed usage information
+            usage_types = []
+            if usage_analysis['is_function']:
+                usage_types.append("FUNCTION NAME")
+            if usage_analysis['is_output_var']:
+                usage_types.append("OUTPUT VARIABLE")
+            if usage_analysis['in_comment']:
+                usage_types.append("IN COMMENTS")
+            if usage_analysis['in_string']:
+                usage_types.append("IN STRINGS")
+            if usage_analysis['is_operand']:
+                usage_types.append("AS OPERAND")
                 
-                # Print detailed usage information
-                usage_types = []
-                if usage_analysis['is_function']:
-                    usage_types.append("FUNCTION NAME")
-                if usage_analysis['is_output_var']:
-                    usage_types.append("OUTPUT VARIABLE")
-                if usage_analysis['in_comment']:
-                    usage_types.append("IN COMMENTS")
-                if usage_analysis['in_string']:
-                    usage_types.append("IN STRINGS")
-                if usage_analysis['is_operand']:
-                    usage_types.append("AS OPERAND")
-                    
-                if usage_types:
-                    print(f"Used as: {', '.join(usage_types)}")
+            if usage_types:
+                print(f"Used as: {', '.join(usage_types)}")
+            
+            # Show context for the most important usage
+            if usage_analysis['important_lines']:
+                priority_order = {'function': 1, 'output_var': 2, 'comment': 3, 'string': 4, 'operand': 5}
+                important_line = sorted(usage_analysis['important_lines'], 
+                                       key=lambda x: priority_order.get(x[1], 99))[0]
                 
-                # Show context for the most important usage
-                if usage_analysis['important_lines']:
-                    # Prioritize function names, output vars, comments, and strings over operands
-                    priority_order = {'function': 1, 'output_var': 2, 'comment': 3, 'string': 4, 'operand': 5}
-                    important_line = sorted(usage_analysis['important_lines'], 
-                                           key=lambda x: priority_order.get(x[1], 99))[0]
-                    
-                    line_num, usage_type, _ = important_line
-                    print(f"\nContext for {usage_type.upper()} usage on line {line_num}:")
-                    context = lookup.extract_context(file_path, line_num)
-                    print(context)
-                else:
-                    # If no detailed analysis is available, show context for the first occurrence
+                line_num, usage_type, _ = important_line
+                print(f"\nContext for {usage_type.upper()} usage on line {line_num}:")
+                context = lookup.extract_context(file_path, line_num)
+                print(context)
+            else:
+                # If no detailed analysis is available, show context for the first occurrence
+                if line_numbers:
                     print("\nContext for first occurrence:")
                     context = lookup.extract_context(file_path, line_numbers[0])
                     print(context)
                     
             print("-" * 50)
+        
+        # Display test number matches if provided
+        if test_number and results['test_number_matches']:
+            print("\n--- TEST NUMBER MATCHES ---")
+            for file_path, count, line_numbers in results['test_number_matches'][:5]:
+                print(f"File: {file_path}")
+                print(f"Occurrences: {count}")
+                print(f"Line numbers: {', '.join(map(str, line_numbers[:10]))}" + 
+                     (", ..." if len(line_numbers) > 10 else ""))
+                print("-" * 50)
         
         # Display detailed semantic matches for code blocks
         print("\n--- TOP CODE BLOCK MATCHES ---")
