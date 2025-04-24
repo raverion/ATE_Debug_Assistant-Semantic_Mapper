@@ -22,6 +22,17 @@ class ATETestLookup:
         # Store info about code blocks for more specific lookup
         self.code_blocks = []  # Will store (file_path, block_type, block_name, block_content, start_line, end_line)
         self.code_block_embeddings = None
+        
+        # Element type weights
+        self.element_weights = {
+            'function': 3.0,      # Higher weight for function declarations
+            'output_var': 2.5,    # Higher weight for output variables
+            'comment': 2.0,       # Higher weight for comments
+            'string': 2.0,        # Higher weight for string literals
+            'class': 1.5,         # Medium weight for class declarations
+            'variable': 0.8,      # Lower weight for general variables
+            'operand_var': 0.5    # Lowest weight for operand variables
+        }
     
     def _get_cached_model(self, model_name='all-MiniLM-L6-v2', cache_path='sentence_transformer_cache.pkl'):
         """
@@ -117,7 +128,7 @@ class ATETestLookup:
         # Extract classes
         self._extract_classes(file_path, content)
         
-        # Extract variables
+        # Extract variables (with role detection)
         self._extract_variables(file_path, content)
         
         # Extract comments
@@ -227,29 +238,79 @@ class ATETestLookup:
     
     def _extract_variables(self, file_path: str, content: str):
         """
-        Extract variable definitions from file content.
+        Extract variable definitions from file content with role detection (output vs operand).
         """
-        # Common variable declaration patterns
-        patterns = [
-            # C/C++ variable declarations
-            r'(?:\w+(?:\s*[*&])?)\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*(?:=|;)',
-            # Python variable assignments
-            r'([a-zA-Z_][a-zA-Z0-9_]*)\s*='
-        ]
+        # Process line by line to better determine context
+        lines = content.split('\n')
         
-        for pattern in patterns:
-            for match in re.finditer(pattern, content):
+        # C/C++ output variable patterns (typically on the left side of assignments)
+        c_output_pattern = r'(?:\w+(?:\s*[*&])?)\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*'
+        c_return_pattern = r'return\s+([a-zA-Z_][a-zA-Z0-9_]*);'
+        
+        # Python output variable patterns
+        py_output_pattern = r'([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*'
+        py_return_pattern = r'return\s+([a-zA-Z_][a-zA-Z0-9_]*)'
+        
+        # Operand patterns (variables used on right side of expressions)
+        operand_pattern = r'=\s*[^=]*?\b([a-zA-Z_][a-zA-Z0-9_]*)\b'
+        
+        # Common skip keywords
+        skip_keywords = ['if', 'for', 'while', 'return', 'switch', 'case', 
+                         'break', 'continue', 'else', 'elif', 'def', 'class', 
+                         'import', 'from', 'True', 'False', 'None']
+        
+        for i, line in enumerate(lines):
+            # Skip comments
+            if line.strip().startswith('//') or line.strip().startswith('#'):
+                continue
+                
+            # Extract output variables in C/C++
+            if file_path.endswith(('.c', '.cpp', '.h')):
+                # Find variable declarations with assignments
+                for match in re.finditer(c_output_pattern, line):
+                    var_name = match.group(1)
+                    if var_name not in skip_keywords:
+                        var_content = match.group(0) + line[match.end():].split(';')[0]
+                        self.code_blocks.append((file_path, 'output_var', var_name, var_content, i+1, i+1))
+                
+                # Find return variables
+                for match in re.finditer(c_return_pattern, line):
+                    var_name = match.group(1)
+                    if var_name not in skip_keywords:
+                        var_content = match.group(0)
+                        self.code_blocks.append((file_path, 'output_var', var_name, var_content, i+1, i+1))
+                
+            # Extract output variables in Python
+            if file_path.endswith('.py'):
+                # Find variable assignments
+                for match in re.finditer(py_output_pattern, line):
+                    var_name = match.group(1)
+                    if var_name not in skip_keywords:
+                        var_content = match.group(0) + line[match.end():]
+                        self.code_blocks.append((file_path, 'output_var', var_name, var_content, i+1, i+1))
+                
+                # Find return variables
+                for match in re.finditer(py_return_pattern, line):
+                    var_name = match.group(1)
+                    if var_name not in skip_keywords:
+                        var_content = match.group(0)
+                        self.code_blocks.append((file_path, 'output_var', var_name, var_content, i+1, i+1))
+            
+            # Extract operand variables (with lower weight)
+            for match in re.finditer(operand_pattern, line):
                 var_name = match.group(1)
-                var_content = match.group(0)
-                
-                # Skip keywords
-                if var_name in ['if', 'for', 'while', 'return', 'switch', 'case']:
-                    continue
-                
-                # Calculate line numbers
-                line_num = content[:match.start()].count('\n') + 1
-                
-                self.code_blocks.append((file_path, 'variable', var_name, var_content, line_num, line_num))
+                if var_name not in skip_keywords:
+                    var_content = line
+                    self.code_blocks.append((file_path, 'operand_var', var_name, var_content, i+1, i+1))
+            
+            # Extract defined variables that might not be assigned yet
+            if file_path.endswith(('.c', '.cpp', '.h')):
+                var_pattern = r'(?:\w+(?:\s*[*&])?)\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*;'
+                for match in re.finditer(var_pattern, line):
+                    var_name = match.group(1)
+                    if var_name not in skip_keywords:
+                        var_content = match.group(0)
+                        self.code_blocks.append((file_path, 'variable', var_name, var_content, i+1, i+1))
     
     def _extract_comments(self, file_path: str, content: str):
         """
@@ -277,6 +338,19 @@ class ATETestLookup:
                 comment = match.group(0)
                 line_num = content[:match.start()].count('\n') + 1
                 self.code_blocks.append((file_path, 'comment', '', comment, line_num, line_num))
+            
+            # Python docstrings
+            for match in re.finditer(r'"""(.+?)"""', content, re.DOTALL):
+                comment = match.group(0)
+                start_line = content[:match.start()].count('\n') + 1
+                end_line = start_line + comment.count('\n')
+                self.code_blocks.append((file_path, 'comment', '', comment, start_line, end_line))
+            
+            for match in re.finditer(r"'''(.+?)'''", content, re.DOTALL):
+                comment = match.group(0)
+                start_line = content[:match.start()].count('\n') + 1
+                end_line = start_line + comment.count('\n')
+                self.code_blocks.append((file_path, 'comment', '', comment, start_line, end_line))
     
     def _extract_string_literals(self, file_path: str, content: str):
         """
@@ -293,12 +367,17 @@ class ATETestLookup:
         for pattern in patterns:
             for match in re.finditer(pattern, content):
                 string_content = match.group(0)
+                
+                # Skip very short strings
+                if len(string_content) < 3:  # Just quotes with maybe one character
+                    continue
+                    
                 line_num = content[:match.start()].count('\n') + 1
                 self.code_blocks.append((file_path, 'string', '', string_content, line_num, line_num))
     
     def create_embeddings(self):
         """
-        Create embeddings for files and code blocks.
+        Create embeddings for files and code blocks, with different weighting for different code elements.
         """
         if not self.file_info:
             print("No files found. Please scan files first.")
@@ -310,7 +389,20 @@ class ATETestLookup:
         
         if self.code_blocks:
             print("Creating embeddings for code blocks...")
-            block_texts = [f"{block_type} {block_name} {content}" for _, block_type, block_name, content, _, _ in self.code_blocks]
+            # Create a weighted representation for code blocks based on their type
+            block_texts = []
+            for _, block_type, block_name, content, _, _ in self.code_blocks:
+                # Apply different weights based on element type by repeating key elements
+                weight = self.element_weights.get(block_type, 1.0)
+                
+                # For higher weighted elements, repeat their name to emphasize importance
+                repeat_count = int(weight * 2)
+                emphasized_name = " ".join([block_name] * repeat_count) if block_name else ""
+                
+                # Create a weighted text representation
+                weighted_text = f"{block_type} {emphasized_name} {content}"
+                block_texts.append(weighted_text)
+                
             self.code_block_embeddings = self.model.encode(block_texts)
         
         print("Embeddings created successfully")
@@ -333,6 +425,9 @@ class ATETestLookup:
             'regex_matches': []
         }
         
+        # Clean test name to focus on core identifier (remove common prefixes/suffixes that might be noise)
+        cleaned_test_name = self._clean_test_name(test_name)
+        
         # 1. Semantic search on whole files
         if self.file_embeddings is not None:
             test_embedding = self.model.encode([test_name])
@@ -344,23 +439,43 @@ class ATETestLookup:
                 score = similarities[idx]
                 results['file_semantic_matches'].append((file_path, score))
         
-        # 2. Semantic search on code blocks
+        # 2. Semantic search on code blocks with type-based weighting
         if self.code_block_embeddings is not None:
             test_embedding = self.model.encode([test_name])
             similarities = cosine_similarity(test_embedding, self.code_block_embeddings)[0]
-            top_indices = np.argsort(similarities)[::-1][:top_n]
+            
+            # Apply post-scoring weight adjustment based on block type
+            weighted_similarities = []
+            for i, (_, block_type, _, _, _, _) in enumerate(self.code_blocks):
+                weight = self.element_weights.get(block_type, 1.0)
+                weighted_similarities.append((i, similarities[i] * weight))
+            
+            # Sort by weighted similarity
+            top_weighted = sorted(weighted_similarities, key=lambda x: x[1], reverse=True)[:top_n]
+            top_indices = [idx for idx, _ in top_weighted]
             
             for idx in top_indices:
                 file_path, block_type, block_name, _, start_line, end_line = self.code_blocks[idx]
                 score = similarities[idx]
-                results['code_block_semantic_matches'].append((file_path, block_type, block_name, start_line, end_line, score))
+                weighted_score = score * self.element_weights.get(block_type, 1.0)
+                results['code_block_semantic_matches'].append(
+                    (file_path, block_type, block_name, start_line, end_line, weighted_score)
+                )
         
         # 3. Exact string matching
         for file_path, content in self.file_info:
+            occurrences = []
+            
+            # Count exact matches of the test name
             if test_name in content:
-                # Count occurrences
                 count = content.count(test_name)
-                results['exact_matches'].append((file_path, count))
+                # Also locate line numbers for the matches
+                lines = content.split('\n')
+                for i, line in enumerate(lines):
+                    if test_name in line:
+                        occurrences.append(i + 1)
+                
+                results['exact_matches'].append((file_path, count, occurrences))
         
         # 4. Regex pattern matching for partial matches or variations
         # Fix the escape sequence issue
@@ -371,7 +486,16 @@ class ATETestLookup:
         for file_path, content in self.file_info:
             matches = re.findall(pattern, content, re.IGNORECASE)
             if matches:
-                results['regex_matches'].append((file_path, len(matches), matches[:5]))  # Show first 5 matches as examples
+                # Find line numbers for matches
+                lines = content.split('\n')
+                match_lines = []
+                for i, line in enumerate(lines):
+                    for match in matches:
+                        if match in line:
+                            match_lines.append(i + 1)
+                            break
+                
+                results['regex_matches'].append((file_path, len(matches), match_lines, matches[:5]))
         
         # Sort results by relevance
         results['file_semantic_matches'].sort(key=lambda x: x[1], reverse=True)
@@ -379,30 +503,62 @@ class ATETestLookup:
         results['exact_matches'].sort(key=lambda x: x[1], reverse=True)
         results['regex_matches'].sort(key=lambda x: x[1], reverse=True)
         
-        # Calculate overall most relevant files
+        # Calculate overall most relevant files with improved weighting
         file_scores = {}
         
         # Add scores from semantic file matches
         for file_path, score in results['file_semantic_matches']:
-            file_scores[file_path] = file_scores.get(file_path, 0) + score * 2  # Weight semantic matches higher
+            file_scores[file_path] = file_scores.get(file_path, 0) + score * 1.5
         
-        # Add scores from exact matches
-        for file_path, count in results['exact_matches']:
-            file_scores[file_path] = file_scores.get(file_path, 0) + count * 1.5  # Exact matches are important
+        # Add scores from exact matches with higher weight
+        for file_path, count, _ in results['exact_matches']:
+            file_scores[file_path] = file_scores.get(file_path, 0) + count * 2.5  # Exact matches weighted higher
         
         # Add scores from regex matches
-        for file_path, count, _ in results['regex_matches']:
-            file_scores[file_path] = file_scores.get(file_path, 0) + count * 0.5  # Partial matches less important
+        for file_path, count, _, _ in results['regex_matches']:
+            file_scores[file_path] = file_scores.get(file_path, 0) + count * 0.5
         
-        # Add scores from code block matches
-        for file_path, _, _, _, _, score in results['code_block_semantic_matches']:
-            file_scores[file_path] = file_scores.get(file_path, 0) + score
+        # Add scores from code block matches with element type weights
+        for file_path, block_type, block_name, _, _, score in results['code_block_semantic_matches']:
+            # Adjust based on block type (already weighted in the scoring above)
+            element_boost = 1.0
+            
+            # Additional boost if the block name exactly matches the test name
+            if block_name and (block_name == test_name or block_name == cleaned_test_name):
+                element_boost = 3.0  # Significant boost for direct name matches
+            
+            file_scores[file_path] = file_scores.get(file_path, 0) + score * element_boost
         
         # Sort files by overall relevance score
         most_relevant_files = sorted(file_scores.items(), key=lambda x: x[1], reverse=True)
         results['most_relevant_files'] = most_relevant_files[:top_n]
         
         return results
+    
+    def _clean_test_name(self, test_name: str) -> str:
+        """
+        Clean the test name to focus on core identifier by removing common prefixes/suffixes.
+        
+        Args:
+            test_name: Original test name
+            
+        Returns:
+            Cleaned test name
+        """
+        # Remove common ATE test prefixes and suffixes
+        prefixes = ['test_', 'v_', 'f_']
+        suffixes = ['_test', '_val', '_pdp']
+        
+        cleaned = test_name
+        for prefix in prefixes:
+            if cleaned.startswith(prefix):
+                cleaned = cleaned[len(prefix):]
+                
+        for suffix in suffixes:
+            if cleaned.endswith(suffix):
+                cleaned = cleaned[:-len(suffix)]
+                
+        return cleaned
     
     def extract_context(self, file_path: str, line_number: int, context_lines: int = 5) -> str:
         """
@@ -459,6 +615,70 @@ class ATETestLookup:
         except Exception as e:
             print(f"Error searching file {file_path}: {e}")
             return []
+    
+    def analyze_test_usage(self, file_path: str, test_name: str) -> Dict:
+        """
+        Analyze how the test is used in the file - as function name, variable, argument, etc.
+        
+        Args:
+            file_path: Path to the file
+            test_name: Test name to search for
+            
+        Returns:
+            Dictionary with analysis results
+        """
+        try:
+            with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+                content = f.read()
+                
+            analysis = {
+                'is_function': False,
+                'is_output_var': False,
+                'is_operand': False,
+                'in_comment': False,
+                'in_string': False,
+                'usage_count': content.count(test_name),
+                'important_lines': []
+            }
+            
+            lines = content.split('\n')
+            
+            # Extended regex patterns to identify usage context
+            func_pattern = fr'(?:def|int|void|float|double|char)\s+{re.escape(test_name)}\s*\('
+            output_pattern = fr'{re.escape(test_name)}\s*='
+            operand_pattern = fr'[^=]=[^=]*{re.escape(test_name)}[^=]*;'
+            comment_pattern = fr'(?://|#|/\*)[^\n]*{re.escape(test_name)}'
+            string_pattern = fr'["\']{re.escape(test_name)}["\']'
+            
+            for i, line in enumerate(lines):
+                if re.search(func_pattern, line):
+                    analysis['is_function'] = True
+                    analysis['important_lines'].append((i+1, 'function', line))
+                    
+                if re.search(output_pattern, line):
+                    analysis['is_output_var'] = True
+                    analysis['important_lines'].append((i+1, 'output_var', line))
+                    
+                if re.search(operand_pattern, line):
+                    analysis['is_operand'] = True
+                    analysis['important_lines'].append((i+1, 'operand', line))
+                    
+                if re.search(comment_pattern, line):
+                    analysis['in_comment'] = True
+                    analysis['important_lines'].append((i+1, 'comment', line))
+                    
+                if re.search(string_pattern, line):
+                    analysis['in_string'] = True
+                    analysis['important_lines'].append((i+1, 'string', line))
+                    
+            return analysis
+        
+        except Exception as e:
+            print(f"Error analyzing file {file_path}: {e}")
+            return {
+                'error': str(e),
+                'usage_count': 0
+            }
 
 def main():
     # Replace with your actual testprogram directory
@@ -469,7 +689,7 @@ def main():
     
     try:
         # Search for a specific test name
-        test_name = "f_osc_3"
+        test_name = "v_source_off"
         print(f"\nComprehensive search for test: '{test_name}'")
 
         # Create the ATE test lookup tool
@@ -492,8 +712,38 @@ def main():
             if line_numbers:
                 print(f"Test name appears on lines: {', '.join(map(str, line_numbers))}")
                 
-                # Show context for the first occurrence
-                if line_numbers:
+                # Analyze how the test is used in this file
+                usage_analysis = lookup.analyze_test_usage(file_path, test_name)
+                
+                # Print detailed usage information
+                usage_types = []
+                if usage_analysis['is_function']:
+                    usage_types.append("FUNCTION NAME")
+                if usage_analysis['is_output_var']:
+                    usage_types.append("OUTPUT VARIABLE")
+                if usage_analysis['in_comment']:
+                    usage_types.append("IN COMMENTS")
+                if usage_analysis['in_string']:
+                    usage_types.append("IN STRINGS")
+                if usage_analysis['is_operand']:
+                    usage_types.append("AS OPERAND")
+                    
+                if usage_types:
+                    print(f"Used as: {', '.join(usage_types)}")
+                
+                # Show context for the most important usage
+                if usage_analysis['important_lines']:
+                    # Prioritize function names, output vars, comments, and strings over operands
+                    priority_order = {'function': 1, 'output_var': 2, 'comment': 3, 'string': 4, 'operand': 5}
+                    important_line = sorted(usage_analysis['important_lines'], 
+                                           key=lambda x: priority_order.get(x[1], 99))[0]
+                    
+                    line_num, usage_type, _ = important_line
+                    print(f"\nContext for {usage_type.upper()} usage on line {line_num}:")
+                    context = lookup.extract_context(file_path, line_num)
+                    print(context)
+                else:
+                    # If no detailed analysis is available, show context for the first occurrence
                     print("\nContext for first occurrence:")
                     context = lookup.extract_context(file_path, line_numbers[0])
                     print(context)
@@ -517,9 +767,11 @@ def main():
         
         # Display exact matches
         print("\n--- EXACT STRING MATCHES ---")
-        for file_path, count in results['exact_matches']:
+        for file_path, count, line_numbers in results['exact_matches']:
             print(f"File: {file_path}")
             print(f"Occurrences: {count}")
+            print(f"Line numbers: {', '.join(map(str, line_numbers[:10]))}" + 
+                 (", ..." if len(line_numbers) > 10 else ""))
             print("-" * 50)
         
     except Exception as e:
