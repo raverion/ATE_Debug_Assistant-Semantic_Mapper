@@ -6,20 +6,26 @@ from sklearn.model_selection import train_test_split
 # Just change this file name
 INPUT_JSONL = "LTX_data_2.jsonl"
 
-# Load data from JSONL
+# Load data from formatted JSON with objects separated by newlines
 print("Loading instruction dataset...")
 data = []
-"""with open(INPUT_JSONL, "r", encoding="utf-8") as f:
-    for line in f:
-        entry = json.loads(line)
-        prompt = f"### Input:\n{entry['input']}\n\n### Response:\n{entry['output']}"
-        data.append({"text": prompt})"""
-data = []
+buffer = ""
 with open(INPUT_JSONL, "r", encoding="utf-8") as f:
-    entries = json.load(f)
-    for entry in entries:
-        prompt = f"### Input:\n{entry['input']}\n\n### Response:\n{entry['output']}"
-        data.append({"text": prompt})
+    for line in f:
+        buffer += line
+        # Check if we have a complete JSON object
+        if line.strip() == "}":
+            try:
+                entry = json.loads(buffer)
+                prompt = f"### Input:\n{entry['input']}\n\n### Response:\n{entry['output']}"
+                data.append({"text": prompt})
+            except json.JSONDecodeError as e:
+                print(f"Error parsing JSON object: {e}")
+                print(f"Problematic JSON: {buffer}")
+            # Reset buffer for next object
+            buffer = ""
+
+print(f"Successfully loaded {len(data)} examples")
 
 # Train/validation split
 train_data, valid_data = train_test_split(data, test_size=0.1)
