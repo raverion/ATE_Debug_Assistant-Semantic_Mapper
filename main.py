@@ -706,16 +706,19 @@ class ATETestLookup:
 
 def main():
     # Replace with your actual testprogram directory
-    testprogram_dir = "C:/Users/rejav/Documents/SilTest-side-projects/GitHub/ATE_Debug_Assisntant-Semantic_Mapper/sample_testprogram_elmos_v52241b"
+    testprogram_dir = "C:/Users/rejav/Documents/SilTest Internal Projects/GitHub/ATE_Debug_Assisntant-Semantic_Mapper/sample_testprogram_v11717c_52360/v11717c_octal/trunk"
     
     if not os.path.exists(testprogram_dir):
         print("Specified testprogram directory does not exist.")
     
     try:
-        # Search for a specific test name and number
-        test_name = "v_source_off_hys"
-        test_number = "8865"  # Example test number
-        print(f"\nComprehensive search for test: '{test_name}' (number: {test_number})")
+        # Get user input for test name and number
+        test_name = input("Enter the test name to search for: ").strip()
+        test_number = input("Enter the test number (optional, press Enter to skip): ").strip()
+        if not test_number:
+            test_number = None
+        print(f"\nComprehensive search for test: '{test_name}'" + 
+              (f" (number: {test_number})" if test_number else ""))
 
         # Create the ATE test lookup tool
         lookup = ATETestLookup(testprogram_dir)

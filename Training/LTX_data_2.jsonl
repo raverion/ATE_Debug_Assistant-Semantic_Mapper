@@ -1,0 +1,3917 @@
+{
+"instruction": "Explain this line of code.",
+"input": "Profiler p(__PRETTY_FUNCTION__);",
+"output": "Starts profiling the current function using an ATE profiling utility for performance diagnostics."
+}
+{
+"instruction": "Explain this line of code.",
+"input": "FloatS vdd = 3.3;",
+"output": "Initializes a floating-point scalar variable named 'vdd' with a value of 3.3 volts."
+}
+{
+"instruction": "Explain this line of code.",
+"input": "L2_CBIT.Open(RDF_USED_CBIT);",
+"output": "Closes relay associated with RDF_USED_CBIT to allow current or signal flow in the circuit."
+}
+{
+"instruction": "Explain this line of code.",
+"input": "L2_CBIT.Close(RDF_CMP2FX1_REL+RDF_C_VDD_OFF+RDF_DVDD_REL+RDF_IDDQ_GAIN_REL+RDF_IDDQ_REL);",
+"output": "Opens multiple relays to isolate specific sections of the power domain or measurement path."
+}
+{
+"instruction": "Explain this line of code.",
+"input": "L2_CBIT.WaitForRelay();",
+"output": "Waits for all relay operations to settle before proceeding."
+}
+{
+"instruction": "Explain this line of code.",
+"input": "iddq_pat = \'iddq._flat_seq_\';",
+"output": "Sets the variable 'iddq_pat' to the pattern name string used for IDDQ measurement."
+}
+{
+"instruction": "Explain this line of code.",
+"input": "DIGITAL.SetVihVil(RDF_IDDQ_HVD, 5V, 0V);",
+"output": "Sets VIH to 5V and VIL to 0V for pin RDF_IDDQ_HVD."
+}
+{
+"instruction": "Explain this line of code.",
+"input": "DIGITAL.SetDriveMode(RDF_IDDQ_HVD, DIGITAL_DRV_MODE_PATTERN);",
+"output": "Configures RDF_IDDQ_HVD pin to be driven using pattern mode."
+}
+{
+"instruction": "Explain this line of code.",
+"input": "DIGITAL.SetDriveState(RDF_IDDQ_HVD, DIGITAL_DRV_STATE_LOW);",
+"output": "Sets drive state of RDF_IDDQ_HVD pin to low logic level."
+}
+{
+"instruction": "Explain this line of code.",
+"input": "DIGITAL.Connect(RDF_IDDQ_HVD, DIGITAL_DCL_TO_DUT);",
+"output": "Connects digital channel to the DUT through RDF_IDDQ_HVD pin."
+}
+{
+"instruction": "Explain this line of code.",
+"input": "MY.PowerOn(12.0);",
+"output": "Powers on DUT with 12.0V through system power controller."
+}
+{
+"instruction": "Explain this line of code.",
+"input": "MY.TM_enable();",
+"output": "Enables test mode functionality or resources."
+}
+{
+"instruction": "Explain this line of code.",
+"input": "VI.Force(RDF_VDD_V, VI_FORCE_V, vdd, 16V, 50mA, 50mA, -5mA, VI_FORCE_APPLY);",
+"output": "Applies voltage to RDF_VDD_V pin with vdd level and current limits/clamps as specified."
+}
+{
+"instruction": "Explain this line of code.",
+"input": "MY.TM_set(0xD6, 0x380);",
+"output": "Sets test mode register with address 0xD6 and data 0x380."
+}
+{
+"instruction": "Explain this line of code.",
+"input": "DIGITAL.SetCompareMode(RDF_SCL_D+RDF_CS_D+RDF_SDA_D+RDF_INT_D+RDF_EN_HVD+RDF_CMP_D,DIGITAL_CMP_MODE_PATTERN);",
+"output": "Enables pattern compare mode on multiple digital pins for IDDQ measurement."
+}
+{
+"instruction": "Explain this line of code.",
+"input": "DIGITAL.SetTimeout(5s);",
+"output": "Sets digital pattern timeout to 5 seconds."
+}
+{
+"instruction": "Explain this line of code.",
+"input": "VI.ClearMeasurements(RDF_VDD_V);",
+"output": "Clears previous measurement history on RDF_VDD_V pin."
+}
+{
+"instruction": "Explain this line of code.",
+"input": "VI.StartMeasure(RDF_VDD_V, VI_MEASURE_I, VI_MEASURE_SAMPLES, 50mA, 10, 10us);",
+"output": "Initiates current measurement on RDF_VDD_V with 10 samples and 10us interval."
+}
+{
+"instruction": "Explain this line of code.",
+"input": "VI.Wait(RDF_VDD_V);",
+"output": "Waits until measurement on RDF_VDD_V pin is complete."
+}
+{
+"instruction": "Explain this line of code.",
+"input": "VI.ReadMeasureSamples(RDF_VDD_V, dummy_meas_1d, 30nA);",
+"output": "Reads measured current samples from RDF_VDD_V pin with resolution of 30nA."
+}
+{
+"instruction": "Explain this line of code.",
+"input": "VI.ConnectMeasureTrigger(RDF_VDD_V, VI_TRIGGER_STEP, \"sync_IDDQ\");",
+"output": "Connects a trigger for current measurement on RDF_VDD_V, synchronized with 'sync_IDDQ' signal."
+}
+{
+"instruction": "Explain this line of code.",
+"input": "DIGITAL.ExecutePattern(\"iddq_B1._flat_seq_\");",
+"output": "Executes IDDQ pattern named 'iddq_B1._flat_seq_'."
+}
+{
+  "instruction": "Explain this line of code.",
+  "input": "DIGITAL.ReadCounter(DIGITAL_CYCLE_COUNTER, exec_vec_pre, 0);",
+  "output": "Reads execution cycle count into 'exec_vec_pre' from digital cycle counter."
+}
+{
+  "instruction": "Explain this line of code.",
+  "input": "VI.ReadMeasureCount(RDF_VDD_V, vdd_meas_count, IDDQ_meas_vectors);",
+  "output": "Reads total number of valid current samples measured at RDF_VDD_V."
+}
+{
+  "instruction": "Explain this line of code.",
+  "input": "iddq_current_pre = MATH.Average(iddq_meas_pre, IDDQ_SAMPLE_COUNT);",
+  "output": "Computes average IDDQ current from 'iddq_meas_pre' samples."
+}
+{
+  "instruction": "Explain this line of code.",
+  "input": "VI.ForceV(RDF_VDD_V, MY_IDDQvoltage, 16V);",
+  "output": "Forces stress voltage defined by 'MY_IDDQvoltage' on RDF_VDD_V pin with 16V range."
+}
+{
+  "instruction": "Explain this line of code.",
+  "input": "TIME.Wait(5ms);",
+  "output": "Delays test sequence for 5 milliseconds."
+}
+{
+  "instruction": "Explain this line of code.",
+  "input": "VI.StartMeasure(RDF_VDD_V, VI_MEASURE_I, VI_MEASURE_SAMPLES, 50mA, IDDQ_meas_vectors, 10us);",
+  "output": "Begins current measurement on RDF_VDD_V using pattern-based sampling."
+}
+{
+  "instruction": "Explain this line of code.",
+  "input": "L2.DatalogPrint(3440, iddq_current_pre-iddq_current_post);",
+  "output": "Logs delta between pre- and post-measurement IDDQ currents with code 3440."
+}
+{
+  "instruction": "Explain the purpose of this line of code:",
+  "input": "VI.ForceV(RDF_SUP_HV, 7.0V, ForceVRange);",
+  "output": "Forces 7.0V on the SUP_HV pin using the previously set force voltage range, typically used to set a known starting voltage before threshold searches."
+}
+
+{
+  "instruction": "What does this function call do?",
+  "input": "DIGITAL.ReadCompareState(RDF_TDO_D, LineState, expectedCmpState);",
+  "output": "Reads the comparator state of the TDO_D pin and stores the result in LineState, comparing it against the expectedCmpState value."
+}
+
+{
+  "instruction": "Explain this VI operation:",
+  "input": "VI.Force(RDF_CHDR_V, VI_FORCE_V, 6.3V, 16V, 50mA, 20mA, -20mA, VI_FORCE_APPLY);",
+  "output": "Forces 6.3V on CHDR_V pin with 16V range, 50mA current limit, and ±20mA current clamps, applying the force immediately (VI_FORCE_APPLY)."
+}
+
+{
+  "instruction": "What is the purpose of this wait command?",
+  "input": "L2.SafeWait(5ms);",
+  "output": "Implements a 5 millisecond delay, ensuring all previous operations have settled before proceeding."
+}
+
+{
+  "instruction": "Explain this threshold search initialization:",
+  "input": "L2.ThresholdSearch(3.4V, 4.2V, loLimit, hiLimit, 10mV, L2_GoNoGo, &SUP_UV_thresh, v_sup_uv_GoNoGo);",
+  "output": "Initializes a Go/NoGo threshold search between 3.4V-4.2V with 10mV resolution for SUP undervoltage detection, using SUP_UV_thresh function."
+}
+
+{
+  "instruction": "What does this datalogging command do?",
+  "input": "L2.DatalogPrint(8400, v_sup_uv);",
+  "output": "Records the SUP undervoltage threshold measurement (v_sup_uv) to datalog with test number 8400."
+}
+
+{
+  "instruction": "Explain this power supply command:",
+  "input": "MY.PowerOn(12.0);",
+  "output": "Powers on the DUT with 12.0V supply, typically with current clamp >100mA to ensure proper regulator operation."
+}
+
+{
+  "instruction": "What is this JTAG operation doing?",
+  "input": "L3_JT.RunChain(\"SUP_UV\");",
+  "output": "Executes the JTAG command chain named 'SUP_UV' to configure the device for supply undervoltage testing."
+}
+
+{
+  "instruction": "Explain this VI configuration:",
+  "input": "VI.SetBandwidth(RDF_SUP_HV, 20kHz);",
+  "output": "Sets the bandwidth of the SUP_HV pin's VI measurement system to 20kHz for noise filtering."
+}
+
+{
+  "instruction": "What does this comparator setup do?",
+  "input": "DIGITAL.SetVihVil(RDF_TDO_D, 1.0V, 0.5V);",
+  "output": "Configures the digital comparator thresholds for TDO_D pin with VIH=1.0V and VIL=0.5V."
+}
+
+{
+  "instruction": "Explain this force current operation:",
+  "input": "VI.Force(RDF_TAO_HV, VI_FORCE_I, 0uA, 5uA, 2.5V, 4V, -0.5V, UTL_VOID);",
+  "output": "Sets current force mode on TAO_HV pin to 0μA with 5μA range, 2.5V compliance, and voltage clamps of 4V/-0.5V."
+}
+
+{
+  "instruction": "What does this connection command do?",
+  "input": "VI.Connect(RDF_TAO_HV, VI_TO_DUT, VI_MODE_REMOTE);",
+  "output": "Connects the TAO_HV pin to DUT in remote sensing mode for accurate voltage measurement."
+}
+
+{
+  "instruction": "Explain this gate operation:",
+  "input": "VI.Gate(RDF_TAO_HV, VI_GATE_ON);",
+  "output": "Enables the VI driver for TAO_HV pin, setting it to low impedance output mode."
+}
+
+{
+  "instruction": "What is this measurement command doing?",
+  "input": "VI.SetMeasureSamples(RDF_TAO_HV, 10);",
+  "output": "Configures the TAO_HV pin measurement to average 10 samples for improved accuracy."
+}
+
+{
+  "instruction": "Explain this voltage force command:",
+  "input": "VI.ForceV(RDF_SW2_V, 10V, 10V);",
+  "output": "Forces 10V on SW2_V pin with 10V range, typically used to prepare for switch voltage threshold tests."
+}
+
+{
+  "instruction": "What does this soft trimming call do?",
+  "input": "MY_OTP.SoftTrimming();",
+  "output": "Executes soft trimming procedure to calibrate device parameters without physical OTP programming."
+}
+
+{
+  "instruction": "Explain this SMPS command:",
+  "input": "MY.SMPS_supply_on(12V);",
+  "output": "Enables the switched-mode power supply with 12V output for DUT power sequencing tests."
+}
+
+{
+  "instruction": "What is this loop doing?",
+  "input": "SERIAL_LOOP_BEGIN",
+  "output": "Begins a serial (single-site-at-a-time) loop for site-specific operations in multisite testing."
+}
+
+{
+  "instruction": "Explain this test mode check:",
+  "input": "if(TestMode == Quality)",
+  "output": "Conditional check for Quality test mode, which typically enables more comprehensive measurements."
+}
+
+{
+  "instruction": "What does this result assignment do?",
+  "input": "TryResult[PRE_SITE][0] = L2_BelowThreshold;",
+  "output": "Sets the threshold search result for current site to 'BelowThreshold' indicating the test condition was not met."
+}
+
+{
+  "instruction": "Explain this bandgap check:",
+  "input": "bgdif_fail[PRE_SITE] |= 0x01;",
+  "output": "Sets bit 0 of bgdif_fail to indicate failure when bandgap voltage is below expected -20mV threshold."
+}
+
+{
+  "instruction": "What does this range change do?",
+  "input": "VI.ForceV(RDF_SUP_HV, ForceVoltage, 50V);",
+  "output": "Changes the force voltage range to 50V on SUP_HV pin while maintaining current voltage level, needed for high voltage tests."
+}
+
+{
+  "instruction": "Explain this POR test setup:",
+  "input": "VI.Force(RDF_VDD_V, VI_FORCE_V, 3.3V, 16V, 50mA, 50mA, -50mA, VI_FORCE_APPLY);",
+  "output": "Configures VDD_V pin for POR test with 3.3V force, 16V range, and ±50mA current limits, applying force immediately."
+}
+
+{
+  "instruction": "What does this power-off sequence do?",
+  "input": "MY.PowerOff();",
+  "output": "Executes controlled power-down sequence for the DUT, ensuring all supplies are properly disabled."
+}
+
+{
+  "instruction": "Explain this relay operation:",
+  "input": "L2_CBIT.Open(RDF_USED_CBIT);",
+  "output": "Opens (disconnects) the specified CBIT relay, typically used to isolate test circuits after measurement."
+}
+{
+"instruction": "Explain the purpose of this code block:",
+"input": "if ( PRE.GetPrintComments() ) {\n    cout << \"Executing: \" << __PRETTY_FUNCTION__ << \n        \" (Entry Subflow: \" << RunTime.GetActiveFlowNode().GetName() <<\n        \", Active flow: \" << TestProg.GetActiveFlow().GetName() << \")\" << endl;\n}",
+"output": "This conditional block prints debug information when comments are enabled, showing the currently executing function (__PRETTY_FUNCTION__), the active test flow node, and the overall test program flow. This is useful for test program traceability and debugging during ATE test execution."
+}
+
+{
+"instruction": "What does this Profiler object do?",
+"input": "Profiler p(__PRETTY_FUNCTION__);",
+"output": "Creates a Profiler object that automatically tracks execution time of the current function (__PRETTY_FUNCTION__). This is used for performance optimization in ATE test programs, helping identify bottlenecks in test time."
+}
+
+{
+"instruction": "Explain the pattern selection logic:",
+"input": "if(MY_GS_MASK_NUMBER.Value() == 1)\n{\n  scan_pat = \"scan_pattern_B1.flatseq\";\n  trans_pat = \"scan_trans_B1.start\";\n}\nelse\n{\n  scan_pat = \"scan_pattern.start\";\n  trans_pat = \"scan_trans.start\";\n}",
+"output": "This conditional selects different scan patterns based on the mask revision (MY_GS_MASK_NUMBER). Mask 1 uses specialized patterns (B1 versions), while other masks use default patterns. This is common in semiconductor testing to handle design revisions or process changes."
+}
+
+{
+"instruction": "What is the purpose of these digital pin configurations?",
+"input": "DIGITAL.SetCompareMode( RDF_SCL_D+RDF_CS_D+RDF_SDA_D+RDF_INT_D+RDF_EN_HVD+RDF_CMP_D, DIGITAL_CMP_MODE_PATTERN );\nDIGITAL.SetDriveMode  ( RDF_SCL_D+RDF_CS_D+RDF_SDA_D+RDF_INT_D+RDF_EN_HVD+RDF_CMP_D, DIGITAL_DRV_MODE_PATTERN );",
+"output": "Configures multiple digital pins (SCL, CS, SDA, INT, EN_HVD, CMP_D) to use pattern-controlled compare and drive modes. This sets up the ATE digital subsystem to follow the timing and values defined in the pattern files during test execution."
+}
+
+{
+"instruction": "Explain the shmoo enable functionality:",
+"input": "ShmooEnable = \"ShmooScan\";\nif( ShmooEnable )\n{\n    RunTime.RegisterBreakpoint(\"Scan\");\n    CallbackFunction callback( MY.Scan_Func );\n    RunTime.Breakpoint(\"Scan\", \"After scan\");\n}",
+"output": "When ShmooScan is enabled, this code registers a breakpoint named \"Scan\" and associates a callback function (MY.Scan_Func). This allows for shmoo analysis - a technique where test parameters are varied systematically to characterize device margins."
+}
+
+{
+"instruction": "What does this counter read operation do?",
+"input": "DIGITAL.ReadCounter( RDF_SCL_D+RDF_CS_D+RDF_SDA_D+RDF_INT_D+RDF_EN_HVD+RDF_CMP_D, DIGITAL_FAIL_COUNTER , fail_vec, 0 );",
+"output": "Reads the digital fail counter for specified pins, storing the number of pattern mismatches in fail_vec. This is critical for scan chain testing to identify which vectors failed during pattern execution."
+}
+
+{
+"instruction": "Explain the datalogging operations:",
+"input": "L2.DatalogPrint (4000, MATH.Sum( fail_vec ));\nif(MY_GS_MASK_NUMBER.Value() == 1)\n   L2.DatalogPrint (4007, exec_vec);\nelse\n   L2.DatalogPrint (4001, exec_vec);",
+"output": "Logs test results to the ATE datalog. First logs the total fail count (sum of fail_vec), then logs execution count with different bin numbers (4007 vs 4001) based on mask revision. This allows for separate tracking of results across device versions."
+}
+
+{
+"instruction": "What is the purpose of this power sequence?",
+"input": "MY.PowerOff();\nL2.SafeWait (2.0ms);\nMY.PowerOn(12.0);",
+"output": "Performs a power cycle on the DUT - first turning power off, waiting 2ms for proper discharge, then reapplying 12V. This ensures clean power state transitions between different test operations."
+}
+
+{
+"instruction": "Explain the relay control operations:",
+"input": "L2_CBIT.Open( RDF_USED_CBIT );\nL2_CBIT.WaitForRelay();\nVI.Gate( RDF_CMP_HV, VI_GATE_ON);",
+"output": "Manages relay states for test resources. First opens the CBIT relay, waits for relay operation to complete, then enables the VI gate for high voltage comparator. This ensures proper isolation and connection of test resources."
+}
+
+{
+"instruction": "What does the final return statement indicate?",
+"input": "return ( L2.GetTestStepResult() );",
+"output": "Returns the overall result of the test step, which aggregates pass/fail status from all operations in the function. This is used by the test executive to determine overall test flow progression."
+}
+{
+"instruction": "Explain the purpose of this VI.Force command:", 
+"input": "VI.Force(RDF_LX2_V, VI_FORCE_I, 0.0uA, 50uA, 16V, 14V, -0.5V, VI_FORCE_APPLY);", 
+"output": "Forces a current of 0.0µA on pin RDF_LX2_V with a current range of 50µA, voltage clamps at 14V and -0.5V, and a compliance voltage of 16V. The VI_FORCE_APPLY flag immediately applies the force value."
+}
+
+{
+"instruction": "What does this relay control sequence do?", 
+"input": "L2_CBIT.Close(RDF_Switch_QFVI_LO_REL); L2_CBIT.WaitForRelay(); L2_CBIT.Open(RDF_Switch_QFVI_LO_REL);", 
+"output": "First closes the QFVI low-side relay to ground (preventing voltage spikes), waits for relay operation to complete, then opens it again. This is a spike protection sequence for sensitive measurements."
+}
+
+{
+"instruction": "Explain this measurement setup:", 
+"input": "VI.SetMeasureSamples(RDF_SW1_HV + RDF_LX1_HV, 100); VI.SetMeasureDelay(RDF_SW1_HV + RDF_LX1_HV, 5.1us); VI.MeasureVdiffSamples(RDF_SW1_HV, RDF_LX1_HV, v_lx_ary, v_lx_ary);", 
+"output": "Configures a differential voltage measurement between SW1_HV and LX1_HV pins: takes 100 samples with 5.1µs delay between measurements, storing results in array v_lx_ary. Used for precise Ron measurement of P-channel driver."
+}
+
+{
+"instruction": "What is the purpose of this threshold search?", 
+"input": "L2.ThresholdSearch(-5.5A, -4.1A, -5.2A, -4.4A, 150mA, L2_FallingRampWithBreak, &HighSide_OC, i_check);", 
+"output": "Performs a high-side overcurrent threshold search between -5.5A to -4.1A with test limits -5.2A to -4.4A. Uses 150mA resolution and falling ramp with break method, calling HighSide_OC function, storing result in i_check."
+}
+
+{
+"instruction": "Explain this digital pattern sequence:", 
+"input": "DIGITAL.SetDriveMode(RDF_TDI_D, DIGITAL_DRV_MODE_LOW); DIGITAL.StartPattern(\"pll_lockin.Clock_100kHz\");", 
+"output": "First sets TDI pin to constant low drive mode, then starts a 100kHz clock pattern. Used to provide synchronous timing for power stage measurements while maintaining control over the TDI signal state."
+}
+
+{
+"instruction": "What does this TMU configuration do?", 
+"input": "TMU.SetTrigger(RDF_TDO_D, RDF_TDI_D, TMU_TRIGGER_IMMEDIATE); TMU.SetPulseWidthMeasure(RDF_TDO_D, TMU_RISING_EDGE, TMU_CMP_HIGH, TMU_CMP_LOW, 1);", 
+"output": "Configures Time Measurement Unit to: 1) Trigger immediately on TDI_D signal, 2) Measure pulse width on TDO_D pin from rising edge to next falling edge (HIGH to LOW transition), with 1 measurement per site."
+}
+
+{
+"instruction": "Explain this power supply sequence:", 
+"input": "MY.SMPS_supply_on(3.0); VI.ForceV(RDF_SW2_V, 12V, 25V);", 
+"output": "First enables SMPS power supply at 3.0V (low initial voltage to prevent spikes), then forces 12V on SW2_V pin with 25V compliance. This staged approach avoids damaging sensitive components during power-up."
+}
+
+{
+"instruction": "What is the purpose of this VI configuration block?", 
+"input": "VI.SetConfig(RDF_MEAS_QFVI, 2.5V, 6A, VI_CONFIG_PULSED); VI.SetBandwidth(RDF_MEAS_QFVI, 80kHz); VI.SetRailsV(RDF_MEAS_QFVI, 2.5V, -2.5V, VI_RAILS_BALANCED);", 
+"output": "Configures QFVI measurement channel for pulsed operation: 2.5V range, 6A current, 80kHz bandwidth, with balanced ±2.5V rails. Optimized for high-current pulsed measurements with fast settling time."
+}
+
+{
+"instruction": "Explain this site handling logic:", 
+"input": "failSites = NO_SITES; SERIAL_LOOP_BEGIN if(failFlag[PRE_SITE]) failSites += PRE_SITE; SERIAL_LOOP_END testSites = startSites - failSites;", 
+"output": "Creates a site mask of failing sites by checking failFlag array, then calculates active test sites by subtracting failSites from startSites. This implements conditional test execution based on previous results."
+}
+
+{
+"instruction": "What does this JTAG sequence accomplish?", 
+"input": "L3_JT.SetValue(\"JT_IR\", 0xD2); L3_JT.SetValue(\"JT_DR10\", 0x130); L3_JT.RunChain(\"IR_DR10\");", 
+"output": "Executes a JTAG command sequence: 1) Loads Instruction Register with 0xD2, 2) Loads Data Register with 0x130, 3) Runs the IR_DR10 chain. Used to configure the power stage test mode via JTAG interface."
+}
+{
+"instruction": "Explain this line of code.", 
+"input": "VI.Force ( OTP_AIO_Pin, VI_FORCE_V, (lLim * (-resIread)) , 2.5V, 50uA, 10uA, -10uA, VI_FORCE_ENABLE );", 
+"output": "Forces voltage on OTP_AIO_Pin with value equal to [lLim * (-resIread)], with a voltage range of 2.5V, and 10uA and -10uA current clamps"
+}
+{
+"instruction": "Explain this line of code.", 
+"input": "DIGITAL.ExecutePattern('L4_OTP_Pattern.OTP_COM_TEST_RESET');", 
+"output": "Runs pattern named 'L4_OTP_Pattern', starting at the pattern label 'OTP_COM_TEST_RESET'"
+}
+{
+"instruction": "Explain this line of code.", 
+"input": "L2.ThresholdSearch( startVoltage - 50mV,    stopVoltage + 50mV,
+                                        startVoltage,           stopVoltage,
+                                        0.1mV,
+                                        L2_BinarySearch, 
+                                        &trySearchVcomp, 
+                                        Vcomp );", 
+"output": "Performs binary search of Vcomp threshold between 'startVoltage' and 'stopVoltage' by executing function 'trySearchVcomp()' repeatedly, each time changing the input according to binary search logic and reading the resulting output. When the output transitions from 1 to 0 or 0 to 1, the corresponding input value is stored in the variable 'Vcomp'."
+}
+{
+"instruction": "Explain this line of code.", 
+"input": "VI.Force (RDF_ADC_MEAS_GEN, VI_FORCE_I, 0uA, 5uA, 10V, 5V, -5V, UTL_VOID );", 
+"output": "Sets the current from 'RDF_ADC_MEAS_GEN' pin to 0uA with a current range of 5uA, and 5V and -5V voltage clamps."
+}
+{
+"instruction": "Explain this line of code.", 
+"input": "VI.Connect(RDF_ADC_MEAS_GEN, VI_TO_DUT, VI_MODE_VM); //DROM: connect only sense channels remotely w/o drive subsystem", 
+"output": "Closes kelvin interface relays of ATE pin RDF_ADC_MEAS_GEN at voltmeter mode ('VI_MODE_VM'), thereby connecting only the VI sense lines to the DUT board but leaving the force lines at open or high impedance. The added comment further confirms this."
+}
+{
+"instruction": "Explain this line of code.", 
+"input": "
+VI.ClearMeasurements ( RDF_ADC_MEAS_GEN );
+VI.StartMeasure ( RDF_ADC_MEAS_GEN , VI_MEASURE_V , VI_MEASURE_SAMPLES , RampStopVoltage, RAMP_MEAS_VECTORS * RAMP_SAMPLE_COUNT/*100 points for each ramp end*/ , 6us );", 
+"output": "Sets the current from 'RDF_ADC_MEAS_GEN' pin to 0uA with a current range of 5uA, and 5V and -5V voltage clamps."
+}
+{
+"instruction": "Explain this line of code.", 
+"input": "VI.Gate   (RDF_ADC_MEAS_GEN, VI_GATE_ON );", 
+"output": "Turns on the VI driver, setting the 'RDF_ADC_MEAS_GEN' ATE pin to low impedance."
+}
+{
+"instruction": "Explain this line of code.", 
+"input": "
+                DIGITAL.ExecutePattern(RampPatternLabel);
+                DIGITAL.ReadCounter(RDF_JT_TDO, DIGITAL_FAIL_COUNTER, fail_count, 0);
+                DIGITAL.ReadCounter(DIGITAL_CYCLE_COUNTER, VectorCount, 23467);
+                DIGITAL.ReadCaptureWordCount('L4_UNI_ADC_Pattern', CaptureCount, 891011);
+", 
+"output": "Runs pattern specified by string pointer 'RampPatternLabel', then reads 'DIGITAL_FAIL_COUNTER' register for pin 'RDF_JT_TDO' and 'DIGITAL_CYCLE_COUNTER' register to get the number of fail vectors from the pattern and the actual number of executed vectors, and finally runs pattern 'L4_UNI_ADC_Pattern' and reading the number of captured words during the pattern execution."
+}
+{
+"instruction": "Explain this line of code.", 
+"input": "DIGITAL.ReadCapture ( 'L4_UNI_ADC_Pattern', adcRead, UTL_VOID );", 
+"output": "Runs the pattern 'L4_UNI_ADC_Pattern', reads the contents of the ATE digital capture memory and stores them into the array 'adcRead'"
+}
+{
+"instruction": "What does this line do?",
+"input":"DIGITAL.Disconnect( RDF_ADR_HVD, DIGITAL_ALL_PATHS   );",
+"output": "This looks like a C++ based ATE API instruction that disconnects the pin named 'RDF_ADR_HVD' from all digital resources, such as driver, comparator, and load."
+}
+
+{
+"instruction": "What does this piece of code do?",
+"input": "VI.Force            ( RDF_SW2_V, VI_FORCE_V, 12V, 16V, 5mA,  5mA,  -5mA,  VI_FORCE_APPLY );
+
+        //check hs check SZ code during debug
+        
+        VI.SetMeasureSamples( RDF_LX2_V, 10                                                      ); //was 100 on SZ
+        VI.SetMeasureDelay  ( RDF_LX2_V, 5.1us                                                   );
+        VI.Force            ( RDF_LX2_V, VI_FORCE_V, 0V,  16V, 50uA, 50uA, -50uA, VI_FORCE_APPLY );
+        
+        L2.SafeWait( 15ms );  // need such long settling time
+    
+        MY_VI.MeasureIAverage ( RDF_LX2_V, i_leakDS , 0.1uA , 8111 );
+        
+//        VI.SetClampsI       ( RDF_LX2_V, 5uA, -5uA                 ); 
+//        VI.SetMeasureIRange ( RDF_LX2_V, 5uA                       );
+// 
+//        MY_VI.MeasureIAverage ( RDF_LX2_V , i_leakDSmeas , 0,1uA , 8111 );
+        
+    
+        VI.ForceV           ( RDF_LX2_V, 12V, 16V                );
+
+        L2.SafeWait( 5ms );
+    
+        MY_VI.MeasureIAverage ( RDF_LX2_V, i_leak100mA_DS , 0.1uA , 8113 );    
+
+
+        VI.Force            ( RDF_LX2_V, VI_FORCE_V, 0V,  16V, 50uA, 50uA, -50uA, VI_FORCE_REMOVE );
+
+
+        VI.Force            ( RDF_SW2_V, VI_FORCE_V, 0V, 16V, 5mA,  5mA,  -5mA,  UTL_VOID );
+        L2.SafeWait         ( 4ms );                                                                // wait some time to avoid current Spike
+        VI.Gate             ( RDF_SW2_V, VI_GATE_OFF_LOZ                                  );
+        VI.Disconnect       ( RDF_SW2_V                                                   );",
+
+"output": "This appears to be a section of a C++ based ATE testprogram containing a series of tester APIs, where two distinct current measurements are being made under specific bias conditions. 
+
+Based on the names of th two output variables, i_leakDS and i_leak100mA_DS, as well as the name of ATE pins LX2 and SW2 that are being referenced in the code, it is likely that the purpose of this piece of code is to test some kind of Drain-to-Source leakage currents in a switch-mode power-supply device (SMPS).
+
+Here is a pseudocode explaining the test sequence:
+   - Forces 12V on SW2 pin
+   - Configures measurement settings of LX2 pin (10 samples, 5.1us intervals)
+   - Forces 0V on LX2 pin at 50uA current clamps, then waits for 15ms
+   - Measures current on LX2 pin and passes the value to i_leakDS
+   - Forces 12V on LX2 pin, then waits for 5ms
+   - Measures current on LX2 pin again and pass the value to i_leak100mA_DS
+   - Resets LX2 pin and SW2 pin to 0V, carefully gates off and disconnects to prevent spikes.
+"
+}
+{
+"instruction": "Explain to me the purpose of the following block of code:",
+"input": "    VI.ForceV     ( RDF_TAI_HV, 0.4V, ForceVRange ); L2.SafeWait(100us);",
+"output": "The first line forces 0.4V on 'TAI_HV' pin and sets the force voltage range of the ATE VI. The second line executes a 100us wait time."
+}
+{
+"instruction": "What is the purpose of the following line of code:",
+"input": "DIGITAL.ReadCompareState (RDF_TDO_D,  LineState, expectedCmpState);",
+"output": "This line appears to be an ATE API instruction to read the output of an ATE comparator. The first argument likely specifies the name of the DUT pin to which the comparator input is connected. The second argument could be a pointer for the output variable to which the status of the comparator is passed. The last argument contains the expected comparator output."
+}
+{
+"instruction": "Explain to me the purpose of the following block of code:",
+"input": "
+    // Set TryResult depending on the state of TDO
+    SERIAL_LOOP_BEGIN
+        if ( LineState[PRE_SITE] == DIGITAL_CMP_STATE_HIGH )
+        { 
+            TryResult[PRE_SITE][0] = L2_AboveThreshold;  
+        }
+        if ( LineState[PRE_SITE] == DIGITAL_CMP_STATE_LOW )
+        { 
+            TryResult[PRE_SITE][0] = L2_BelowThreshold;  
+        }
+    SERIAL_LOOP_END
+",
+"output": "This appears to be a standard site loop where pass or fail (AboveThreshold or BelowThreshold) results are assigned to the multisite variable TryResult, perhaps preparing for datalogging."
+}
+{
+"instruction": "You are an expert in semiconductor test engineering. Analyze the following piece of testprogram.",
+"input": "#include <Main.h>
+
+using namespace std;
+
+
+TMResultM TS::ApplikationTests ( void )
+{
+    if ( PRE.GetPrintComments() ) {
+        cout << "Executing: " << __PRETTY_FUNCTION__ << 
+            " (Entry Subflow: " << RunTime.GetActiveFlowNode().GetName() <<
+            ", Active flow: " << TestProg.GetActiveFlow().GetName() << ")" << endl;
+    }
+    
+    // used for autoprofiler 
+    Profiler p(__PRETTY_FUNCTION__);
+    
+    // declarations
+    FloatM voltage;
+
+    FloatM FeedBackLimitation;    
+    
+    // fill in your source code here
+    
+    TRIGGER(1)    
+    
+    if (PartType == Wafertest) 
+    {
+        return ( L2.GetTestStepResult() );
+    }
+
+    L2_CBIT.Open( RDF_USED_CBIT );
+    L2_CBIT.WaitForRelay();    
+
+    MY.Init_Dutpins();
+
+
+    /*********************************************/
+    /* voltage monitoring - Feedback limitation  */
+    /*********************************************/
+    
+    // check hs wird das benötigt????
+    VI.Gate               ( RDF_LX2_V+RDF_LX2_V+RDF_SW1_HV+RDF_SW2_V, VI_GATE_OFF_LOZ           );
+    VI.Disconnect         ( RDF_LX2_V+RDF_LX2_V+RDF_SW1_HV+RDF_SW2_V                            );
+    L2.SafeWait (1ms);
+
+
+
+    L2_CBIT.Open( RDF_DP_REL + RDF_DM_REL ); /* Sicherheit! */
+    L2_CBIT.WaitForRelay();    
+
+
+
+
+    
+    /* Connect VIS_SUPPLY between SW and GND */
+ 
+    VI.SetBandwidthV      (RDF_SW2_V+RDF_LX2_V, VI_COMP_MIN_SETTLING_TIME, 2uA );
+    VI.Force              ( RDF_SW2_V, VI_FORCE_V, 0V, 16V, 50mA, 50mA, -50mA, UTL_VOID          );
+    VI.Gate               ( RDF_SW2_V, VI_GATE_ON                                                );
+    VI.Connect            ( RDF_SW2_V, VI_TO_DUT, VI_MODE_REMOTE                                 );
+
+    VI.Force              ( RDF_LX2_V, VI_FORCE_I, 0uA, 50mA, 16V, 14V, -0.2V, UTL_VOID          );
+
+    VI.Connect            ( RDF_LX2_V,VI_TO_DUT, VI_MODE_REMOTE                                  ); 
+    VI.Gate               ( RDF_LX2_V, VI_GATE_ON                                                );
+
+
+    /* Initializing of used pins: Connect LX1 to APIN, 
+       CMP in voltage mode, EN in voltage mode */
+
+    DIGITAL.Disconnect    ( RDF_CS_D, DIGITAL_ALL_PATHS                                          );         
+
+        //check hs was fuer win Strom wird wirklich gebraucht?
+    VI.Force              ( RDF_CMP_HV, VI_FORCE_V, 0V, 2.5V, 50mA, 50mA, -50mA, VI_FORCE_APPLY  );
+
+    // check hs checken ob das mit Digital level funktioniert ( auf der SZ wird das mit der PMU gemacht ) 
+    DIGITAL.SetDriveMode  ( RDF_EN_HVD, DIGITAL_DRV_MODE_LOW                                     );     
+    DIGITAL.SetVih        ( RDF_EN_HVD, 3.3V                                                     );
+
+    
+    /* Connect BUS to VIS10, Clamping of 100mA needed at pin BUS */
+    VI.SetBandwidthV      ( RDF_BUS_V, VI_COMP_MIN_SETTLING_TIME , 100nF );
+    VI.Force              ( RDF_BUS_V, VI_FORCE_V, 0V, 16V, 1A, 160mA, -160mA, VI_FORCE_APPLY    );                      
+
+    /* Power ON in sleep mode */        
+    MY.PowerOn_sleep(12.0);
+    L2.SafeWait(5ms);
+
+     VI.ForceV             ( RDF_SW2_V, 12V, 16V                                                 ); 
+     VI.SetClampsV         ( RDF_LX2_V, 14V, 8.7V                                                );     // clamp to 8.7V to get a fail without a device
+
+    
+    /* Set EN permament to High level of 3.3 V -> run mode */
+    // check hs checken ob das mit Digital level funktioniert ( auf der SZ wird das mit der PMU gemacht ) 
+    DIGITAL.SetDriveMode  ( RDF_EN_HVD, DIGITAL_DRV_MODE_HIGH                                    ); 
+    TIME.Wait( 3ms );
+
+    /* Switch on VIS_MEAS within 2 to 10ms -> otherweise regulator will not work */
+    VI.ForceV             ( RDF_BUS_V, 5V, 16V                                                   );
+
+    /* Set voltage at CMP to 0.5V - to control the PWM */       
+    VI.ForceV             ( RDF_CMP_HV, 0.5V, 2.5V                                               );
+
+    /* load current of 30 mA */
+    //check hs 30mA oder 60mA????
+    VI.SetMeasureSamples ( RDF_LX2_V , 10                                                        ); 
+    VI.SetMeasureDelay   ( RDF_LX2_V , 5.1us                                                     );
+    VI.ForceI            ( RDF_LX2_V, -30mA, 50mA                                               );
+        
+    L2.SafeWait( 10ms);
+    
+    /* Measure voltage in normal mode */
+    MY_VI.MeasureVAverage ( RDF_LX2_V , voltage , 6V , 8141                                      ); 
+    L2.DatalogPrint(8141, voltage);
+
+    // Auswertung spannung
+    SERIAL_LOOP_BEGIN
+        if((voltage[PRE_SITE] > -1.0) && (voltage[PRE_SITE] < 11.0))
+        {
+            FeedBackLimitation[PRE_SITE] = 0;
+        }
+        else
+        {
+            FeedBackLimitation[PRE_SITE] = 1;
+        }    
+    SERIAL_LOOP_END             
+        
+    /* Set voltage at BUS under V__LLIM__ -> LX should by constantly on */
+    VI.ForceV           ( RDF_BUS_V, 4.5V, 16V                                                   );     
+    L2.SafeWait( 5ms);
+
+    MY_VI.MeasureVAverage ( RDF_LX2_V , voltage , 10V , 8142                                      ); 
+    L2.DatalogPrint(8142, voltage);
+          
+    // Auswertung spannung
+    SERIAL_LOOP_BEGIN
+        if(voltage[PRE_SITE] > 9.0 )
+        {
+            FeedBackLimitation[PRE_SITE] = FeedBackLimitation[PRE_SITE] + 0;
+        }
+        else
+        {
+            FeedBackLimitation[PRE_SITE] = FeedBackLimitation[PRE_SITE] + 2;
+        }
+    SERIAL_LOOP_END
+                
+    /* Set voltage at BUS above V__HLIM__ -> LX should by constantly off */
+    VI.ForceV           ( RDF_BUS_V, 6V, 16V                                                    );      
+                
+    L2.SafeWait( 10ms);
+
+    MY_VI.MeasureVAverage ( RDF_LX2_V , voltage , 4V , 8143                                      ); 
+    L2.DatalogPrint(8143, voltage);
+    
+   // Auswertung spannung
+    SERIAL_LOOP_BEGIN
+        // check hs soll das auskommentiert sein??
+        if(0)
+        {       
+            if(voltage[PRE_SITE] < 5.0 )
+            {
+                FeedBackLimitation[PRE_SITE] = FeedBackLimitation[PRE_SITE] + 0;
+            }
+            else
+            {
+                FeedBackLimitation[PRE_SITE] = FeedBackLimitation[PRE_SITE] + 4;
+            }    
+        }
+        //  L2.DatalogPrint(8141, voltage[PRE_SITE]);
+    SERIAL_LOOP_END     
+
+    
+    VI.ForceI             ( RDF_LX2_V, 0mA, 1A                                                   );     
+
+    VI.ForceV             ( RDF_CMP_HV, 0.0V, 2.5V                                               );
+    
+        
+    VI.SetClampsV         ( RDF_LX2_V, 14V, -0.2V                                                ); 
+    VI.Gate               (  RDF_LX2_V, VI_GATE_OFF_LOZ                                          );
+    VI.Disconnect         (  RDF_LX2_V                                                           );
+    
+    TIME.Wait( 2ms );
+
+    VI.Force              ( RDF_SW2_V, VI_FORCE_V, 0V, 16V, 50mA, 50mA, -50mA, UTL_VOID       );
+    TIME.Wait( 2ms );
+    VI.Gate               (  RDF_SW2_V, VI_GATE_OFF_LOZ                                          );
+    VI.Disconnect         (  RDF_SW2_V                                                           );
+
+
+    DIGITAL.SetDriveMode  ( RDF_EN_HVD, DIGITAL_DRV_MODE_LOW                                     );     
+    DIGITAL.SetVih        ( RDF_EN_HVD, 3.0V                                                     );  
+
+
+
+    VI.Gate               (  RDF_CMP_HV, VI_GATE_OFF_LOZ                                         );
+    VI.Disconnect         (  RDF_CMP_HV                                                          );   
+
+
+    /* Reset VIS_MEAS */
+    VI.Force              ( RDF_BUS_V, VI_FORCE_V, 0V, 16V, 1A, 160mA, -160mA, VI_FORCE_REMOVE   );
+    L2.SafeWait ( 1ms );
+
+
+    MY.SMPS_supply_off();                       
+            
+    L2_CBIT.Open( RDF_USED_CBIT );
+    L2_CBIT.WaitForRelay();
+    MY.PowerOff();
+
+    VI.SetDefaultBandwidth (RDF_SW2_V+RDF_LX2_V+RDF_BUS_V); 
+
+    L2.DatalogPrint(8140, FeedBackLimitation);
+                                  
+    
+    return ( L2.GetTestStepResult() );
+}",
+"output": "These texts appear to form an entire source code file implementing a part of an ATE testprogram. 
+
+## File Overview
+- The file is written in C++ and appears to be using the LTX Unison framework.
+- Implements the test block or test step called 'ApplikationTests' based on the function name 'TS::ApplikationTests()'
+- Based on the comment found in line number 38, this test block implements voltage monitoring and feedback limitation.
+- The file mostly contains ATE test method calls from 'VI', 'L2', 'L2_CBIT' and 'DIGITAL' libraries.
+- Also calls a few user-defined methods from the 'MY' and 'MY_VI' classes.
+- Does not contain any function or class definitions.
+
+## 'TS::ApplikationTests()' sequence overview (based on comments)
+1. Initialization and safety checks
+2. Power supply configuration and device setup
+3. Multiple test conditions with measurements
+4. Results evaluation and datalogging
+5. Cleanup and resource release
+
+## Test Sequence detailed summary
+1. **Initial Setup**:
+   - Check if PartType == Wafertest. If yes, skip the entire test block.
+   - Relay configuration for safety
+   - DUT pin initialization via `MY.Init_Dutpins()`
+   - Instrument connections and initial states
+   - Instrument bandwidth and clamp settings
+
+2. **Power Supply Configuration**:
+   - `MY.PowerOn_sleep(12.0)` powers the device in sleep mode
+   - EN pin driven high to switch to run mode
+   - Various voltage/current settings applied to SW, LX, BUS, and CMP pins
+
+3. **Test Measurements**:
+   - Voltage measurements at LX2 pin under different BUS voltage conditions
+   - Current loading at 30mA (with a comment questioning if 60mA should be used)
+   - Multiple measurement points (test numbers 8141, 8142, 8143)
+
+4. **Result Evaluation**:
+   - Voltage measurements evaluated against thresholds
+   - `FeedBackLimitation` variable accumulates test results (bitmask-style)
+   - Final result datalogged as test number 8140
+
+## Important Test Engineering Details
+1. **Notable Test Conditions**
+   - Tests feedback limitation functionality of the DUT
+   - Verifies behavior under different BUS voltage conditions:
+     - Normal mode (5V)
+     - Low voltage condition (4.5V) - expects LX to stay on
+     - High voltage condition (6V) - expects LX to turn off
+   - Includes current loading test (30mA)
+
+1. **Resources Involved**:
+   - List of pins and pin groups that are referenced directly in the file: RDF_LX2_V, RDF_SW2_V, RDF_CS_D, RDF_CMP_HV, RDF_EN_HVD, RDF_BUS_V
+   - List of relays and relay groups that are referenced directly in the file: RDF_DP_REL, RDF_DM_REL, RDF_USED_CBIT
+
+2. **Debugging Notes**:
+   - Multiple "check hs" comments indicate areas needing verification
+   - One test section is conditionally disabled (`if(0)`)
+   - Questions about proper current levels (30mA vs 60mA)
+
+3. **Datalogging**:
+   - Results stored in test numbers 8140-8143
+   - `FeedBackLimitation` appears to be a bitmask result
+
+4. **Device Specifics**:
+   - Tests a power management IC with:
+     - Sleep/run mode control (via EN pin)
+     - Feedback regulation
+     - PWM control (via CMP pin)
+     - High voltage capability (up to 16V)
+
+## Recommendations for Further Investigation
+1. Verify the current levels and test conditions marked with "check hs"
+2. Double-check the `FeedBackLimitation` scoring system
+
+## Summary
+This test appears to validate the feedback control and regulation functionality of a power management IC, with particular focus on its behavior under different input voltage conditions."
+}
+{
+"instruction": "You are an expert in semiconductor test engineering. Analyze the following piece of testprogram.",
+"input": "#include <Main.h>
+
+using namespace std;
+
+
+TMResultM TS::BusCM ( void )
+{
+    if ( PRE.GetPrintComments() ) {
+        cout << "Executing: " << __PRETTY_FUNCTION__ << 
+            " (Entry Subflow: " << RunTime.GetActiveFlowNode().GetName() <<
+            ", Active flow: " << TestProg.GetActiveFlow().GetName() << ")" << endl;
+    }
+    
+    // used for autoprofiler 
+    Profiler p(__PRETTY_FUNCTION__);
+    
+    // declarations
+    FloatM  i_cs, r_safety;
+    FloatM  v_cs_refl, v_cs_outfb_5v,  v_cs_outfb_6v, v_cs_mid;
+    FloatM  gain_5v, gain_6v, gain_ratio;
+    FloatM voltage;    
+    
+    // fill in your source code here
+
+    TRIGGER(1)    
+
+    L2_CBIT.Open( RDF_USED_CBIT );
+    L2_CBIT.WaitForRelay();
+
+    MY.Init_Dutpins();
+
+    MY.PowerOn (12.0);
+
+    if((PartType == Wafertest) || Expression("_SoftTrim").GetBoolValue()[ ActiveSites.Begin().GetValue() ])
+    {
+        MY_OTP.SoftTrimming();
+    }
+    
+    /***  Safety resistance between CS and BUS  r_safety  ***/
+    /* Set BUS to 0V and CS to 1V and measure current into CS */
+
+    VI.Force             ( RDF_BUS_V, VI_FORCE_V, 0V, 16V, 5mA, 5mA, -5mA, VI_FORCE_APPLY       );
+    L2.SafeWait ( 2ms );
+    
+    DIGITAL.SetDriveState( RDF_CS_D, DIGITAL_DRV_STATE_LOW                                       );
+    DIGITAL.Disconnect   ( RDF_CS_D, DIGITAL_DCL_TO_DUT                                          );
+    VI.Force             ( RDF_CS_V, VI_FORCE_V, 1V, 16V, 500uA, 500uA, -500uA , VI_FORCE_APPLY  );  // min 40uA 
+    
+    
+    L2.SafeWait (0.5ms);
+
+    VI.SetMeasureSamples ( RDF_CS_V , 10                                                         ); 
+    VI.SetMeasureDelay   ( RDF_CS_V , 5.1us                                                      );
+    MY_VI.MeasureIAverage  ( RDF_CS_V , i_cs , 40uA , 8550                                         );
+
+    /* Reconfigure CS for next JTAG transmissions (CS=TMS!) */
+    VI.Force             ( RDF_CS_V, VI_FORCE_V, 0V, 16V, 500uA, 500uA, -500uA , VI_FORCE_REMOVE );
+    DIGITAL.Connect      ( RDF_CS_D, DIGITAL_DCL_TO_DUT                                          );
+
+    L2.SafeWait (2ms);
+
+    SERIAL_LOOP_BEGIN
+        if (i_cs[PRE_SITE] != 0)
+        {
+            r_safety[PRE_SITE] = 1.0 / i_cs[PRE_SITE];
+        }
+        else
+        {
+            r_safety[PRE_SITE] = 1e9;
+        }
+    SERIAL_LOOP_END
+        
+
+/***  CS amplifier DC gain and mid voltage ***/
+
+    /* Setup TAO for voltage measurements */
+    VI.Force              ( RDF_TAO_HV, VI_FORCE_I,  0uA, 5uA, 5V, 5V, -0.2V, UTL_VOID  );  
+    VI.Connect            ( RDF_TAO_HV, VI_TO_DUT, VI_MODE_REMOTE                       );
+    VI.Gate               ( RDF_TAO_HV, VI_GATE_ON                                      );
+
+    /*TM_set (0xc0, 0x020);      //SMPS_OSC_ON=1
+    JTAG_write (0x4c, 0x210);  //CM_ON=1, lt. Spec: 0bxxxx100001 -> Swappen, da hier LSB first?!
+    */
+
+    /* Measure Vmid */
+    /*JTAG_write (0xd1,0x1e0);   //TAO = CS_VMID (Mid reference)  */
+    MY.TM_enable();
+    L3_JT.RunChain("cs_mid");
+    L2.SafeWait (1ms);
+
+    VI.SetMeasureSamples  ( RDF_TAO_HV , 100                                      );    // was 200 on SZ
+    VI.SetMeasureDelay    ( RDF_TAO_HV , 5.1us                                    );
+    MY_VI.MeasureVAverage   ( RDF_TAO_HV , v_cs_mid , 1.48V , 8563                  );  
+
+
+
+    /* Measure ground reference */
+    //JTAG_write (0xd1, 0x1c4);   //TAO = CS_REFL (Ground Ref) 
+    L3_JT.RunChain("cs_ref");
+    L2.SafeWait (1ms);
+    
+    //check hs Messbereich checken -> 2.5V?
+    VI.SetMeasureSamples  ( RDF_TAO_HV , 100                                      );    // was 800 on SZ  
+    MY_VI.MeasureVAverage   ( RDF_TAO_HV , v_cs_refl , 2.9mV , 8562                 ); 
+
+    /* Set TAO muxer to CS_OUTFB */
+    //JTAG_write (0xd1, 0x1c8);  //TAO = CS_OUTFB 
+    L3_JT.RunChain ("cs_outfb");
+    L2.SafeWait (1ms);
+
+
+    /* Measure CS_OUTFB with Vcm=5V */
+    L2_CBIT.Close ( RDF_CMP_RC_REL );
+    L2_CBIT.WaitForRelay();    
+
+    VI.ForceV             ( RDF_BUS_V, 5V-MY_GS_BUS_V_SOURCE_OFFSET.Value(), 5V                                              );   
+
+    DIGITAL.SetDriveState ( RDF_CS_D, DIGITAL_DRV_STATE_LOW                                 );
+    DIGITAL.Disconnect    ( RDF_CS_D, DIGITAL_DCL_TO_DUT                                    );
+    VI.Force              ( RDF_CS_V, VI_FORCE_V, 5.1V, 16V, 5mA, 5mA, -5mA, VI_FORCE_APPLY );   //Aussteuerung beachten (Gain 20dB)!
+
+        
+    L2.SafeWait (20ms);  // long settling time needed
+
+    MY_VI.MeasureVAverage   ( RDF_TAO_HV , v_cs_outfb_5v , 1V , 8560                          ); 
+
+
+    /* Measure CS_OUTFB with Vcm=6V */
+
+    VI.ForceV             ( RDF_BUS_V, 5.9V-MY_GS_BUS_V_SOURCE_OFFSET.Value(), 16V                                           );
+
+    VI.ForceV             ( RDF_CS_V,   6V,   16V                                           );
+
+    L2.SafeWait (20ms); // long settling time needed
+
+
+    MY_VI.MeasureVAverage   ( RDF_TAO_HV , v_cs_outfb_6v , 1V , 8558                          ); 
+
+
+    /* Berechnungen */
+
+    gain_5v = ((v_cs_outfb_5v - v_cs_refl) / 0.1);
+    gain_6v = ((v_cs_outfb_6v - v_cs_refl) / 0.1);
+    SERIAL_LOOP_BEGIN
+        if (gain_5v[PRE_SITE] != 0)
+        {
+            gain_ratio[PRE_SITE] = gain_6v[PRE_SITE] / gain_5v[PRE_SITE];
+        }
+        else
+        {
+            gain_ratio[PRE_SITE] = 99.99;
+        }  
+    SERIAL_LOOP_END
+
+
+    /* Reset Pins */
+
+    VI.Force             ( RDF_BUS_V, VI_FORCE_V, 0V, 16V, 5mA, 5mA, -5mA, VI_FORCE_REMOVE  );
+    
+    VI.Force             ( RDF_CS_V, VI_FORCE_V,  0V, 16V, 5mA, 5mA, -5mA,  VI_FORCE_REMOVE  );
+    DIGITAL.Connect      ( RDF_CS_D, DIGITAL_DCL_TO_DUT                                      );
+
+    MY.PowerOff();
+    L2_CBIT.Open( RDF_USED_CBIT );
+    L2_CBIT.WaitForRelay();    
+
+    /*** Datalogs ***/
+    L2.DatalogPrint (8550, r_safety  );
+    L2.DatalogPrint (8551, i_cs      );
+    L2.DatalogPrint (8558, gain_6v   );
+    L2.DatalogPrint (8560, gain_5v   );
+    L2.DatalogPrint (8561, gain_ratio);
+    L2.DatalogPrint (8562, v_cs_refl );
+    L2.DatalogPrint (8563, v_cs_mid  );
+
+
+//L2_DatalogTestStepTime(9046);    
+    
+    
+    return ( L2.GetTestStepResult() );
+}",
+"output": "These texts form an entire source code file implementing part of an ATE test program for semiconductor device testing.
+
+## File Overview
+- The file is written in C++ and appears to be using the LTX Unison framework.
+- Implements the test block called 'BusCM' based on the function name 'TS::BusCM()'
+- Based on the test sequence and comments, this test block implements current sense (CS) amplifier characterization and safety resistance measurement.
+- Contains ATE test method calls from 'VI', 'L2', 'L2_CBIT', 'DIGITAL', and 'L3_JT' libraries.
+- Calls user-defined methods from 'MY', 'MY_VI', and 'MY_OTP' classes.
+- Does not contain any function or class definitions.
+
+## 'TS::BusCM()' sequence overview
+1. Initialization and safety checks
+2. Safety resistance measurement (CS to BUS)
+3. CS amplifier DC characterization:
+   - Mid voltage measurement
+   - Ground reference measurement
+   - Output feedback measurements at 5V and 6V
+4. Gain calculations and results evaluation
+5. Cleanup and resource release
+
+## Test Sequence detailed summary
+1. **Initial Setup**:
+   - Relay configuration for safety (RDF_USED_CBIT)
+   - DUT pin initialization via `MY.Init_Dutpins()`
+   - Power application (12V) via `MY.PowerOn()`
+   - Conditional soft trimming execution for wafer test or soft trim flag
+
+2. **Safety Resistance Measurement**:
+   - BUS pin forced to 0V, CS pin forced to 1V
+   - Current measurement at CS pin (test number 8550)
+   - Safety resistance calculated as 1/measured current
+   - Reconfiguring CS pin resources (RDF_CS_V, RDF_CS_D) for CS amplifier measurements
+
+3. **CS Amplifier Characterization**:
+   - TAO pin configured for voltage measurements
+   - Three measurement configurations via JTAG chains:
+     * CS_VMID (mid reference) - test number 8563
+     * CS_REFL (ground reference) - test number 8562
+     * CS_OUTFB (output feedback)
+   - Output feedback measurements at:
+     * 5V BUS voltage (test number 8560)
+     * 6V BUS voltage (test number 8558)
+   - Long settling times (20ms) for accurate measurements
+
+4. **Gain Calculations**:
+   - DC gain calculated at both voltage conditions
+   - Gain ratio (6V/5V) computed and stored
+   - Special handling for divide-by-zero cases
+
+5. **Cleanup**:
+   - Pin states reset to safe conditions
+   - Power removed via `MY.PowerOff()`
+   - Relays opened for safety
+
+## Important Test Engineering Details
+
+1. **Resources Involved**:
+   - Pins and pin groups:
+     * RDF_BUS_V, RDF_CS_V, RDF_CS_D, RDF_TAO_HV
+   - Relays and relay groups:
+     * RDF_USED_CBIT, RDF_CMP_RC_REL
+
+2. **Measurement Configuration**:
+   - Multiple sample averaging (10-100 samples)
+   - Precise measurement delays (5.1μs)
+   - High settling times (up to 20ms) for stable measurements
+   - Current measurements with 40μA minimum expected value
+
+3. **Debugging Notes**:
+   - Comment about checking measurement range for ground reference
+   - Note about signal swing consideration (Gain 20dB)
+   - Sample count differences noted (was 200/800 on SZ)
+
+4. **Datalogging**:
+   - Comprehensive results storage:
+     * 8550: Safety resistance
+     * 8551: CS current
+     * 8558: 6V gain measurement
+     * 8560: 5V gain measurement
+     * 8561: Gain ratio
+     * 8562: Ground reference voltage
+     * 8563: Mid reference voltage
+
+5. **Device Specifics**:
+   - Tests a device with:
+     * Current sense amplifier
+     * Programmable references via JTAG
+     * TAO (Test Analog Output) monitoring capability
+     * BUS voltage input (5-6V range)
+     * Safety resistance between CS and BUS
+
+## Recommendations for Further Investigation
+1. Verify the JTAG chain configurations ("cs_mid", "cs_ref", "cs_outfb")
+2. Review the MY_GS_BUS_V_SOURCE_OFFSET value impact
+3. Confirm the expected gain values and ratios
+4. Check the soft trimming conditions and implementation
+
+## Summary
+This test thoroughly characterizes the current sense amplifier functionality of a power management IC, including safety resistance verification and DC gain measurements under different operating conditions. The test provides comprehensive datalogging of both raw measurements and calculated parameters for production test analysis."
+}
+{
+"instruction": "You are an expert in semiconductor test engineering. Analyze the following piece of testprogram.",
+"input": "#include <Main.h>
+
+using namespace std;
+
+extern L4::OTP::Value MY_Trim_temp_mon_trimcode;
+extern L4::OTP::Value MY_Trim_osc50_trimcode;
+extern L4::OTP::Value MY_Trim_iref_trimcode;
+extern L4::OTP::Value MY_Trim_iref_tc_trimcode;
+extern L4::OTP::Value MY_Trim_vref_trimcode;
+extern L4::OTP::Value MY_Trim_hs_current_trimcode;
+extern L4::OTP::Value MY_Trim_smps_osc_trimcode;
+extern L4::OTP::Value MY_Trim_rdwn_trimcode;
+extern L4::OTP::Value MY_Trim_i2c_address;
+extern L4::OTP::Value MY_Trim_autoChargeTime;
+extern L4::OTP::Value MY_Trim_vbusmax;
+extern L4::OTP::Value MY_Trim_ccp_settings;
+extern L4::OTP::Value MY_Trim_disableI2C;
+extern L4::OTP::Value MY_Trim_chip_id;
+extern L4::OTP::Value MY_Trim_id_parity;
+
+TMResultM TS::CheckChipID ( void )
+{
+    if ( PRE.GetPrintComments() ) {
+        cout << "Executing: " << __PRETTY_FUNCTION__ << 
+            " (Entry Subflow: " << RunTime.GetActiveFlowNode().GetName() <<
+            ", Active flow: " << TestProg.GetActiveFlow().GetName() << ")" << endl;
+    }
+    
+    // used for autoprofiler 
+    Profiler p(__PRETTY_FUNCTION__);
+    
+    UnsignedM  temp_mon_trimcode(999);
+    UnsignedM  osc50_trimcode(999);
+    UnsignedM  iref_trimcode(999);
+    UnsignedM  iref_tc_trimcode(999);
+    UnsignedM  vref_trimcode(999);
+    UnsignedM  hs_current_trimcode(999);
+    UnsignedM  smps_osc_trimcode(999);
+    UnsignedM  rdwn_trimcode(999);
+    UnsignedM  i2c_address(999);
+    UnsignedM  charge_time(999);     
+    UnsignedM  vbusmax(999);         
+    UnsignedM  ccp_settings(999);    
+    UnsignedM  disableI2C(999);   
+    UnsignedM  chip_id(999);   
+
+    UnsignedM  fused_id_lsb;
+    UnsignedM  fused_id_msb;
+   
+    FloatM     DeviceType(999);
+    FloatM     idOkay(999); 
+ 
+ 
+    // fill in your source code here
+
+    TRIGGER(1)
+
+    if((TestTemp == minus40) && (TestMode != Quality))
+    {
+        return ( L2.GetTestStepResult() );
+    }
+
+   /*************************************************************************/
+   /* Run user defined setup function                                       */
+   /*************************************************************************/
+
+    
+    MY.L4_OTP_SetTestMode( true );
+
+   /*************************************************************************/
+   /* Test block:                                                           */
+   /* Read Fuse array                                                       */
+   /*************************************************************************/
+
+   /* Read array and save data to user defined array of values */
+
+    L4::OTP::FuseArrayTest::ReadOTPData();
+
+   /*************************************************************************/
+   /* Run user defined setup function                                       */
+   /*************************************************************************/
+
+   /* Execute setup (FALSE => set OTP test mode Off)
+    * Check returned value */
+
+    MY.L4_OTP_SetTestMode( false );
+
+    chip_id             = MY_Trim_chip_id.ReadValue;
+
+    fused_id_lsb = (chip_id & 0x7FFFFFFF);
+    //fused_id_msb = ((chip_id >> 23) & 0x00000001);  
+   
+    if(PartType == Wafertest)
+    {
+        if((id_lsb != fused_id_lsb))
+        {
+            idOkay = 1;
+        }
+        else
+        {
+            idOkay = 0;
+        }
+        
+        if( SYS.GetTesterName() == "munich11l" || SYS.GetTesterName() == "munich15l" || SYS.GetTesterName() == "munich17l")
+        {
+            
+            cout << " !!!! Dummy Data for Test 4900 and 143 to get a pass without a Database !!!!" << endl;
+            idOkay = 0;
+            id_lsb = 1;
+        }
+         L2.DatalogPrint (4900, idOkay); 
+    }
+
+    L2.DatalogPrint(143, id_lsb);
+    L2.DatalogPrint(142, id_msb);    
+
+
+    if(PartType == Finaltest)
+    {
+
+        temp_mon_trimcode   = MY_Trim_temp_mon_trimcode.ReadValue;
+        osc50_trimcode      = MY_Trim_osc50_trimcode.ReadValue;
+        iref_trimcode       = MY_Trim_iref_trimcode.ReadValue;
+        iref_tc_trimcode    = MY_Trim_iref_tc_trimcode.ReadValue;
+        vref_trimcode       = MY_Trim_vref_trimcode.ReadValue;
+        hs_current_trimcode = MY_Trim_hs_current_trimcode.ReadValue;
+        smps_osc_trimcode   = MY_Trim_smps_osc_trimcode.ReadValue;
+        rdwn_trimcode       = MY_Trim_rdwn_trimcode.ReadValue;
+        i2c_address         = MY_Trim_i2c_address.ReadValue;
+        charge_time         = MY_Trim_autoChargeTime.ReadValue;     
+        vbusmax             = MY_Trim_vbusmax.ReadValue;         
+        ccp_settings        = MY_Trim_ccp_settings.ReadValue;    
+        disableI2C          = MY_Trim_disableI2C.ReadValue;   
+
+
+        L2.DatalogPrint (7021, temp_mon_trimcode); 
+        L2.DatalogPrint (7022, osc50_trimcode);
+        L2.DatalogPrint (7023, iref_trimcode);
+        L2.DatalogPrint (7024, iref_tc_trimcode);
+        L2.DatalogPrint (7025, vref_trimcode);
+        L2.DatalogPrint (7026, hs_current_trimcode);
+        L2.DatalogPrint (7027, smps_osc_trimcode);
+        L2.DatalogPrint (7028, rdwn_trimcode);
+        L2.DatalogPrint (7029, i2c_address);
+        L2.DatalogPrint (7030, charge_time);
+        L2.DatalogPrint (7031, vbusmax);
+        L2.DatalogPrint (7032, ccp_settings);
+        L2.DatalogPrint (7033, disableI2C);
+
+        SERIAL_HW_LOOP_BEGIN
+            if ( (TestTemp == plus25)  && !i2c_address_fused[PRE_SITE] ) // only done if not trimm values were fused before this run  
+            {
+              L2.DatalogPrint ( 7051, temp_mon_trimcode - 6 );
+              L2.DatalogPrint ( 7052, osc50_trimcode - g_osc50_trimcode);
+              L2.DatalogPrint ( 7053, iref_trimcode - g_iref_trimcode );
+              L2.DatalogPrint ( 7054, iref_tc_trimcode - 12 );
+              L2.DatalogPrint ( 7055, vref_trimcode - g_vref_trimcode );
+              L2.DatalogPrint ( 7056, hs_current_trimcode - g_hs_current_trimcode );
+              L2.DatalogPrint ( 7057, smps_osc_trimcode - g_smps_osc_trimcode );
+              L2.DatalogPrint ( 7058, rdwn_trimcode - g_rdwn_trimcode );
+              L2.DatalogPrint ( 7059, i2c_address - g_i2c_address );
+              L2.DatalogPrint ( 7060, charge_time - 0 );
+              L2.DatalogPrint ( 7061, vbusmax - 0 );
+              L2.DatalogPrint ( 7062, ccp_settings - 0 );
+              
+              if(is52243.Value())
+              {
+                L2.DatalogPrint ( 7063, disableI2C - 1 );
+              }
+              else
+              {
+                L2.DatalogPrint ( 7063, disableI2C - 0 );
+               } 
+            }
+        SERIAL_HW_LOOP_END
+
+        if( TestMode != Quality)
+        {
+          
+          DeviceType = 0.0;
+          SERIAL_LOOP_BEGIN
+
+            if((is52243.Value()) && (disableI2C[PRE_SITE] != 1))
+                DeviceType[PRE_SITE] = 2;
+            if((!is52243.Value()) && (disableI2C[PRE_SITE] == 1))
+                DeviceType[PRE_SITE] = 3;
+          
+          SERIAL_LOOP_END
+          
+          L2.DatalogPrint(7035, DeviceType);  
+        }
+    
+    } //PartType == Finaltest
+    
+    return ( L2.GetTestStepResult() );
+}",
+"output": "These texts form a complete source code file implementing part of an ATE test program for semiconductor device testing.
+
+## File Overview
+- The file is written in C++ and appears to be using the LTX Unison framework.
+- Implements the test block called 'CheckChipID' based on the function name 'TS::CheckChipID()'
+- Primarily handles chip identification verification and trim code validation
+- Introduces OTP (One-Time Programmable) memory reading functionality
+- Contains ATE test method calls from 'L2', 'L4::OTP', and 'SYS' libraries
+- Calls user-defined methods from 'MY' class
+- Features extensive datalogging of trim codes and device identification
+
+## 'TS::CheckChipID()' sequence overview
+1. Initialization and temperature check
+2. OTP memory reading setup
+3. Chip ID verification:
+   - Fused ID extraction and comparison
+   - Special handling for wafer test
+4. Trim code validation (final test only)
+5. Device type classification
+6. Comprehensive datalogging
+
+## Test Sequence detailed summary
+
+1. **Initial Setup**:
+   - Temperature check (skips test at -40°C for non-Quality tests)
+   - OTP test mode activation via `MY.L4_OTP_SetTestMode(true)`
+   - OTP memory read operation via `L4::OTP::FuseArrayTest::ReadOTPData()`
+   - OTP test mode deactivation
+
+2. **Chip ID Verification**:
+   - Reads chip ID from OTP (`MY_Trim_chip_id`)
+   - Extracts LSB portion of chip ID
+   - Special wafer test handling:
+     * Compares against expected ID (`id_lsb`)
+     * Includes tester-specific dummy data handling for certain Munich testers
+   - Datalogs ID verification result (test 4900) and ID components (tests 142-143)
+
+3. **Trim Code Validation (Final Test Only)**:
+   - Reads numerous trim codes from OTP memory:
+     * Temperature monitor, oscillators, references
+     * Current settings, SMPS, I2C configuration
+     * Charge parameters and protection settings
+   - Datalogs raw trim values (tests 7021-7033)
+   - Calculates and datalogs trim code deviations (tests 7051-7063)
+   - Special handling for device variant (is52243)
+
+4. **Device Type Classification**:
+   - Determines device type based on I2C disable flag and variant
+   - Datalogs device type (test 7035) for non-Quality tests
+
+## Important Test Engineering Details
+
+1. **Key Variables**:
+   - 13 trim code variables from OTP memory
+   - Chip ID components (fused_id_lsb, fused_id_msb)
+   - Device classification flags (is52243, disableI2C)
+   - Tester-specific variables (munich11l, munich15l, munich17l)
+
+2. **Test Conditions**:
+   - PartType differentiation (Wafertest vs Finaltest)
+   - Temperature sensitivity (minus40, plus25)
+   - TestMode variations (Quality vs others)
+   - Tester-specific workarounds
+
+3. **Datalogging**:
+   - Extensive test number coverage:
+     * 142-143: Chip ID components
+     * 4900: ID verification result
+     * 7021-7033: Raw trim codes
+     * 7051-7063: Trim code deviations
+     * 7035: Device type classification
+
+4. **Device Specifics**:
+   - Tests a device with:
+     * OTP memory for configuration
+     * Multiple trim-able parameters
+     * Chip identification system
+     * I2C interface with configurable address
+     * Multiple device variants (is52243 flag)
+     * Temperature monitoring capability
+
+5. **New Elements**:
+   - OTP memory interface (L4::OTP namespace)
+   - Tester-specific workarounds (munich testers)
+   - Global reference values (g_xxx_trimcode)
+   - Device variant flag (is52243)
+   - Serial hardware loop construct (SERIAL_HW_LOOP)
+
+## Recommendations for Further Investigation
+1. Verify OTP test mode implementation details
+2. Review global reference values (g_xxx_trimcode)
+3. Examine device variant handling (is52243)
+4. Validate tester-specific workarounds
+5. Check chip ID parity handling (commented code)
+
+## Summary
+This test performs comprehensive device identification and configuration validation through OTP memory reading. It verifies chip IDs for wafer testing and extensively validates trim codes for final testing, with special handling for different test conditions and device variants. The test provides detailed datalogging of both raw values and calculated deviations for production analysis and quality control."
+}
+{
+"instruction": "You are an expert in semiconductor test engineering. Analyze the following piece of testprogram.",
+"input": "#include <Main.h>
+
+using namespace std;
+
+namespace   // Local namespace
+{
+// Add variable declarations that are global in this file only
+void I2C_add_thresholds(const FloatM1D TryValue, L2_ThresholdTryResult_tM1D &TryResult, const L2_SearchMethod_tS Mode, L2_SearchEdge_tS Edge);
+void SDA_vih_thres(const FloatM1D TryValue, L2_ThresholdTryResult_tM1D &TryResult, const L2_SearchMethod_tS Mode, L2_SearchEdge_tS Edge);
+void SDA_vil_thres(const FloatM1D TryValue, L2_ThresholdTryResult_tM1D &TryResult, const L2_SearchMethod_tS Mode, L2_SearchEdge_tS Edge);
+void SCL_vih_thres(const FloatM1D TryValue, L2_ThresholdTryResult_tM1D &TryResult, const L2_SearchMethod_tS Mode, L2_SearchEdge_tS Edge);
+void SCL_vil_thres(const FloatM1D TryValue, L2_ThresholdTryResult_tM1D &TryResult, const L2_SearchMethod_tS Mode, L2_SearchEdge_tS Edge);
+
+// Add forward declaration of local functions here
+}   // End Local namespace
+
+
+TMResultM TS::I2C ( void )
+{
+    if ( PRE.GetPrintComments() ) {
+        cout << "Executing: " << __PRETTY_FUNCTION__ << 
+            " (Entry Subflow: " << RunTime.GetActiveFlowNode().GetName() <<
+            ", Active flow: " << TestProg.GetActiveFlow().GetName() << ")" << endl;
+    }
+    
+    // used for autoprofiler 
+    Profiler p(__PRETTY_FUNCTION__);
+    
+    // declarations
+
+FloatM  vth_lowadd, vth_highadd;     //Absolute voltage values 
+FloatM  thres_lowadd, thres_highadd; //Rational values to v_vdd_global
+FloatM  vih_sda, vih_scl;
+FloatM  vih_sda_ratio, vih_scl_ratio;
+FloatM  vil_sda, vil_scl;
+FloatM  vil_sda_ratio, vil_scl_ratio;
+FloatM  vlow_sda;
+FloatM  vhys_sda, vhys_scl;
+FloatM  i_adr, v_int;
+
+UnsignedM     exec_vectors; 
+UnsignedM1D    fail_vectors;
+
+FloatS  MY_VDD(3.3V); // was a global variable on SZ
+FloatS  MY_digInLowLevel(0.3V);
+FloatS  MY_digInHighLevel(3.3V);
+FloatS  MY_digOutLowLevel(0.9V);
+FloatS  MY_digOutHighLevel(2.3V);
+
+FloatS  loLimit, hiLimit, resolution;
+
+FloatM    ResultGoNoGo;
+UnsignedS errorFlag;
+
+    
+    // fill in your source code here
+    
+    TRIGGER(1)
+
+    if((TestTemp != minus40) || (TestMode == Quality))
+    {
+
+        L2_CBIT.Open( RDF_USED_CBIT );
+        L2_CBIT.WaitForRelay();        
+        MY.Init_Dutpins();
+        MY.PowerOn (12.0);
+        
+        if((PartType == Wafertest) || Expression("_SoftTrim").GetBoolValue()[ ActiveSites.Begin().GetValue() ])
+        {
+            MY_OTP.SoftTrimming();
+        }
+
+        /***  I2C Address decoding thresholds  ***/
+
+        ///* Setup TAI for input stimulation */
+        
+        DIGITAL.SetDriveState( RDF_ADR_HVD, DIGITAL_DRV_STATE_LOW                                   ); // avoid hot switch
+        DIGITAL.Disconnect   ( RDF_ADR_HVD, DIGITAL_DCL_TO_DUT                                      ); // move to PPMU
+        
+        VI.Force             ( RDF_ADR_HVD, VI_FORCE_V, 3.3V, 24V, 20uA, 20uA, -20uA, UTL_VOID      );     
+        VI.Connect           ( RDF_ADR_HVD, VI_TO_DUT, VI_MODE_LOCAL                                );
+        
+        L2.SafeWait(2ms);    
+        
+        VI.SetMeasureSamples ( RDF_ADR_HVD  , 10                                                    );   
+        VI.SetMeasureDelay   ( RDF_ADR_HVD  , 5.1us                                                 ); 
+        MY_VI.MeasureIAverage  ( RDF_ADR_HVD  , i_adr , 3.4nA , 8912                                  );      
+        
+        VI.Force             ( RDF_ADR_HVD, VI_FORCE_V, 0V, 24V, 20uA, 20uA, -20uA, UTL_VOID        );        
+        VI.Disconnect        ( RDF_ADR_HVD                                                          );
+
+
+        DIGITAL.Connect      ( RDF_ADR_HVD, DIGITAL_DCL_TO_DUT                                      ); // back to DCL
+
+ 
+
+
+        // check hs ueberprüfen ob Strombereich okay ist -> Spannung at 0V
+        VI.Force             ( RDF_TAI_HV, VI_FORCE_V, 0V, 5V, 5mA, 5mA, -5mA, VI_FORCE_APPLY       );     
+
+
+
+        MY.TM_set(0xD8, 0x200);
+
+        
+        DIGITAL.SetDriveState( RDF_SDA_D, DIGITAL_DRV_STATE_LOW                                     ); // avoid hot switch
+        DIGITAL.Disconnect   ( RDF_SDA_D, DIGITAL_DCL_TO_DUT                                        ); // move to PPMU
+        
+        VI.Force             ( RDF_SDA_D, VI_FORCE_V, 0V, 7V, 2uA, 2uA, -2uA, UTL_VOID              );  // connect first 0V to avoid current Spike during connect
+        
+        VI.Connect           ( RDF_SDA_D, VI_TO_DUT, VI_MODE_LOCAL                                  );
+        L2.SafeWait          ( 500us);    
+        VI.Force             ( RDF_SDA_D, VI_FORCE_I, 4mA, 25mA, 7V, 5V, -0.2V, UTL_VOID            );  
+        
+        VI.SetMeasureSamples ( RDF_SDA_D  , 10                                                      );   
+        VI.SetMeasureDelay   ( RDF_SDA_D  , 5.1us                                                   ); 
+        MY_VI.MeasureVAverage  ( RDF_SDA_D  , vlow_sda , 225mV , 8919                                 );          
+
+        VI.Force             ( RDF_SDA_D, VI_FORCE_I, 0mA, 25mA, 7V, 5V, -0.2V, UTL_VOID            );
+        VI.Disconnect        ( RDF_SDA_D                                                            );
+        
+        DIGITAL.Connect      ( RDF_SDA_D, DIGITAL_DCL_TO_DUT                                        ); // back to DCL
+
+
+
+        //TM_set (0xd0, 0x010);      //TAI=Input stimulation
+        //JTAG_write (0xc0, 0x200);  //DISSINK=1, sonst fliesst Discharge current an TAI=BUS!
+
+        /* Measure Low address selection threshold */
+        //JTAG_write (0xd2, 0x140);  //TDO=ADR_LOW
+
+        MY.TM_enable();
+  if(!is52243.Value())
+  {        
+        L3_JT.RunChain("adr_l");
+        
+        // Attention: Because of site dependent absolute voltage test limits "gonogo" mode 
+        //            of this L2 function only applicable with MDR treatment ! 
+
+
+        L2.GetLimitsOfTest ( 8910, loLimit, hiLimit );
+
+        loLimit = loLimit * MY_VDD;
+        hiLimit = hiLimit * MY_VDD;
+        resolution = 20mV;
+
+
+        errorFlag = 0;
+        L2.ThresholdSearch (0.5V,                // Absolute minimum value
+                            1.2V,                // Absolute maximum value
+                            loLimit,             // Lower test limit
+                            hiLimit,             // Upper test limit
+                            resolution,          // Neccessary resolution
+                            L2_GoNoGo,           // Search mode
+                            &I2C_add_thresholds, // Pointer to the measurement function
+                            vth_lowadd           // The result of the threshold measurement
+                           );
+
+        SERIAL_LOOP_BEGIN
+              
+            if(vth_lowadd[PRE_SITE] < -8)
+            {
+                ResultGoNoGo[PRE_SITE] = 0;
+                errorFlag += 1;
+            }
+            else if(vth_lowadd[PRE_SITE] > 8)
+            {
+                ResultGoNoGo[PRE_SITE] = 2;
+                errorFlag += 1;      
+            }
+            else
+            {
+                ResultGoNoGo[PRE_SITE] = 1;     
+            }
+
+        SERIAL_LOOP_END
+
+        L2.DatalogPrint(8915, ResultGoNoGo);
+  
+
+
+        if(MY_PCP_IsFullMeasurementInterval || (errorFlag != 0) || ( TestMode == Quality ))
+        {
+            L2.ThresholdSearch (0.5V,                // Absolute minimum value
+                                1.2V,                // Absolute maximum value
+                                loLimit,             // Lower test limit
+                                hiLimit,             // Upper test limit
+                                resolution,          // Neccessary resolution
+                                L2_BinarySearch,     // Search mode
+                                &I2C_add_thresholds, // Pointer to the measurement function
+                                vth_lowadd           // The result of the threshold measurement
+                               );    
+
+            L2.DatalogPrint(8910, vth_lowadd/ v_vdd_global);
+
+
+        }
+            
+
+        /* Measure High address selection threshold */
+        //JTAG_write (0xd2, 0x150);  //TDO=ADR_HIGH
+        L3_JT.RunChain("adr_h");
+
+
+
+        L2.GetLimitsOfTest ( 8911, loLimit, hiLimit );
+
+        loLimit = loLimit * MY_VDD;
+        hiLimit = hiLimit * MY_VDD;
+        resolution = 20mV;
+
+
+
+        errorFlag = 0;
+        L2.ThresholdSearch (2.0V,                // Absolute minimum value
+                            3.0V,                // Absolute maximum value
+                            loLimit,             // Lower test limit
+                            hiLimit,             // Upper test limit
+                            resolution,          // Neccessary resolution
+                            L2_GoNoGo,           // Search mode
+                            &I2C_add_thresholds, // Pointer to the measurement function
+                            vth_highadd          // The result of the threshold measurement
+                           );
+        SERIAL_LOOP_BEGIN
+
+            if(vth_highadd[PRE_SITE] < -8)
+            {
+                ResultGoNoGo[PRE_SITE] = 0;
+                errorFlag += 1;
+            }
+            else if(vth_highadd[PRE_SITE] > 8)
+            {
+                ResultGoNoGo[PRE_SITE] = 2;
+                errorFlag += 1;      
+            }
+            else
+            {
+                ResultGoNoGo[PRE_SITE] = 1;       
+            }
+
+        SERIAL_LOOP_END
+
+        L2.DatalogPrint(8916, ResultGoNoGo);
+ 
+
+
+        if(MY_PCP_IsFullMeasurementInterval || (errorFlag != 0) || ( TestMode == Quality ))
+        {
+            L2.ThresholdSearch (2.0V,                // Absolute minimum value
+                                3.0V,                // Absolute maximum value
+                                loLimit,             // Lower test limit
+                                hiLimit,             // Upper test limit
+                                resolution,          // Neccessary resolution
+                                L2_BinarySearch,     // Search mode
+                                &I2C_add_thresholds, // Pointer to the measurement function
+                                vth_highadd          // The result of the threshold measurement
+                               );     
+
+
+            L2.DatalogPrint(8911, vth_highadd/ v_vdd_global);
+
+
+        }
+
+
+        /***  I2C input voltage thresholds and hysteresis  ***/
+
+        /* Setup SDA for threshold test */
+        //TM_set (0xd2, 0x1e0);  //TDO=SDA
+        L3_JT.RunChain("sda");
+
+        DIGITAL.SetDriveState     ( RDF_SDA_D, DIGITAL_DRV_STATE_HIGH   );
+
+        resolution = 25.0e-3;
+        /* Measure SDA threshold vih_sda */
+        // check ueberpuefen ob VIH genau genug ist sonst auf PPMU umbauen
+        L2.ThresholdSearch (0.7V,                // Absolute minimum value
+                            3.0V,                // Absolute maximum value
+                            0.8V,                // Lower test limit
+                            2.8V,                // Upper test limit
+                            resolution,          // Neccessary resolution
+                            L2_BinarySearch,     // Search mode
+                            &SDA_vih_thres,      // Pointer to the measurement function
+                            vih_sda              // The result of the threshold measurement
+                           );
+
+
+        /* Measure SDA threshold vil_sda */
+        L2.ThresholdSearch (0.7V,                // Absolute minimum value
+                            3.0V,                // Absolute maximum value
+                            0.8V,                // Lower test limit
+                            2.8V,                // Upper test limit
+                            resolution,          // Neccessary resolution
+                            L2_BinarySearch,     // Search mode
+                            &SDA_vil_thres,      // Pointer to the measurement function
+                            vil_sda              // The result of the threshold measurement
+                           );
+
+        vih_sda_ratio = vih_sda / v_vdd_global;
+        vil_sda_ratio = vil_sda / v_vdd_global;
+    
+        vhys_sda = vih_sda - vil_sda;
+
+        /* Set  SDA VIH to normal */
+        DIGITAL.SetDriveState( RDF_SDA_D, DIGITAL_DRV_STATE_LOW                         );        
+        DIGITAL.SetVih( RDF_SDA_D, 3.0V                                                 );
+
+        L2.SafeWait( 1ms );
+
+        /* Setup SCL for threshold test */
+        //TM_set (0xd2, 0x1f0);  //TDO=SCL
+        L3_JT.RunChain("scl");
+
+        DIGITAL.SetDriveState     ( RDF_SCL_D, DIGITAL_DRV_STATE_HIGH   );
+
+        /* Measure SCL threshold vih_scl */
+                // check ueberpuefen ob VIH genau genug ist sonst auf PPMU umbauen
+        L2.ThresholdSearch (0.7V,                // Absolute minimum value
+                            3.0V,                // Absolute maximum value
+                            0.8V,                // Lower test limit
+                            2.8V,                // Upper test limit
+                            resolution,          // Neccessary resolution
+                            L2_BinarySearch,     // Search mode
+                            &SCL_vih_thres,      // Pointer to the measurement function
+                            vih_scl              // The result of the threshold measurement
+                           );
+
+
+        /* Measure SCL threshold vil_scl */
+        L2.ThresholdSearch (0.7V,                // Absolute minimum value
+                            3.0V,                // Absolute maximum value
+                            0.8V,                // Lower test limit
+                            2.8V,                // Upper test limit
+                            resolution,          // Neccessary resolution
+                            L2_BinarySearch,     // Search mode
+                            &SCL_vil_thres,      // Pointer to the measurement function
+                            vil_scl              // The result of the threshold measurement
+                           );
+
+        vih_scl_ratio = vih_scl / v_vdd_global;
+        vil_scl_ratio = vil_scl / v_vdd_global;
+
+        vhys_scl = vih_scl - vil_scl;
+
+}
+        /* Set  SDA VIH to normal */
+        DIGITAL.SetDriveState( RDF_SCL_D, DIGITAL_DRV_STATE_LOW                         );
+        DIGITAL.SetVih       ( RDF_SCL_D, 3.0V                                          );
+
+
+        /* Reset TAI */
+        VI.Force             ( RDF_TAI_HV, VI_FORCE_V, 0V, 5V, 5mA, 5mA, -5mA, VI_FORCE_REMOVE       );     
+
+
+        DIGITAL.SetDriveState( RDF_INT_D, DIGITAL_DRV_STATE_LOW                                     ); // avoid hot switch
+        DIGITAL.Disconnect   ( RDF_INT_D, DIGITAL_DCL_TO_DUT                                        ); // move to PPMU
+        
+        VI.Force             ( RDF_INT_D, VI_FORCE_I, 4mA, 25mA, 7V, 5V, -0.2V, UTL_VOID            );     
+        VI.Connect           ( RDF_INT_D, VI_TO_DUT, VI_MODE_LOCAL                                  );
+        
+        VI.SetMeasureSamples ( RDF_INT_D  , 10                                                      );   
+        VI.SetMeasureDelay   ( RDF_INT_D  , 5.1us                                                   ); 
+        MY_VI.MeasureVAverage  ( RDF_INT_D  , v_int , 63mV , 8940                                     );          
+
+        VI.Force             ( RDF_INT_D, VI_FORCE_I, 0mA, 25mA, 7V, 5V, -0.2V, UTL_VOID            );
+        VI.Disconnect        ( RDF_INT_D                                                            );
+        
+        DIGITAL.Connect      ( RDF_INT_D, DIGITAL_DCL_TO_DUT                                        ); // back to DCL
+        
+
+        // check hs ueberpruefen ob noch pins high sind!!!!! 
+        MY.PowerOff();
+
+  if(!is52243.Value())
+  {
+        L2.DatalogPrint (8920, vih_sda_ratio          ); 
+        L2.DatalogPrint (8921, vil_sda_ratio          ); 
+        L2.DatalogPrint (8922, vhys_sda               ); 
+        L2.DatalogPrint (8930, vih_scl_ratio          ); 
+        L2.DatalogPrint (8931, vil_scl_ratio          ); 
+        L2.DatalogPrint (8932, vhys_scl               ); 
+        L2.DatalogPrint(8912, i_adr                   );
+        if(PartType == Finaltest)
+        {
+            L2.DatalogPrint(8919, vlow_sda              );
+        }           
+   }
+        L2.DatalogPrint(8940, v_int                   );
+ 
+
+
+
+
+    } //(TestTemp != minus40) || (TestMode == Quality)
+ if(!is52243.Value())
+ {
+    if(PartType != Wafertest)
+    {
+
+        MY.PowerOn(12.0);   
+    
+    
+        DIGITAL.SetVihVil   ( RDF_SCL_D+RDF_SDA_D, MY_digInHighLevel, MY_digInLowLevel                );
+        DIGITAL.SetVohVol   ( RDF_SCL_D+RDF_SDA_D, MY_digOutHighLevel,MY_digOutLowLevel+0.3           );
+        DIGITAL.SetIohIol   ( RDF_SCL_D+RDF_SDA_D, 0mA, 10mA, MY_VDD                                  );
+        DIGITAL.SetLoadMode ( RDF_SCL_D+RDF_SDA_D, DIGITAL_LD_MODE_PGL                                ); 
+
+        DIGITAL.SetDriveState( RDF_ADR_HVD, DIGITAL_DRV_STATE_LOW                                     ); // avoid hot switch
+        DIGITAL.Disconnect   ( RDF_ADR_HVD, DIGITAL_DCL_TO_DUT                                        ); // move to PPMU
+        
+        // check hs check for bouncing
+        VI.Force             ( RDF_ADR_HVD, VI_FORCE_V, 1.65V, 24V, 25mA, 25mA, -25mA, UTL_VOID       );     
+        VI.Connect           ( RDF_ADR_HVD, VI_TO_DUT, VI_MODE_LOCAL                                  );    
+
+        L2.PatternRun        ( "I2C_Pattern.I2CHoldTime", RDF_SDA_D, exec_vectors, fail_vectors       );
+
+
+
+        L2.DatalogPrint(4052, fail_vectors          );
+        L2.DatalogPrint(4053, exec_vectors          );
+
+
+
+        L2.PatternRun        ( "I2C_Pattern.I2CSetUpTime", RDF_SDA_D, exec_vectors, fail_vectors      );
+
+     
+
+        L2.DatalogPrint(4054, fail_vectors          );
+        L2.DatalogPrint(4055, exec_vectors          );
+    
+
+        VI.Force             ( RDF_ADR_HVD, VI_FORCE_V, 0V, 24V, 25mA, 25mA, -25mA, UTL_VOID          );
+        VI.Disconnect        ( RDF_ADR_HVD                                                            );
+        
+        DIGITAL.Connect      ( RDF_ADR_HVD, DIGITAL_DCL_TO_DUT                                        ); // back to DCL
+
+    } // PartType != Wafertest
+}   
+    L2_CBIT.Open( RDF_USED_CBIT );
+    L2_CBIT.WaitForRelay();    
+
+    MY.Init_Dutpins();
+    MY.PowerOff();
+
+  
+ /***  Data logging  ***/
+
+      
+    return ( L2.GetTestStepResult() );
+}
+
+namespace   // Local namespace
+{
+// Add implementation of local functions here
+void I2C_add_thresholds(const FloatM1D TryValue, L2_ThresholdTryResult_tM1D &TryResult, const L2_SearchMethod_tS Mode, L2_SearchEdge_tS Edge)
+{
+// FMM_20200520: Added to get rid of compiler warnings
+    L2_SearchMethod_tS xMode = Mode;
+    L2_SearchEdge_tS   xEdge = Edge;
+
+    FloatM ForceVRange;
+    DigitalCmpStateM LineState;
+    DigitalCmpStateM expectedCmpState(DIGITAL_CMP_STATE_HIGH);  
+    ForceVRange = VI.GetForceVRange ( RDF_TAI_HV );
+    
+
+    // Set the voltage below the hysteresis
+
+    VI.ForceV     ( RDF_TAI_HV, 0.4V, ForceVRange );
+    L2.SafeWait(100us);
+
+    // Force try voltage
+    VI.ForceV         ( RDF_TAI_HV, TryValue[0], ForceVRange  );
+
+
+    L2.SafeWait(3ms);
+    
+    // Get the output state at TDO
+    DIGITAL.ReadCompareState (RDF_TDO_D,  LineState, expectedCmpState);
+    
+          
+    // Set TryResult depending on the state of TDO
+    SERIAL_LOOP_BEGIN
+        if ( LineState[PRE_SITE] == DIGITAL_CMP_STATE_HIGH )
+        { 
+            TryResult[PRE_SITE][0] = L2_AboveThreshold;  
+        }
+        if ( LineState[PRE_SITE] == DIGITAL_CMP_STATE_LOW )
+        { 
+            TryResult[PRE_SITE][0] = L2_BelowThreshold;  
+        }
+    SERIAL_LOOP_END
+
+} /* I2C_add_thresholds */
+
+void SDA_vih_thres(const FloatM1D TryValue, L2_ThresholdTryResult_tM1D &TryResult, const L2_SearchMethod_tS Mode, L2_SearchEdge_tS Edge)
+{
+// FMM_20200520: Added to get rid of compiler warnings
+    L2_SearchMethod_tS xMode = Mode;
+    L2_SearchEdge_tS   xEdge = Edge;
+
+    DigitalCmpStateM LineState;
+    DigitalCmpStateM expectedCmpState(DIGITAL_CMP_STATE_HIGH);  
+
+    
+    // Set the voltage below the hysteresis
+
+    DIGITAL.SetVih( RDF_SDA_D, 0.7V );
+//    VI.ForceV     ( RDF_SDA_D, 0.7V );
+    L2.SafeWait(100us);
+
+    // Force try voltage
+    DIGITAL.SetVih    ( RDF_SDA_D, TryValue[0]  );
+//    VI.ForceV         ( RDF_SDA_D, TryValue[0]  );
+
+    L2.SafeWait(1ms);
+
+    // Get the output state at TDO
+    DIGITAL.ReadCompareState (RDF_TDO_D,  LineState, expectedCmpState);
+    
+          
+    // Set TryResult depending on the state of TDO
+    SERIAL_LOOP_BEGIN
+        if ( LineState[PRE_SITE] == DIGITAL_CMP_STATE_HIGH )
+        { 
+            TryResult[PRE_SITE][0] = L2_AboveThreshold;  
+        }
+        if ( LineState[PRE_SITE] == DIGITAL_CMP_STATE_LOW )
+        { 
+            TryResult[PRE_SITE][0] = L2_BelowThreshold;  
+        }
+    SERIAL_LOOP_END    
+
+} /* SDA_vih_thres */
+
+void SDA_vil_thres(const FloatM1D TryValue, L2_ThresholdTryResult_tM1D &TryResult, const L2_SearchMethod_tS Mode, L2_SearchEdge_tS Edge)
+{
+// FMM_20200520: Added to get rid of compiler warnings
+    L2_SearchMethod_tS xMode = Mode;
+    L2_SearchEdge_tS   xEdge = Edge;
+
+    DigitalCmpStateM LineState;
+    DigitalCmpStateM expectedCmpState(DIGITAL_CMP_STATE_HIGH);  
+
+    
+    // Set the voltage above the hysteresiss
+
+    DIGITAL.SetVih( RDF_SDA_D, 2.6V );
+//    VI.ForceV     ( RDF_SDA_D, 2.6V );
+    L2.SafeWait(100us);
+
+    // Force try voltage
+    DIGITAL.SetVih    ( RDF_SDA_D, TryValue[0]  );    
+//    VI.ForceV         ( RDF_SDA_D, TryValue[0]  );
+
+    L2.SafeWait(1ms);
+
+    // Get the output state at TDO
+    DIGITAL.ReadCompareState (RDF_TDO_D,  LineState, expectedCmpState);
+    
+          
+    // Set TryResult depending on the state of TDO
+    SERIAL_LOOP_BEGIN
+        if ( LineState[PRE_SITE] == DIGITAL_CMP_STATE_HIGH )
+        { 
+            TryResult[PRE_SITE][0] = L2_AboveThreshold;  
+        }
+        if ( LineState[PRE_SITE] == DIGITAL_CMP_STATE_LOW )
+        { 
+            TryResult[PRE_SITE][0] = L2_BelowThreshold;  
+        }
+    SERIAL_LOOP_END   
+
+} /* SDA_vil_thres */
+
+void SCL_vih_thres(const FloatM1D TryValue, L2_ThresholdTryResult_tM1D &TryResult, const L2_SearchMethod_tS Mode, L2_SearchEdge_tS Edge)
+{
+// FMM_20200520: Added to get rid of compiler warnings
+    L2_SearchMethod_tS xMode = Mode;
+    L2_SearchEdge_tS   xEdge = Edge;
+
+    DigitalCmpStateM LineState;
+    DigitalCmpStateM expectedCmpState(DIGITAL_CMP_STATE_HIGH);  
+
+    
+    // Set the voltage below the hysteresis
+    DIGITAL.SetVih( RDF_SCL_D, 0.7V );
+//    VI.ForceV     ( RDF_SCL_D, 0.7V );
+    L2.SafeWait(100us);
+
+    // Force try voltage
+    DIGITAL.SetVih    ( RDF_SCL_D, TryValue[0]  );    
+//    VI.ForceV         ( RDF_SCL_D, TryValue[0]  );
+
+    L2.SafeWait(1ms);
+
+    // Get the output state at TDO
+    DIGITAL.ReadCompareState (RDF_TDO_D,  LineState, expectedCmpState);
+    
+          
+    // Set TryResult depending on the state of TDO
+    SERIAL_LOOP_BEGIN
+        if ( LineState[PRE_SITE] == DIGITAL_CMP_STATE_HIGH )
+        { 
+            TryResult[PRE_SITE][0] = L2_AboveThreshold;  
+        }
+        if ( LineState[PRE_SITE] == DIGITAL_CMP_STATE_LOW )
+        { 
+            TryResult[PRE_SITE][0] = L2_BelowThreshold;  
+        }
+    SERIAL_LOOP_END 
+
+} /* SCL_vih_thres */
+
+void SCL_vil_thres(const FloatM1D TryValue, L2_ThresholdTryResult_tM1D &TryResult, const L2_SearchMethod_tS Mode, L2_SearchEdge_tS Edge)
+{
+// FMM_20200520: Added to get rid of compiler warnings
+    L2_SearchMethod_tS xMode = Mode;
+    L2_SearchEdge_tS   xEdge = Edge;
+
+    DigitalCmpStateM LineState;
+    DigitalCmpStateM expectedCmpState(DIGITAL_CMP_STATE_HIGH);  
+
+    
+    // Set the voltage above the hysteresis
+    DIGITAL.SetVih( RDF_SCL_D, 3.0V );
+//    VI.ForceV     ( RDF_SCL_D, 3.0V );
+    L2.SafeWait(100us);
+
+    // Force try voltage
+    DIGITAL.SetVih    ( RDF_SCL_D, TryValue[0]  );    
+//    VI.ForceV         ( RDF_SCL_D, TryValue[0]  );
+
+    L2.SafeWait(1ms);
+
+    // Get the output state at TDO
+    DIGITAL.ReadCompareState (RDF_TDO_D,  LineState, expectedCmpState);
+    
+          
+    // Set TryResult depending on the state of TDO
+    SERIAL_LOOP_BEGIN
+        if ( LineState[PRE_SITE] == DIGITAL_CMP_STATE_HIGH )
+        { 
+            TryResult[PRE_SITE][0] = L2_AboveThreshold;  
+        }
+        if ( LineState[PRE_SITE] == DIGITAL_CMP_STATE_LOW )
+        { 
+            TryResult[PRE_SITE][0] = L2_BelowThreshold;  
+        }
+    SERIAL_LOOP_END 
+   
+} /* SCL_vil_thres */
+
+}   // End Local namespace",
+"output": "These texts form a complete source code file implementing part of an ATE test program for semiconductor device testing.
+
+## File Overview
+- The file is written in C++ and appears to be using the LTX Unison framework
+- Implements comprehensive I2C interface testing through function `TS::I2C()`
+- Contains both threshold measurement and protocol timing validation
+- Features extensive use of helper functions for threshold searches
+- Combines analog parametric tests with digital pattern execution
+
+## 'TS::I2C()' Sequence Overview
+1. Initialization and temperature check
+2. I2C address decoding threshold characterization:
+   - Low address threshold search
+   - High address threshold search
+3. I2C signal threshold measurements:
+   - SDA VIH/VIL and hysteresis
+   - SCL VIH/VIL and hysteresis
+4. Protocol timing validation (non-wafer test only):
+   - Hold time pattern
+   - Setup time pattern
+5. Cleanup and resource release
+
+## Test Sequence Detailed Summary
+
+### 1. Initial Setup
+- Skips test at -40°C except for Quality tests
+- Relay configuration and DUT initialization
+- Power application (12V) and conditional soft trimming
+- Soft trimming in wafertest or if _SoftTrim flag is true
+
+### 2. Address Threshold Characterization
+- Configures ADR_HVD pin and TAI pin for input stimulation
+- Performs binary search for:
+  * Low address threshold (0.5V-1.2V range, test 8910)
+  * High address threshold (2.0V-3.0V range, test 8911)
+- Includes Go/NoGo screening (tests 8915, 8916)
+- Measures address pin current (test 8912)
+
+### 3. Signal Threshold Measurements
+- Configures SDA/SCL pins for threshold testing
+- Measures using binary search:
+  * SDA VIH (test 8920) and VIL (test 8921)
+  * SCL VIH (test 8930) and VIL (test 8931)
+- Calculates and datalogs hysteresis (tests 8922, 8932)
+- Measures SDA low voltage (test 8919)
+
+### 4. Protocol Timing Validation
+- Configures digital levels for I2C pins
+- Executes timing patterns:
+  * I2C hold time (tests 4052-4053)
+  * I2C setup time (tests 4054-4055)
+- Uses intermediate voltage (1.65V) on address pin
+
+### 5. Additional Measurements
+- Interrupt pin voltage measurement (test 8940)
+- SDA low voltage measurement (test 8919)
+
+## Important Test Engineering Details
+
+### 1. Key Resources
+- **Pins**:
+  * RDF_SDA_D, RDF_SCL_D (I2C signals)
+  * RDF_ADR_HVD (address)
+  * RDF_TAI_HV (test analog input)
+  * RDF_TDO_D (digital observation)
+- **Instrumentation**:
+  * VI for analog forcing/measurement
+  * DIGITAL for protocol testing
+  * L3_JT for JTAG control
+
+### 2. Measurement Techniques
+- Binary search algorithms for precise threshold detection
+- Multiple measurement samples (10) with precise delays (5.1μs)
+- Ratio-based results normalized to supply voltage
+- Separate Go/NoGo and full measurement modes
+
+### 3. Test Conditions
+- Temperature sensitivity (minus40°C handling)
+- Part type differentiation (Wafertest vs Finaltest)
+- Test mode variations (Quality vs others)
+- Device variant handling (is52243 flag)
+
+### 4. Datalogging
+- Comprehensive test coverage:
+  * 8910-8912, 8915-8916: Address thresholds
+  * 8920-8922, 8930-8932: Signal thresholds
+  * 4052-4055: Timing validation
+  * 8919, 8940: Additional measurements
+
+### 5. Special Considerations
+- Local namespace contains threshold search implementations
+- Extensive comments about potential measurement issues
+- Voltage ratio calculations using v_vdd_global
+- Pattern execution with vector counting
+
+## Recommendations for Further Investigation
+1. Verify pattern definitions (I2C_Pattern.I2CHoldTime/SetupTime)
+2. Review v_vdd_global reference value
+3. Check device variant handling (is52243)
+4. Validate digital level settings
+5. Examine hysteresis calculation methodology
+
+## Summary
+This test provides comprehensive validation of I2C interface functionality, including precise threshold measurements, protocol timing verification, and address decoding characterization. The implementation combines analog parametric tests with digital pattern execution, providing thorough coverage of both DC and timing specifications. The test features sophisticated threshold detection algorithms and handles multiple test conditions and device variants."
+}
+{
+"instruction": "You are an expert in semiconductor test engineering. Analyze the following piece of testprogram.",
+"input": "#include <Main.h>
+
+using namespace std;
+
+
+TMResultM TS::IDDQ ( void )
+{
+    if ( PRE.GetPrintComments() ) {
+        cout << "Executing: " << __PRETTY_FUNCTION__ << 
+            " (Entry Subflow: " << RunTime.GetActiveFlowNode().GetName() <<
+            ", Active flow: " << TestProg.GetActiveFlow().GetName() << ")" << endl;
+    }
+    
+    // used for autoprofiler 
+    Profiler p(__PRETTY_FUNCTION__);
+    
+    // declarations
+
+    UnsignedM       exec_vec_pre, exec_vec_post, exec_vec_stress;
+    UnsignedM1D     fail_vec_pre, fail_vec_post, fail_vec_stress;
+
+    FloatM          stime;
+    FloatS          vdd = 3.3;
+
+    StringS         iddq_pat; 
+    
+    FloatS          MY_IDDQvoltage = 4.0;
+    
+    UnsignedS       IDDQ_meas_vectors( IDDQ_MEAS_COUNT*IDDQ_SAMPLE_COUNT );
+    UnsignedM       vdd_meas_count;
+    
+    FloatM1D        iddq_meas_pre, iddq_meas_post;
+    FloatM1D        iddq_current_pre(IDDQ_MEAS_COUNT,999 ), iddq_current_post(IDDQ_MEAS_COUNT,999 );
+    
+    
+    // fill in your source code here
+
+
+
+
+
+
+//unsigned short   nr_of_breaks = 20;            //number points of measurement 
+//double           **iddq[20];
+//char             *label[20] = {"Meas1", "Meas2", "Meas3", "Meas4", 
+//                               "Meas5", "Meas6", "Meas7", "Meas8", 
+//                               "Meas9", "Meas10", "Meas11", "Meas12", 
+//                               "Meas13", "Meas14", "Meas15", "Meas16", 
+//                               "Meas17", "Meas18", "Meas19", "Meas20"};
+//
+//unsigned long   exec_vector_sum[PRE_MAX_SITES];
+//unsigned long   fail_vector_sum[PRE_MAX_SITES];
+
+//int i;
+
+
+//if(1) return;
+
+    L2_CBIT.Open( RDF_USED_CBIT );
+    L2_CBIT.Close( RDF_CMP2FX1_REL+RDF_C_VDD_OFF+RDF_DVDD_REL+RDF_IDDQ_GAIN_REL+RDF_IDDQ_REL  );
+
+    L2_CBIT.WaitForRelay();
+
+
+    if ((PartType != Wafertest)) 
+    {
+        return ( L2.GetTestStepResult() );
+    }
+    
+    if(MY_GS_MASK_NUMBER.Value() == 1)
+    {
+        iddq_pat = "iddq_B1._flat_seq_";
+    }
+    else
+    {
+        iddq_pat = "iddq._flat_seq_";
+    }
+
+
+
+//SERIAL_BEGIN
+//  exec_vector_sum[PRE_SITE]=0;
+//  fail_vector_sum[PRE_SITE]=0;
+//SERIAL_END  
+    
+
+    // setup iddq trigger pin
+    DIGITAL.SetVihVil     ( RDF_IDDQ_HVD, 5V, 0V                   );
+    DIGITAL.SetDriveMode  ( RDF_IDDQ_HVD, DIGITAL_DRV_MODE_PATTERN );
+    DIGITAL.SetDriveState ( RDF_IDDQ_HVD, DIGITAL_DRV_STATE_LOW    ); 
+    DIGITAL.Connect       ( RDF_IDDQ_HVD, DIGITAL_DCL_TO_DUT );
+
+  
+    //SetRelay (TDO_BUF_REL, ON, 3);
+    MY.Init_Dutpins();
+    MY.PowerOn (12.0); 
+    MY.TM_enable();
+
+
+    VI.Force  ( RDF_VDD_V, VI_FORCE_V, vdd, 16V, 50mA, 50mA, -5mA, VI_FORCE_APPLY );
+    
+//    VI.Force  ( RDF_VDD_HV, VI_FORCE_V, vdd, 5V, 50mA, 50mA, -5mA, VI_FORCE_APPLY );
+    
+
+
+//CTRL DPIN
+//   DO_FOR_SIGNAL       BUSX
+//   CONNECT_TO          LPMU 
+//   SET_GATE            ON 
+//   SET_OUTPUT_RELAY    OPEN 
+//END; 
+
+
+    MY.TM_set(0xD6, 0x380);
+    MY.TM_set(0xC0, 0x000); 
+
+
+
+/* Start pattern */
+//JTAG transmission IR=0xb1 in iddq_pattern
+
+
+
+
+
+    DIGITAL.SetCompareMode( RDF_SCL_D+RDF_CS_D+RDF_SDA_D+RDF_INT_D+RDF_EN_HVD+RDF_CMP_D, DIGITAL_CMP_MODE_PATTERN );
+    DIGITAL.SetDriveMode  ( RDF_SCL_D+RDF_CS_D+RDF_SDA_D+RDF_INT_D+RDF_EN_HVD+RDF_CMP_D, DIGITAL_DRV_MODE_PATTERN );
+    
+    DIGITAL.SetTimeout    ( 5s );  
+
+    // dummy measurement to avoid to many samples in the triggered measurement
+    UnsignedM dummy_count;
+    FloatM1D  dummy_meas_1d;
+    VI.ClearMeasurements  ( RDF_VDD_V                                                   );
+    VI.StartMeasure       ( RDF_VDD_V, VI_MEASURE_I, VI_MEASURE_SAMPLES, 50mA, 10, 10us );
+    VI.Wait               ( RDF_VDD_V                                                   );
+    VI.ReadMeasureCount   ( RDF_VDD_V, dummy_count, IDDQ_meas_vectors                   );
+    VI.ReadMeasureSamples ( RDF_VDD_V, dummy_meas_1d, 30nA                              );
+    
+    
+       
+    DIGITAL.ConnectSyncRefs ( "iddq_B1" ) ;
+    VI.ConnectMeasureTrigger ( RDF_VDD_V, VI_TRIGGER_STEP , "sync_IDDQ");
+    VI.ClearMeasurements ( RDF_VDD_V );
+    VI.StartMeasure ( RDF_VDD_V, VI_MEASURE_I, VI_MEASURE_SAMPLES, 50mA, IDDQ_meas_vectors, 10us );
+    
+   // TIME.Wait(10ms);
+    
+    
+    
+    DIGITAL.ExecutePattern( "iddq_B1._flat_seq_" );
+//L2_CBIT.Open( RDF_IDDQ_REL );
+//L2_CBIT.WaitForRelay(); 
+
+    DIGITAL.ReadCounter(                                                              DIGITAL_CYCLE_COUNTER, exec_vec_pre, 0 );
+    DIGITAL.ReadCounter( RDF_SCL_D+RDF_CS_D+RDF_SDA_D+RDF_INT_D+RDF_EN_HVD+RDF_CMP_D, DIGITAL_FAIL_COUNTER , fail_vec_pre, 0 ); 
+
+    VI.ReadMeasureCount ( RDF_VDD_V, vdd_meas_count, IDDQ_meas_vectors );
+    VI.ReadMeasureSamples ( RDF_VDD_V, iddq_meas_pre, 30nA );
+
+          
+    
+    iddq_current_pre = MATH.Average ( iddq_meas_pre, IDDQ_SAMPLE_COUNT );
+    iddq_current_pre = (iddq_current_pre * IDDQ_MEAS_SCALE) - MY_G_IDDQ_OFFSET.Value() ;
+
+    // stress voltage 
+    VI.ForceV  (RDF_VDD_V,  MY_IDDQvoltage, 16V );
+    VI.ForceV  (RDF_VDD_HV, MY_IDDQvoltage, 5V  );
+    TIME.Wait(5ms);
+    
+    
+    DIGITAL.ExecutePattern( "iddq_B1_stress._flat_seq_" );
+
+    DIGITAL.ReadCounter(                                                              DIGITAL_CYCLE_COUNTER, exec_vec_stress, 0 );
+    DIGITAL.ReadCounter( RDF_SCL_D+RDF_CS_D+RDF_SDA_D+RDF_INT_D+RDF_EN_HVD+RDF_CMP_D, DIGITAL_FAIL_COUNTER , fail_vec_stress, 0 ); 
+
+    
+    VI.ForceV  (RDF_VDD_V,  3.3V, 16V );
+    VI.ForceV  (RDF_VDD_HV, 3.3V, 5V  );    
+    
+    TIME.Wait(5ms);
+    
+    
+    VI.ClearMeasurements ( RDF_VDD_V );
+    VI.StartMeasure ( RDF_VDD_V, VI_MEASURE_I, VI_MEASURE_SAMPLES, 50mA, IDDQ_meas_vectors, 10us );
+ //   TIME.Wait(10ms);
+    
+//L2_CBIT.Close( RDF_IDDQ_REL );
+//L2_CBIT.WaitForRelay(); 
+    
+    DIGITAL.ExecutePattern( "iddq_B1._flat_seq_" );
+L2_CBIT.Open( RDF_IDDQ_REL );
+L2_CBIT.WaitForRelay(); 
+
+    DIGITAL.ReadCounter(                                                              DIGITAL_CYCLE_COUNTER, exec_vec_post, 0 );
+    DIGITAL.ReadCounter( RDF_SCL_D+RDF_CS_D+RDF_SDA_D+RDF_INT_D+RDF_EN_HVD+RDF_CMP_D, DIGITAL_FAIL_COUNTER , fail_vec_post, 0 ); 
+
+    VI.ReadMeasureCount ( RDF_VDD_V, vdd_meas_count, IDDQ_meas_vectors );
+    VI.ReadMeasureSamples ( RDF_VDD_V, iddq_meas_post, 30nA );
+
+    // calculate min and max values of iddq current           
+    
+    iddq_current_post = MATH.Average ( iddq_meas_post, IDDQ_SAMPLE_COUNT );
+    iddq_current_post = (iddq_current_post * IDDQ_MEAS_SCALE) - MY_G_IDDQ_OFFSET.Value() ;
+
+
+
+    VI.Force  ( RDF_VDD_V, VI_FORCE_V, 0V, 16V, 50mA, 50mA, -5mA, VI_FORCE_REMOVE );
+    
+    VI.Force  ( RDF_VDD_HV, VI_FORCE_V, 0V, 5V, 50mA, 50mA, -5mA, VI_FORCE_REMOVE );
+
+    MY.PowerOff();
+    L2_CBIT.Open( RDF_USED_CBIT ); // CMP_Pin is in the Pattern but only with X
+    L2_CBIT.WaitForRelay(); 
+    
+    DIGITAL.DisconnectSyncRefs();
+    VI.DisconnectMeasureTrigger(RDF_VDD_V,  VI_TRIGGER_STEP );    
+ 
+   
+    L2.DatalogPrint( 4004, MATH.Sum( fail_vec_pre )  );  
+    L2.DatalogPrint( 4005, exec_vec_pre  );
+    L2.DatalogPrint( 4009, MATH.Sum( fail_vec_post ) );  
+    L2.DatalogPrint( 4011, exec_vec_post );     
+    L2.DatalogPrint( 4012, MATH.Sum( fail_vec_stress ) );  
+    L2.DatalogPrint( 4013, exec_vec_stress ); 
+    L2.DatalogPrint( 3400, iddq_current_pre  );
+    L2.DatalogPrint( 3420, iddq_current_post );
+    L2.DatalogPrint( 3440, iddq_current_pre-iddq_current_post );      
+    
+
+    return ( L2.GetTestStepResult() );
+}",
+"output": "## File Overview
+- The file implements quiescent current (IDDQ) testing through function `TS::IDDQ()`
+- Uses pattern-based current measurement with stress voltage application
+- Combines digital pattern execution with precision analog current measurement
+- Features pre-stress, stress, and post-stress measurement phases
+- Designed specifically for wafer test (skips final test parts)
+
+## 'TS::IDDQ()' Sequence Overview
+1. Initialization and relay configuration
+2. Pattern setup and dummy measurement
+3. Pre-stress current measurement
+4. Voltage stress application
+5. Post-stress current measurement
+6. Results calculation and datalogging
+
+## Test Sequence Detailed Summary
+
+### 1. Initial Setup
+- Configures IDDQ trigger pin (RDF_IDDQ_HVD)
+- Initializes DUT pins and applies power (12V)
+- Sets up VDD forcing (3.3V nominal)
+- Configures digital pins for pattern mode
+- Performs dummy measurement to stabilize system
+
+### 2. Pre-Stress Measurement
+- Executes "iddq_B1._flat_seq_" pattern
+- Measures VDD current with triggered acquisition
+- Records execution vectors (test 4005) and fails (test 4004)
+- Calculates baseline IDDQ (test 3400)
+
+### 3. Stress Application
+- Applies elevated voltage (4.0V) to VDD
+- Executes stress pattern ("iddq_B1_stress._flat_seq_")
+- Records stress vectors (test 4013) and fails (test 4012)
+
+### 4. Post-Stress Measurement
+- Returns VDD to 3.3V
+- Repeats IDDQ measurement pattern
+- Records post-stress vectors (test 4011) and fails (test 4009)
+- Calculates post-stress IDDQ (test 3420)
+
+### 5. Results Analysis
+- Computes IDDQ delta (pre vs post, test 3440)
+- Applies scaling and offset correction
+- Uses multi-sample averaging (IDDQ_SAMPLE_COUNT)
+
+## Important Test Engineering Details
+
+### 1. Key Resources
+- **Pins**:
+  * RDF_VDD_V (main current measurement)
+  * RDF_IDDQ_HVD (trigger control)
+  * Digital bus pins (SCL, CS, SDA, etc.)
+- **Relays**:
+  * RDF_CMP2FX1_REL, RDF_IDDQ_REL, etc.
+- **Patterns**:
+  * iddq_B1._flat_seq_ (measurement)
+  * iddq_B1_stress._flat_seq_ (stress)
+
+### 2. Measurement Techniques
+- Triggered current measurement synchronized to pattern
+- Multi-sample averaging (IDDQ_SAMPLE_COUNT)
+- Current scaling (IDDQ_MEAS_SCALE) and offset correction
+- Dummy measurement for system stabilization
+- Vector counting for pattern verification
+
+### 3. Test Conditions
+- Wafer test only (skips final test parts)
+- Voltage stress (4.0V vs nominal 3.3V)
+- Mask number variation handling (MY_GS_MASK_NUMBER)
+- Timing-critical measurements (10μs sample delay)
+
+### 4. Datalogging
+- Comprehensive test coverage:
+  * 3400: Pre-stress IDDQ
+  * 3420: Post-stress IDDQ 
+  * 3440: IDDQ delta
+  * 4004-4013: Pattern vector counts
+
+### 5. Special Considerations
+- Pattern-dependent measurement timing
+- Current measurement scaling factors
+- Stress voltage application
+- Wafer test focus
+- Extensive relay control
+
+## Recommendations for Further Investigation
+1. Verify pattern content and synchronization
+2. Review current scaling factors (IDDQ_MEAS_SCALE)
+3. Check stress voltage level and duration
+4. Validate offset correction (MY_G_IDDQ_OFFSET)
+5. Examine mask number handling
+
+## Summary
+This test implements a comprehensive IDDQ characterization methodology, featuring pattern-synchronized current measurement both before and after voltage stress application. The test provides valuable data on quiescent current behavior and stress-induced changes, with particular focus on wafer-level testing. The implementation combines precise analog measurement with digital pattern execution and includes thorough result verification through vector counting."
+}
+{
+"instruction": "You are an expert in semiconductor test engineering. Analyze the following piece of testprogram.",
+"input": "#include <Main.h>
+
+using namespace std;
+
+
+TMResultM TS::Iref ( void )
+{
+    if ( PRE.GetPrintComments() ) {
+        cout << "Executing: " << __PRETTY_FUNCTION__ << 
+            " (Entry Subflow: " << RunTime.GetActiveFlowNode().GetName() <<
+            ", Active flow: " << TestProg.GetActiveFlow().GetName() << ")" << endl;
+    }
+    
+    // used for autoprofiler 
+    Profiler p(__PRETTY_FUNCTION__);
+    
+    // declarations
+
+    FloatM iref(999);
+    FloatM i_ptat(999);    
+    
+    // fill in your source code here
+
+    TRIGGER(1)
+
+    L2_CBIT.Open( RDF_USED_CBIT );
+    L2_CBIT.WaitForRelay();
+    
+    MY.Init_Dutpins();
+    MY.PowerOn (12.0);
+
+
+
+    if((PartType == Wafertest) || Expression("_SoftTrim").GetBoolValue()[ ActiveSites.Begin().GetValue() ])
+    {
+        MY_OTP.SoftTrimming();
+    }
+
+
+    VI.Force( RDF_TAO_HV, VI_FORCE_V, 0V, 2.5V, 50uA, 50uA , -50uA, VI_FORCE_APPLY );
+
+    /*** Measure iref (after fusing) ***/
+    MY.TM_set   (0xd1, 0x050); //Testmode HBIAS_CURRENT
+    L2.SafeWait (0.5ms);
+
+    VI.SetMeasureSamples( RDF_TAO_HV , 10 );
+    VI.SetMeasureDelay  ( RDF_TAO_HV , 5.1us );
+
+
+    MY_VI.MeasureIAverage ( RDF_TAO_HV , iref , 10uA , 3100 );
+
+    iref = -iref;
+
+    /*** Measure i_ptat ***/
+    MY.TM_set   (0xd1, 0x048); //Testmode LBIAS_CURRENT
+    L2.SafeWait (0.5ms);
+
+
+    if(TestTemp == plus25)
+    {
+        MY_VI.MeasureIAverage ( RDF_TAO_HV , i_ptat , 11uA , 3124 );
+    }
+    else
+    {
+        MY_VI.MeasureIAverage ( RDF_TAO_HV , i_ptat , 11uA , 3125 );    
+    }
+    
+    i_ptat = -i_ptat;
+
+
+    /* Reset HW  */
+    
+    VI.Gate  ( RDF_TAO_HV, VI_GATE_OFF_LOZ                                     );
+    VI.Force ( RDF_TAO_HV, VI_FORCE_I      , 0uA, 5uA, 5V, 5V, -0.3V, UTL_VOID );
+    VI.Gate  ( RDF_TAO_HV, VI_GATE_ON                                          );
+    
+
+    MY.PowerOff();
+    L2_CBIT.Open( RDF_USED_CBIT );
+    L2_CBIT.WaitForRelay();    
+
+    /* Datalogging */
+
+    L2.DatalogPrint (3100, iref); 
+    if(TestTemp == plus25)
+    {
+        L2.DatalogPrint (3124, i_ptat); 
+    }
+    else
+    {
+        L2.DatalogPrint (3125, i_ptat);     
+    }
+
+//L2_DatalogTestStepTime(9035);
+
+
+
+
+    
+    
+    
+    return ( L2.GetTestStepResult() );
+}",
+"output": "## 1. File Overview
+
+- **File**: `TS_Iref.cpp`
+- **Function**: `TMResultM TS::Iref(void)`
+- **Purpose**: A test routine to **characterize and verify the reference and temperature-dependent bias currents** (`iref` and `i_ptat`) after fusing or trimming operations in a semiconductor device.
+- **Scope**: This function is part of an automated test sequence — likely for analog/mixed-signal parts — and serves as a **post-trim electrical verification**.
+
+---
+
+## 2. Sequence of Actions
+
+-Variable declarations: `iref` and `i_ptat`
+-Initial configuration of relays and DUT pins with `L2_CBIT.Open(...)`, `MY.Init_Dutpins()`
+-Enable DUT power supply at 12V `MY.PowerOn(12.0)`
+-Perform soft trimming if the DUT is wafer or if `_SoftTrim` flag is true
+-`VI.Force(...)` 0V @ RDF_TAO_HV to set up DUT analog node in a known state before measurement
+-Enter test mode `TM_set(0xd1, 0x050)` to enable **HBIAS_CURRENT path** for `iref`
+-Measure `iref` current with 10 averaging samples at 5.1us intervals, then take the negative value
+-Enter test mode `TM_set(0xd1, 0x048)` for **LBIAS_CURRENT** (temperature-dependent)
+-Measure `i_ptat` using the same pin and VI settings
+-HW Reset: VI Gate, Force 0uA
+-Remove power from DUT with `MY.PowerOff()`
+-Reset relay states with `L2_CBIT.Open(...)` to safe defaults
+-Datalog `iref` and `i_ptat`
+
+---
+
+## 3. Detailed Procedure of Each Test (Enhanced)
+
+### A. iref — HBIAS Current (Test Mode 0x050)
+- **Setup**:
+  - Set DUT into HBIAS test mode (`0xd1, 0x050`)
+  - Force 0V on analog node `RDF_TAO_HV`
+  - Measure average current
+- **Purpose**: Measure trimmed or fused **bias current** sourced internally for analog blocks.
+- **Datalog ID**: `3100`
+- **Notes**: Current may be trimmed during soft trimming, so this checks post-trim value.
+
+---
+
+### 🔹 B. i_ptat — LBIAS Current (Test Mode 0x048)
+- **Setup**:
+  - Switch DUT to **LBIAS/PTAT current mode**
+  - Measure current, temp-dependent
+- **Purpose**: Characterize **temperature-dependent current** (Proportional To Absolute Temperature)
+- **Temp-Aware Branching**:
+  - `plus25` → Test ID `3124`
+  - Else → Test ID `3125`
+- **Use Case**: PTAT current often used in bandgap refs or on-chip thermal monitors.
+
+---
+
+## 🧵 4. Pins, Relays, Channels
+
+| Type | Name | Description |
+|------|------|-------------|
+| Pin/Channel | `RDF_TAO_HV` | Analog bias current node under test |
+| Relay Group | `L2_CBIT` | Opened before/after power cycles |
+| Relay Definition | `RDF_USED_CBIT` | Configuration mask for CBIT relays |
+| Power Control | `MY.PowerOn/Off()` | Manages DUT power (12V nominal) |
+| Measurement | `VI`, `MY_VI` | Force/measure module with averaging |
+
+---
+
+## 📊 5. Datalogged Tests and IDs
+
+| Test ID | Parameter | Condition |
+|---------|-----------|-----------|
+| 3100    | `iref`    | Always    |
+| 3124    | `i_ptat`  | If `TestTemp == plus25` |
+| 3125    | `i_ptat`  | Otherwise |
+
+---
+
+## 6. Other Relevant Info for Test Engineers
+
+- **SoftTrimming**:
+  - Invoked based on flow context (wafer test or test option `_SoftTrim`)
+  - Ensures accurate biasing pre-measurement
+- **Profiler + Debug Print**:
+  - Helpful for diagnosing flow timing and structure
+- **Negative Current Sign**:
+  - Convention used to match measurement polarity expectations
+- **Safety and Cleanup**:
+  - Consistent power-down and gate reset protects DUT and ATE
+
+---
+
+## 7. Summary — What This File Does
+
+This test block validates the **reference and PTAT bias currents** in a device, crucial for analog and mixed-signal performance. It optionally performs **soft trimming** based on part type or flow condition, then verifies that trimming was successful by:
+
+- Setting the DUT into specific **test modes**
+- Using precision **current measurement**
+- Logging results for **binning, spec check, or debug**
+
+This test is **post-trim and likely wafer-level**, intended to ensure key analog current sources are functioning and trimmed properly before final test or packaging."
+}
+{
+"instruction": "You are an expert in semiconductor test engineering. Analyze the following piece of testprogram.",
+"input": "#include <Main.h>
+
+using namespace std;
+
+
+TMResultM TS::Vref ( void )
+{
+    if ( PRE.GetPrintComments() ) {
+        cout << "Executing: " << __PRETTY_FUNCTION__ << 
+            " (Entry Subflow: " << RunTime.GetActiveFlowNode().GetName() <<
+            ", Active flow: " << TestProg.GetActiveFlow().GetName() << ")" << endl;
+    }
+    
+    // used for autoprofiler 
+    Profiler p(__PRETTY_FUNCTION__);
+    
+    // declarations
+    FloatM  v_bg1(999), v_bg2(999);   
+    FloatM  vref_smps;
+    FloatM  vref_vari;
+    FloatM  vfbdi;
+
+    // fill in your source code here
+    
+    TRIGGER(1)
+
+    if((TestTemp == minus40) && (TestMode != Quality))
+    {
+        return ( L2.GetTestStepResult() );
+    }
+
+    L2_CBIT.Open( RDF_USED_CBIT );
+    L2_CBIT.WaitForRelay();    
+  
+    MY.Init_Dutpins();
+    MY.PowerOn (12.0);
+
+    if((PartType == Wafertest) || Expression("_SoftTrim").GetBoolValue()[ ActiveSites.Begin().GetValue() ])
+    {
+        MY_OTP.SoftTrimming();
+    }
+
+    // check hs was ist der Status vorher??
+    VI.SetMeasureSamples( RDF_TAO_HV, 10 ); // check hs auf sz600!!
+    VI.SetMeasureDelay  ( RDF_TAO_HV, 5.1us);
+    
+    VI.Force( RDF_TAO_HV, VI_FORCE_I, 0uA, 5uA, 5V, 5V, -0.3V, UTL_VOID );
+
+    MY.TM_enable();
+
+    L2.SafeWait( 2ms);
+
+
+    L3_JT.RunChain("VREF_SMPS");        
+        
+
+    MY_VI.MeasureVAverage ( RDF_TAO_HV , vref_smps , 2.4V , 3220 );
+
+   
+    L3_JT.RunChain("VREF_VARI");
+    
+    VI.Force( RDF_TAO_HV, VI_FORCE_I, 0uA, 5uA, 2.5V, 2.5V, -0.3V, UTL_VOID );
+    MY_VI.MeasureVAverage ( RDF_TAO_HV , vref_vari , 1.2V , 3200 );
+        
+
+
+
+
+// check hs wird die variable "vref_smps_global" gebraucht?
+//SERIAL_BEGIN;
+//  vref_smps_global[PRE_SITE] = vref_smps[0][PRE_SITE];
+//SERIAL_END;
+
+
+    /*** Sleep reference: v_bg2 ***/                   //zuerst v_bg1 geht nicht!!!
+
+    L3_JT.RunChain("BG2");      
+    L2.SafeWait (1ms);
+
+    MY_VI.MeasureVAverage ( RDF_TAO_HV , v_bg2 , 1.2V , 3310 );
+        
+
+    /*** General reference: v_bg1 ***/
+        
+    L3_JT.RunChain("BG1");
+    L2.SafeWait(1ms);
+
+    MY_VI.MeasureVAverage ( RDF_TAO_HV , v_bg1 , 1.2V , 3300 );
+
+    VI.Force( RDF_BUS_HV, VI_FORCE_V, 5V, 5V, 500uA, 500uA, -500uA, VI_FORCE_APPLY );
+
+
+        
+    MY.JTAG_write (0xd1, 0x148);   //TAO=Vref_vari
+    L2.SafeWait (5ms); 
+    
+    
+    MY_VI.MeasureVAverage ( RDF_TAO_HV , vfbdi , 1.2V , 3320 );
+
+
+
+
+    /* Reset TAO  */
+
+    VI.Force( RDF_TAO_HV, VI_FORCE_I, 0uA, 5uA, 10V   , 7.5V   , -0.3V , UTL_VOID        );
+
+    VI.Force( RDF_BUS_HV, VI_FORCE_V, 0V , 5V , 500uA, 500uA, -500uA, VI_FORCE_REMOVE );
+
+
+    MY.PowerOff();
+    L2_CBIT.Open( RDF_USED_CBIT );
+    L2_CBIT.WaitForRelay();    
+
+
+
+    /* Datalogging */
+
+    if(TestTemp == plus25) 
+    {
+        L2.DatalogPrint (3220, vref_smps/2); 
+        L2.DatalogPrint (3200, vref_vari-MY_GS_CMP_HV_MEAS_OFFSET.Value() );   
+        L2.DatalogPrint (3300, v_bg1      ); 
+        L2.DatalogPrint (3310, v_bg2      ); 
+        L2.DatalogPrint (3320, vfbdi      );
+    }
+    else {
+        L2.DatalogPrint (3221, vref_smps/2); 
+        L2.DatalogPrint (3201, vref_vari  );   
+        L2.DatalogPrint (3301, v_bg1      ); 
+        L2.DatalogPrint (3311, v_bg2      ); 
+        L2.DatalogPrint (3321, vfbdi      );    
+    }    
+    
+    return ( L2.GetTestStepResult() );
+}",
+"output": "These texts appear to form an entire source code file implementing part of an ATE test program for semiconductor testing. The file targets voltage reference testing in a typical analog or mixed-signal IC flow.
+
+---
+
+## 1. File Overview
+
+- **File Name**: `TS_Vref.cpp`
+- **Function**: `TMResultM TS::Vref(void)`
+- **Purpose**: This test routine verifies various **internal voltage references**, including bandgaps and SMPS reference voltages. It also performs optional trimming and handles temperature-dependent behavior and device setup through JTAG chains and ATE measurements.
+- **Test Context**: This function is part of a wafer or final test sequence. It’s likely invoked post-fuse or post-trim to confirm the correctness of voltage references across analog blocks.
+- **Notable Condition**: Skips execution if temperature is `-40°C` and test mode is not "Quality" — a common practice in screening tests to exclude cold corner unless specifically required.
+
+---
+
+## 2. Sequence of Actions
+
+-Variable declarations: `v_bg1`, `v_bg2`, `vref_smps`, `vref_vari`, `vfbdi`
+-Skip execution early if temperature is -40°C and not in Quality test mode
+-Initial configuration of relays and DUT pins with `L2_CBIT.Open(...)`, `MY.Init_Dutpins()`
+-Enable DUT power supply at 12V `MY.PowerOn(12.0)`
+-Perform soft trimming if the DUT is wafer or if `_SoftTrim` flag is true
+-Configure VI measurement with 10 samples and 5.1µs delay
+-Apply 0µA force on `RDF_TAO_HV` with `VI.Force(...)` to float the pin for voltage measurement
+-Enable test mode logic on DUT using `MY.TM_enable()`
+-Wait 2ms for internal settling before starting measurements
+-Execute JTAG sequence `"VREF_SMPS"` to connect or activate the internal SMPS Vref node
+-Measure `vref_smps` voltage, expected around 2.4V, and log it with test ID 3220
+-Execute JTAG sequence `"VREF_VARI"` to connect alternate Vref path
+-Change VI force level to 2.5V to bias the reference path appropriately
+-Measure `vref_vari`, expected around 1.2V, and log with test ID 3200
+-Run `"BG2"` JTAG chain to access the second bandgap reference, then measure and log `v_bg2` with test ID 3310
+-Run `"BG1"` JTAG chain to access the first bandgap reference, then measure and log `v_bg1` with test ID 3300
+-Apply 5V to `RDF_BUS_HV` pin to prepare for feedback measurement
+-Write test mode register `0xd1, 0x148` via JTAG to switch TAO pin to `vref_vari` internally
+-Wait 5ms for stabilization, then measure `vfbdi` via `RDF_TAO_HV`, expected ~1.2V, log with test ID 3320
+-Reset TAO pin by applying 0µA and up to 10V, a common analog block reset strategy
+-Remove force on `RDF_BUS_HV` to restore pin state
+-Power off DUT with `MY.PowerOff()`
+-Reset relays back to safe state with `L2_CBIT.Open(...)`
+-Log all voltage measurements using conditional test IDs based on temperature (plus25 vs others)
+
+---
+
+## 3. Detailed Procedure of Each Test
+
+-**`vref_smps` (ID: 3220 or 3221)**: Measures the output of the internal SMPS voltage reference. It is divided by 2 before datalogging (indicating maybe it’s a buffered or scaled reference).
+-**`vref_vari` (ID: 3200 or 3201)**: Measures the primary voltage reference of the DUT. In +25°C mode, an ATE compensation offset is subtracted to improve accuracy.
+-**`v_bg2` (ID: 3310 or 3311)**: Sleep-mode bandgap reference, likely used in low-power or standby configurations.
+-**`v_bg1` (ID: 3300 or 3301)**: Main bandgap reference for core analog systems.
+-**`vfbdi` (ID: 3320 or 3321)**: Voltage at feedback node after forcing `vref_vari` to the TAO pin; used to verify analog mux and routing correctness.
+
+---
+
+## 4. List of Pins, Relays, and Channels
+
+-**Analog Channels**:
+  - `RDF_TAO_HV`: Primary pin for measuring Vref outputs and feedback
+  - `RDF_BUS_HV`: Additional pin for applying voltage bias (5V during feedback measurement)
+
+-**Relays**:
+  - `L2_CBIT`, configured using `RDF_USED_CBIT`, toggled open at both start and end
+  - Wait-for-relay steps ensure relays are physically switched before proceeding
+
+-**Control Interfaces**:
+  - JTAG chains: `"VREF_SMPS"`, `"VREF_VARI"`, `"BG1"`, `"BG2"`
+  - `MY.TM_enable()` and `MY.JTAG_write(...)` used for enabling test modes and injecting signals
+
+---
+
+## 5. List of Datalogged Tests and Corresponding IDs
+
+-Voltage references are logged with **different test numbers** depending on the test temperature.
+-At `+25°C`:
+  - `vref_smps` → 3220
+  - `vref_vari` → 3200 (with measurement offset correction)
+  - `v_bg1` → 3300
+  - `v_bg2` → 3310
+  - `vfbdi` → 3320
+-At other temperatures:
+  - `vref_smps` → 3221
+  - `vref_vari` → 3201
+  - `v_bg1` → 3301
+  - `v_bg2` → 3311
+  - `vfbdi` → 3321
+
+---
+
+## 6. Other Relevant Information
+
+-Commented debug code refers to `vref_smps_global`, possibly for multi-site data transfer or historical storage — not currently active.
+-Reset steps at the end show **safe disengagement of test conditions** via forcing 0 µA and gradually removing high voltage paths.
+-The test applies **different force levels** depending on the analog block under test (e.g., 2.5V for Vref, 5V for feedback check).
+-The use of `L3_JT.RunChain(...)` shows reliance on **scan/JTAG-based control**, suggesting this is for a digital-analog hybrid IC with embedded analog blocks accessed via digital scan.
+
+---
+
+## 7. Summary of the File's Purpose
+
+This test sequence validates the behavior and accuracy of **multiple voltage references** on the DUT, including:
+- Internal switching regulator reference (`vref_smps`)
+- Primary analog reference (`vref_vari`)
+- Sleep-mode and general bandgaps (`v_bg2`, `v_bg1`)
+- Internal feedback signal path (`vfbdi`)
+
+The test ensures correct **analog muxing**, **reference trimming**, and **voltage output levels**, using a combination of JTAG chains, precision VI measurements, and conditional test behavior based on operating temperature."
+}
+{
+"instruction": "You are an expert in semiconductor test engineering. Analyze the following piece of testprogram.",
+"input": "#include <Main.h>
+
+using namespace std;
+
+
+TMResultM TS::Leakage ( void )
+{
+    if ( PRE.GetPrintComments() ) {
+        cout << "Executing: " << __PRETTY_FUNCTION__ << 
+            " (Entry Subflow: " << RunTime.GetActiveFlowNode().GetName() <<
+            ", Active flow: " << TestProg.GetActiveFlow().GetName() << ")" << endl;
+    }
+    
+    // used for autoprofiler 
+    Profiler p(__PRETTY_FUNCTION__);
+    
+    // declarations
+    
+    PinML LeakagePins_D ( RDF_DP_D+RDF_DM_D+RDF_PDP_D+RDF_PDM_D+RDF_SCL_D+RDF_SDA_D+RDF_INT_D ); 
+    PinML LeakagePins_HVD ( RDF_EN_HVD+RDF_ADR_HVD );
+    PinML LeakagePins_VI( RDF_BUS_V+RDF_CHDR_V+RDF_CMP_HV+RDF_CS_V );
+    PinML LeakagePins   ( RDF_DP_D+RDF_DM_D+RDF_PDP_D+RDF_PDM_D+RDF_SCL_D+RDF_SDA_D+RDF_EN_HVD+RDF_INT_D+RDF_CMP_HV+RDF_ADR_HVD+RDF_BUS_V+RDF_CS_V);
+    
+    FloatM1D i_leak ( 13 , 999. );
+    FloatM1D i_chdr_ary;
+    FloatM   i_leak_chdr, i_INTB;
+    
+    // fill in your source code here
+
+    TRIGGER(1)
+
+    if(( PCP.GetTestTemperature() == PRE_MINUS40) && (PCP.GetTestMode() != PRE_QUALITY))
+    return ( TM_NOTEST );
+
+    VI.SetMeasureDelay  ( LeakagePins_D+LeakagePins_VI+LeakagePins_HVD+RDF_CHDR_V, 5.1us            ); //shortes time
+    VI.SetMeasureSamples( LeakagePins_D+LeakagePins_VI+LeakagePins_HVD, 10                          );
+    VI.SetMeasureSamples( RDF_CHDR_V                                  , 500                         );    
+
+    VI.Force            ( LeakagePins_D, VI_FORCE_V     , 0V , 7V, 2uA, 2uA, -2uA, UTL_VOID         );
+    VI.Connect          ( LeakagePins_D, VI_TO_DUT      , VI_MODE_LOCAL                             );
+
+    VI.Force            ( LeakagePins_HVD, VI_FORCE_V   , 0V , 24V, 20uA, 20uA, -20uA, UTL_VOID     );
+    VI.Connect          ( LeakagePins_HVD, VI_TO_DUT    , VI_MODE_LOCAL                             );
+
+    VI.Force            ( RDF_SW2_V                , VI_FORCE_V    , 0V , 2.5V, 50mA, 50mA, -50mA, VI_FORCE_APPLY ); //needed because of Cap on the loadboard
+
+    VI.Force            ( LeakagePins_VI-RDF_CHDR_V, VI_FORCE_V    , 0V , 2.5V, 5uA, 5uA, -5uA, VI_FORCE_APPLY );
+    VI.Force            ( RDF_CHDR_V               , VI_FORCE_V    , 0V , 2.5V, 500uA, 500uA, -500uA, VI_FORCE_APPLY ); //needed because of Cap on the loadboard
+
+    TIME.Wait           ( 2ms );
+
+    VI.ForceV           ( LeakagePins_D+LeakagePins_HVD+LeakagePins_VI, -100mV );
+    
+    TIME.Wait           ( 10ms ); // settling time 
+
+    VI.MeasureISamples  ( RDF_CHDR_V, i_chdr_ary, i_chdr_ary );
+    i_leak_chdr   = MATH.Average( i_chdr_ary );
+
+    MY_VI.MeasureIAverage ( LeakagePins, i_leak, -100nA, 5004, 5005, 5006, 5007, 5008, 5009, 5010, 5011, 5012, 5013, 5019, 5020 ); 
+
+    VI.ForceV           ( LeakagePins_D+LeakagePins_HVD+LeakagePins_VI+RDF_CHDR_V, 0V );
+    VI.Gate             ( LeakagePins+RDF_CHDR_V+RDF_SW2_V, VI_GATE_OFF_LOZ           );
+    VI.Disconnect       ( LeakagePins+RDF_CHDR_V+RDF_SW2_V                            );
+
+    L2.DatalogPrint (5004, i_leak[0] );  /*DP*/
+    L2.DatalogPrint (5005, i_leak[1] );  /*DM*/
+    L2.DatalogPrint (5006, i_leak[2] );  /*PDP*/
+    L2.DatalogPrint (5007, i_leak[3] );  /*PDM*/
+    L2.DatalogPrint (5008, i_leak[4] );  /*SCL*/
+    L2.DatalogPrint (5009, i_leak[5] );  /*SDA*/
+    L2.DatalogPrint (5010, i_leak[6] );  /*EN*/
+    L2.DatalogPrint (5011, i_leak[7] );  /*INT*/
+    L2.DatalogPrint (5012, i_leak[8] );  /*CMP*/
+    L2.DatalogPrint (5013, i_leak[9] );  /*ADR*/
+    L2.DatalogPrint (5018, i_leak_chdr);  /*CHDR*/
+    L2.DatalogPrint (5019, i_leak[10]);  /*BUSX*/
+    L2.DatalogPrint (5020, i_leak[11]);  /*CS*/
+
+    VI.Connect( RDF_SUP_HV, VI_TO_DUT, VI_MODE_REMOTE);
+    VI.Force(RDF_SUP_HV, VI_FORCE_V, 12V, 25V, 25mA, 20mA, -20mA, VI_FORCE_APPLY);
+
+    VI.Connect ( RDF_VDD_HV, VI_TO_DUT, VI_MODE_REMOTE);
+    VI.Force( RDF_VDD_HV, VI_FORCE_V, 3.3V, 10V, 20mA, 20mA, -20mA, VI_FORCE_APPLY);
+    
+    VI.Connect ( RDF_INT_D, VI_TO_DUT, VI_MODE_LOCAL);
+    VI.Force ( RDF_INT_D, VI_FORCE_V, 3.3V, 10V, 2uA, 20mA, -20mA, VI_FORCE_APPLY); 
+    TIME.Wait( 2ms);
+    VI.MeasureIAverage ( RDF_INT_D, i_INTB, 10nA);
+    
+    SERIAL_HW_LOOP_BEGIN
+      if(i_INTB[PRE_SITE] > 2.0e-6)
+      {  
+       VI.SetMeasureIRange ( RDF_INT_D, 20mA);
+       TIME.Wait ( 1ms);
+       VI.MeasureIAverage ( RDF_INT_D, i_INTB, 10mA);  
+       }
+    SERIAL_HW_LOOP_END
+    
+    L2.DatalogPrint( 5030, i_INTB);
+    
+    VI.ForceV( RDF_INT_D, 0.0V);
+    VI.ForceV ( RDF_VDD_HV, 0.0V);
+    VI.ForceV ( RDF_SUP_HV, 0.0V);
+    
+    VI.Disconnect ( RDF_INT_D+ RDF_VDD_HV + RDF_SUP_HV);
+    
+    
+    return ( L2.GetTestStepResult() );
+}",
+"output": "These texts appear to form an entire source code file implementing part of an ATE test program for semiconductor device testing.
+
+## File Overview
+- The file is written in C++ and appears to be using the LTX Unison framework.
+- Implements the test block called 'Leakage' based on the function name 'TS::Leakage()'
+- Based on the test sequence and comments, this test block implements leakage current measurements for various pin groups.
+- Contains ATE test method calls from 'VI', 'L2', 'TIME', 'MATH', and 'MY_VI' libraries.
+- Does not contain any user function or class definitions. The source code is a flat and straight-forward ATE program with no user abstractions.
+
+## 'TS::Leakage()' sequence overview
+1. Initialization of pin groups and variables, and conditional test execution
+2. Measurement setup and configuration (setting sampling interval, number of samples)
+3. Connection and Initialization of pins
+3. Leakage current measurements for multiple pin groups
+4. Special handling for INT pin measurement
+5. Cleanup and resource release after each measurement stage
+
+## Test Sequence detailed summary
+1. **Initial Setup**:
+   - Prints execution info if comments are enabled
+   - Skips test if temperature is -40°C and not in QUALITY mode
+   - Three pin subgroups defined:
+     * LeakagePins_D (digital pins)
+     * LeakagePins_HVD (high voltage digital pins)
+     * LeakagePins_VI (voltage/current pins)
+
+2. **Pin Configuration: sampling and initial state**:
+   - Configures measurement parameters:
+     * 5.1μs sampling interval for all pins
+     * 10 samples for most pins, 500 for RDF_CHDR_V
+   - Forces voltages with current limits:
+     * 0V with 7V compliance for digital pins (2μA range)
+     * 0V with 24V compliance for HVD pins (20μA range)
+     * Special handling for RDF_SW2_V (50mA range)
+     * 0V with 2.5V compliance for VI pins (5μA range)
+     * Higher current (500μA) for RDF_CHDR_V due to board capacitance
+
+3. **Leakage Measurements at -100mV**:
+   - Applies -100mV bias to all pins
+   - Measures CHDR current with 500 samples after 10ms of settling time, and takes the average (test number 5018)
+   - Measures leakage currents for all other LeakagePins (test numbers 5004-5020)
+   - Then forces all LeakagePins to 0V and disconnects them.
+   - Datalogs the measurements
+   - Special handling for INT pin with range switching (2μA to 20mA)
+
+4. **Special Leakage Measurement for INT pin with DUT powered on**:
+   - Applies 12V to SUP_HV to power up the device
+   - Applies 3.3V to VDD_HV to power up the device
+   - Applies 3.3V to INT_D with 2uA limit
+   - Measures leakage current on RDF_INT_D with expected measurement of 10nA
+   - If INT current clamps to 2uA, switch to a larger range (20mA) and measure again.
+   - Datalog the final INT measurement
+   - Force INT, VDD, and SUP all to 0V to power down the DUT
+   - Disconnect and gate off pins
+
+## Important Test Engineering Details
+
+1. **Resources Involved**:
+   - Pin groups:
+     * Digital: DP, DM, PDP, PDM, SCL, SDA, INT
+     * High Voltage Digital: EN, ADR
+     * Voltage/Current: BUS, CHDR, CMP, CS
+   - Power supplies:
+     * SUP_HV (12V)
+     * VDD_HV (3.3V)
+
+2. **Measurement Configuration**:
+   - Different sample counts for different pins (10 vs. 500)
+   - Settling times:
+     * 2ms after initial force
+     * 10ms after -100mV bias
+   - Current ranges from nA to mA depending on pin
+
+3. **Special Cases**:
+   - CHDR pin has higher sample count, likely due to capacitance
+   - INT pin has both low and high leakage specs. INT high leakage current is likely to clamp, thus needing to switch from 2μA to 20mA range in order to get the actual current.
+   - Temperature conditional test execution (-40°C skip)
+
+4. **Datalogging**:
+   - Comprehensive results storage:
+     * 5004-5013: Digital and HVD pin leakages
+     * 5018: CHDR leakage
+     * 5019-5020: BUS and CS leakages
+     * 5030: INT pin leakage
+
+5. **Device Specifics**:
+   - Tests a device with:
+     * Mixed signal pins (digital and analog)
+     * High voltage and normal voltage domains
+     * Special handling for capacitive loads
+     * Temperature-dependent test conditions
+
+## Recommendations for Further Investigation
+1. Verify the -40°C test skip condition is properly implemented
+2. Review the CHDR pin measurement requirements (why 500 samples?)
+3. Confirm the INT pin range switching logic
+4. Check the board capacitance impact on RDF_SW2_V and RDF_CHDR_V
+
+## Summary
+This test thoroughly measures leakage currents across all device pins under controlled bias conditions, with special handling for high-capacitance and high-current paths. The test provides comprehensive datalogging of leakage currents for production test analysis and includes conditional execution based on temperature and test mode.
+"
+}
+{
+"instruction": "You are an expert in semiconductor test engineering. Analyze the following piece of testprogram.",
+"input": "#include <Main.h>
+
+using namespace std;
+
+
+TMResultM TS::Supply ( void )
+{
+    if ( PRE.GetPrintComments() ) {
+        cout << "Executing: " << __PRETTY_FUNCTION__ << 
+            " (Entry Subflow: " << RunTime.GetActiveFlowNode().GetName() <<
+            ", Active flow: " << TestProg.GetActiveFlow().GetName() << ")" << endl;
+    }
+    
+    // used for autoprofiler 
+    Profiler p(__PRETTY_FUNCTION__);
+    
+    // declarations
+
+    FloatM  i_sleep(999), i_stb(999), i_stb32V(999); 
+    FloatM  v_sleep(999), v_vdd(999), v_chdr(999);
+    FloatM  t_wake(999);
+    FloatM  ipd_en(999), ipd_en28V(999);
+
+    FloatM  i_leak(999), i_stress(999), i_post(999);
+    FloatM  i_leakDS(999), i_leakDS_post(999);
+    FloatM  i_leakDSmeas(999), i_leakDS_postmeas(999);
+    FloatM  i_leak100mA_DS(999), i_leak100mA_DS_post(999);    
+
+    UnsignedM fail_vec;
+
+    // fill in your source code here
+    
+    TRIGGER(1)    
+
+    L2_CBIT.Open( RDF_USED_CBIT );
+    L2_CBIT.WaitForRelay();    
+
+
+    /*** SLEEP mode current: i_sleep ***/
+
+    MY.Init_Dutpins();   //Inputs_Low?!!
+
+    DIGITAL.Disconnect( RDF_ADR_HVD, DIGITAL_ALL_PATHS   );
+
+//CTRL VI_SUP
+//  SELECT_CLAMP_RANGE    20 mA
+//  SET_CLAMP             20 mA
+//  SET_MULTIPLE 100
+//  END;
+
+
+    MY.PowerOn_sleep (12.0);   //PowerOn ohne Wakeup
+    L2.SafeWait (5ms);
+
+    VI.SetClampsI       ( RDF_SUP_HV, 500uA,  -500uA      );   
+    VI.SetMeasureIRange ( RDF_SUP_HV, 500uA               );        //was 2mA on SZ 
+    VI.SetMeasureSamples( RDF_SUP_HV, 10                  );         //was 100 at SZ
+    VI.SetMeasureDelay  ( RDF_SUP_HV, 5.1us               );
+
+
+    MY_VI.MeasureIAverage ( RDF_SUP_HV, i_sleep, 10uA, 3000 );
+
+    VI.SetBandwidth      ( RDF_SUP_HV, 20kHz              );    // set to 20KHz to avoid overshoot
+
+    VI.Force            ( RDF_SUP_HV,VI_FORCE_V, 40V, 50V, 50mA, 50mA, -50mA, UTL_VOID);
+
+
+    /*** Standby current: i_stb ***/
+    MY.Wakeup();   //Standby aktivieren
+    L2.SafeWait (5ms);
+
+    if((PartType == Wafertest) || Expression("_SoftTrim").GetBoolValue()[ ActiveSites.Begin().GetValue() ])
+    {
+        MY_OTP.SoftTrimming();
+    }
+
+    if(PartType == Finaltest) 
+    {
+        MY_VI.MeasureIAverage ( RDF_SUP_HV, i_stb32V, 10uA, 3003 );     
+    }
+
+
+    VI.ForceV           ( RDF_SUP_HV, 12V                   );
+
+    VI.SetBandwidth     ( RDF_SUP_HV, 40kHz                 ); // set back to 40KHz
+
+    MY_VI.MeasureIAverage ( RDF_SUP_HV, i_stb, 10uA, 3001 );
+
+
+
+    /* Reset VI_SUP Clamping */
+
+    VI.SetClampsI       ( RDF_SUP_HV, 50mA,  -50mA       );
+    VI.SetMeasureIRange ( RDF_SUP_HV, 50mA               );        //was 200mA on SZ 
+ 
+
+
+
+/*** Standby Reg.: v_sleep (Sleep Reg.!) ***/
+
+    /* Connect TAO */
+    
+    
+// check hs should be already gated on    
+//    MULTI_SITE_BEGIN;
+//    CTRL DPIN
+//      DO_FOR_SIGNAL        TAO
+//      SET_GATE             CLOSE
+//      WAIT_FOR_COMPLETION
+//      END;
+//    MULTI_SITE_END;
+
+    DIGITAL.Connect ( RDF_ADR_HVD, DIGITAL_DCL_TO_DUT   );
+      
+    MY.TM_enable();
+
+    L3_JT.RunChain("SLEEP");
+    L2.SafeWait( 0.5ms);      
+    
+    
+    MY_VI.MeasureVAverage ( RDF_TAO_HV , v_sleep , 1.55V , 3031 );
+    
+
+    /*** VDD-Reg.: v_vdd ***/
+
+    VI.SetMeasureSamples( RDF_VDD_V, 10                                                    );
+    VI.SetMeasureDelay  ( RDF_VDD_V, 5.1us                                                 );
+
+    VI.Force            ( RDF_VDD_V, VI_FORCE_I, -5mA, 5mA, 16V, 4V, -0.3V, VI_FORCE_APPLY );
+
+    L2.SafeWait (2ms);
+    
+    MY_VI.MeasureVAverage ( RDF_VDD_V , v_vdd , 1.2V , 3040 );
+    
+    VI.Force            ( RDF_VDD_V, VI_FORCE_I, 0uA, 5mA, 16V, 4V, -0.3V, VI_FORCE_REMOVE );
+
+    SERIAL_LOOP_BEGIN
+        if((v_vdd[PRE_SITE] > 3.1) && (v_vdd[PRE_SITE] < 3.5))
+        {
+          v_vdd_global[PRE_SITE] = v_vdd[PRE_SITE];
+        }
+        else{  
+          v_vdd_global[PRE_SITE] = 3.3;
+        }
+    SERIAL_LOOP_END
+
+    if((TestTemp != minus40) || (TestMode == Quality))
+    {
+
+        VI.Force            ( RDF_SW2_V, VI_FORCE_V, 12V, 16V, 5mA,  5mA,  -5mA,  VI_FORCE_APPLY );
+
+        //check hs check SZ code during debug
+        
+        VI.SetMeasureSamples( RDF_LX2_V, 10                                                      ); //was 100 on SZ
+        VI.SetMeasureDelay  ( RDF_LX2_V, 5.1us                                                   );
+        VI.Force            ( RDF_LX2_V, VI_FORCE_V, 0V,  16V, 50uA, 50uA, -50uA, VI_FORCE_APPLY );
+        
+        L2.SafeWait( 15ms );  // need such long settling time
+    
+        MY_VI.MeasureIAverage ( RDF_LX2_V, i_leakDS , 0.1uA , 8111 );
+        
+//        VI.SetClampsI       ( RDF_LX2_V, 5uA, -5uA                 ); 
+//        VI.SetMeasureIRange ( RDF_LX2_V, 5uA                       );
+// 
+//        MY_VI.MeasureIAverage ( RDF_LX2_V , i_leakDSmeas , 0,1uA , 8111 );
+        
+    
+        VI.ForceV           ( RDF_LX2_V, 12V, 16V                );
+
+        L2.SafeWait( 5ms );
+    
+        MY_VI.MeasureIAverage ( RDF_LX2_V, i_leak100mA_DS , 0.1uA , 8113 );    
+
+
+        VI.Force            ( RDF_LX2_V, VI_FORCE_V, 0V,  16V, 50uA, 50uA, -50uA, VI_FORCE_REMOVE );
+
+
+        VI.Force            ( RDF_SW2_V, VI_FORCE_V, 0V, 16V, 5mA,  5mA,  -5mA,  UTL_VOID );
+        L2.SafeWait         ( 4ms );                                                                // wait some time to avoid current Spike
+        VI.Gate             ( RDF_SW2_V, VI_GATE_OFF_LOZ                                  );
+        VI.Disconnect       ( RDF_SW2_V                                                   );
+        
+ 
+    }
+    
+    MY.TM_enable();
+    L3_JT.RunChain ("PS_RON");
+
+    /* Connect Power stage supply to SW pins */
+    MY.SMPS_supply_on (12.0);
+
+    if((TestTemp != minus40) || (TestMode == Quality))
+    {
+      
+        VI.SetMeasureSamples( RDF_CHDR_V, 10                                                             ); //was 100 on SZ
+        VI.SetMeasureDelay  ( RDF_CHDR_V, 5.1us                                                          );  
+        VI.Force            ( RDF_CHDR_V, VI_FORCE_V,     4.8V, 16V, 500uA, 500uA, -500uA,VI_FORCE_APPLY );    
+      
+
+        
+        L2.SafeWait (3ms);
+        
+        
+        MY_VI.MeasureIAverage ( RDF_CHDR_V, i_leak , -90uA , 8102                      );    
+        
+        VI.ForceV           ( RDF_CHDR_V, 0.0V,    16V                               );            
+        
+        
+        L2.SafeWait (3ms);    
+       
+        
+        MY_VI.MeasureIAverage ( RDF_CHDR_V, i_stress , -150uA , 8105                   );    
+        
+        VI.ForceV           ( RDF_CHDR_V, 4.8V,    16V                               );   
+       
+        
+        L2.SafeWait (3ms);
+
+        MY_VI.MeasureIAverage ( RDF_CHDR_V, i_post ,   -90uA , 8108                    );
+
+
+    }
+    /* Testmode CHDR_VOLTAGE */
+    //JTAG_write (0xc0, 0x018);    //SMPS_DRVON=1 u. SMPS_ON=1
+    L3_JT.RunChain("CHDR");
+
+    // check hs switch from voltage into current mode check for spikes
+    VI.Force            ( RDF_CHDR_V, VI_FORCE_I, 10mA, 50mA, 16V, 10V, -0.2V, UTL_VOID);
+    VI.Connect          ( RDF_CHDR_V, VI_TO_DUT, VI_MODE_REMOTE                        ); // is not connected if minus40 
+    VI.Gate             ( RDF_CHDR_V, VI_GATE_ON                                       ); 
+
+    L2.SafeWait (5ms);
+
+    MY_VI.MeasureVAverage ( RDF_CHDR_V , v_chdr , 5.2V , 3050 );    
+
+
+    VI.Force            ( RDF_CHDR_V, VI_FORCE_I, 0uA, 50mA, 16V, 10V, -0.2V, VI_FORCE_REMOVE);  
+
+
+    v_chdr = 12.0 - v_chdr;  /* v_chdr gegen Pin SUP */ 
+
+
+//JTAG_write (0xc0, 0x000);
+
+
+/*** Measure Wake time at EN ***/
+/* Stimulate pulse at EN and measure time difference from rising edge of EN to rising edge of TDO */
+
+
+    /* Set testmode: TDO = EN_FILT */
+    MY.TM_set (0xd2, 0x050);
+
+
+    DIGITAL.ExecutePattern( "wake_up.wake_up"                             );
+    DIGITAL.ReadCounter   ( RDF_INT_D, DIGITAL_FAIL_COUNTER , fail_vec, 0 );
+    
+    t_wake = fail_vec*10ns; // 10ns pattern period
+    
+
+    //JTAG_write (0xd2, 0x000);
+
+
+    /*** Measure EN input pulldown current ***/
+
+    L2_CBIT.Close( RDF_EN2HVVI_REL );
+    L2_CBIT.WaitForRelay();    
+
+    DIGITAL.Disconnect   ( RDF_EN_HVD, DIGITAL_ALL_PATHS                                         );
+    DIGITAL.SetDriveState( RDF_EN_HVD, DIGITAL_DRV_STATE_LOW                                     );
+    VI.SetMeasureSamples ( RDF_EN_HV, 10                                                         );
+    VI.SetMeasureDelay   ( RDF_EN_HV, 5.1us                                                      );    
+    VI.Force             ( RDF_EN_HV, VI_FORCE_V, 3.3V, 50V, 50uA, 50uA, -50uA, VI_FORCE_APPLY   ); 
+
+    L2.SafeWait (0.5ms);
+    
+    MY_VI.MeasureIAverage  ( RDF_EN_HV, ipd_en , 4.7uA , 8001                                      );   
+    
+    VI.ForceV            ( RDF_EN_HV, 28V                                                        );
+    
+    L2.SafeWait(5ms);
+
+    MY_VI.MeasureIAverage  ( RDF_EN_HV, ipd_en28V , 4.7uA , 8002                                   ); 
+
+    VI.Force             ( RDF_EN_HV, VI_FORCE_V, 0.0V, 50V, 50uA, 50uA, -50uA, VI_FORCE_REMOVE  );
+    DIGITAL.Connect      ( RDF_EN_HVD, DIGITAL_DCL_TO_DUT                                        );
+
+    L2_CBIT.Open( RDF_EN2HVVI_REL );
+    L2_CBIT.WaitForRelay();    
+    
+    MY.Inputs_Low();
+    MY.SMPS_supply_off();
+    MY.PowerOff();
+    L2_CBIT.Open( RDF_USED_CBIT );
+    L2_CBIT.WaitForRelay();    
+
+
+    if((TestTemp != minus40) || (TestMode == Quality))
+    {
+        /* Drain Leakage */
+        MY.PowerOn_sleep(12.0);
+        VI.Force            ( RDF_SW2_V, VI_FORCE_V, 12V, 16V, 5mA,  5mA,  -5mA,  VI_FORCE_APPLY );
+
+        //check hs check SZ code during debug
+        
+        VI.SetMeasureSamples( RDF_LX2_V, 10                                                      ); //was 100 on SZ
+        VI.SetMeasureDelay  ( RDF_LX2_V, 5.1us                                                   );
+        VI.Force            ( RDF_LX2_V, VI_FORCE_V, 0V,  16V, 50uA, 50uA, -50uA, VI_FORCE_APPLY );
+        
+        L2.SafeWait( 5ms );
+    
+        MY_VI.MeasureIAverage ( RDF_LX2_V, i_leakDS_postmeas , 0.1uA , 8112 );
+        //check hs wird die zweite Messung gebraucht? R&R -> SZ Code
+//        VI.SetClampsI       ( RDF_LX2_V, 5uA, -5uA                 ); 
+//        VI.SetMeasureIRange ( RDF_LX2_V, 5uA                       );
+// 
+//        MY_VI.MeasureIAverage ( RDF_LX2_V , i_leakDS_postmeas , 0,1uA , 8112 );
+        
+    
+        VI.ForceV           ( RDF_LX2_V, 12V, 16V                );
+
+        L2.SafeWait( 5ms );
+    
+        MY_VI.MeasureIAverage ( RDF_LX2_V, i_leak100mA_DS_post , 0.1uA , 8113 );    
+
+
+        VI.Force            ( RDF_LX2_V, VI_FORCE_V, 0V, 16V, 50uA, 50uA, -50uA, VI_FORCE_REMOVE );
+        VI.Force            ( RDF_SW2_V, VI_FORCE_V, 0V, 16V, 5mA,  5mA,  -5mA,  UTL_VOID        );
+        L2.SafeWait(5ms);
+        VI.Gate             ( RDF_SW2_V, VI_GATE_OFF_LOZ                                         );
+        VI.Disconnect       ( RDF_SW2_V                                                          );
+ 
+        L2_CBIT.Open( RDF_USED_CBIT );
+        L2_CBIT.WaitForRelay();        
+        MY.PowerOff();
+    
+    }
+
+
+    /* Datalogging */
+
+    L2.DatalogPrint (3000, i_sleep  ); 
+    L2.DatalogPrint (3001, i_stb    ); 
+    if(PartType == Finaltest)
+    {
+    L2.DatalogPrint(3003, i_stb32V);
+    }
+    L2.DatalogPrint (8001, ipd_en   ); 
+    L2.DatalogPrint (8002, ipd_en28V);  
+    L2.DatalogPrint (3030, v_sleep*4); 
+    L2.DatalogPrint (3031, v_sleep  );
+    L2.DatalogPrint (3040, v_vdd    ); 
+    L2.DatalogPrint (3050, v_chdr   ); 
+    L2.DatalogPrint (6200, t_wake   ); 
+
+    if((TestTemp != minus40) || (TestMode == Quality))
+    {    
+
+        L2.DatalogPrint(8111, i_leakDS);    
+
+
+        L2.DatalogPrint(8112, i_leakDS_postmeas  );     
+        L2.DatalogPrint(8113, i_leak100mA_DS     );
+        L2.DatalogPrint(8114, i_leak100mA_DS_post);  
+        L2.DatalogPrint(8102, i_leak             );    
+        L2.DatalogPrint(8105, i_stress           );   
+        L2.DatalogPrint(8108, i_post             );      
+        L2.DatalogPrint(8109, i_post-i_leak      );  
+    } 
+
+
+//L2_DatalogTestStepTime(9030);    
+    
+    
+    return ( L2.GetTestStepResult() );
+}
+   ",
+"output": "These texts appear to form an entire source code file implementing part of an ATE test program for semiconductor device testing. It is composed of a suite of tests related to the supply characteristics of an SMPS device.
+
+## File Overview
+- The file is written in C++ and appears to be using the LTX Unison framework.
+- Implements the test block called 'Supply' based on the function name 'TS::Supply()'
+- Based on the test sequence and comments, this test block implements various power supply related measurements including sleep/standby currents, voltage regulation, and wake-up timing.
+- Contains ATE test method calls from 'VI', 'L2', 'DIGITAL', 'L3_JT', 'MY', and 'MY_VI' libraries.
+- The test appears to be for a power management IC with multiple power domains and sleep modes.
+
+## 'TS::Supply()' sequence overview
+1. Initialization and debug printing
+2. Sleep mode current measurement (i_sleep)
+3. Standby mode current measurements (i_stb, i_stb32V)
+4. Voltage regulation measurements (v_sleep, v_vdd, v_chdr)
+5. Wake-up time measurement (t_wake)
+6. EN pin pulldown current measurements (ipd_en, ipd_en28V)
+7. Additional leakage measurements (i_leakDS, i_leak100mA_DS, etc.)
+8. Cleanup and datalogging
+
+## Test Sequence detailed summary
+
+1. **Initial Setup**:
+   - Prints execution info if comments are enabled
+   - Resets most if not all relays (relay group RDF_USED_CBIT likely refers to all used CBITS) to Normally Open position
+   - Initializes DUT pins using MY.Init_Dutpins(), likely setting DCL levels of digital pins
+   - Disconnects RDF_ADR_HVD from all digital resources (driver, comparator, load)
+
+2. **Sleep Mode Current Measurement**:
+   - Powers on DUT in sleep mode (12V) and waits for 5ms.
+   - Configures VI settings for SUP current measurement (500uA range, +/-500μA clamps, 10 samples at 5.1us intervals)
+   - Measures sleep current (i_sleep) on SUP pin with 10μA resolution
+
+3. **Standby Mode Current Measurements**:
+   - Adjusts SUP pin bandwidth to 20kHz to avoid overshoot
+   - Forces 40V on SUP pin with 50mA current limits
+   - Wakes up DUT from sleep to standby mode using MY.Wakeup() function
+   - Performs soft trimming if needed (if wafer test or soft trim enabled)
+   - Measures standby current at 32V (i_stb32V) for final test
+   - Measures standby current at 12V (i_stb) with 40kHz bandwidth
+   - Resets SUP VI clamping settings to 50mA
+
+4. **Voltage Regulation Measurements**:
+   - Connects DCL resources to ADR pin
+   - Enables test mode by calling MY.TM_Enable() function
+   - Sets device to sleep mode using JTAG chain "SLEEP", then waits 0.5ms
+   - Measures sleep regulator voltage (v_sleep) on TAO_HV pin
+   - Set VDD pin measurement samples (10) and interval (5.1us)
+   - Measures VDD regulator voltage (v_vdd) with -5mA to 5mA force current
+   - Assigns the value of v_vdd to global variable (unless it is lower than 3.1V or higher than 3.5V, in which cases the global variable is set to 3.3V)
+
+5. **LX Drain-Source Leakage Measurement (only at -40C testing or Quality mode)**
+   - Forces 12V on SW2 pin
+   - Configures measurement settings of LX2 pin (10 samples, 5.1us intervals)
+   - Forces 0V on LX2 pin at 50uA current clamps, then waits for 15ms
+   - Measures current on LX2 pin and passes the value to i_leakDS
+   - Forces 12V on LX2 pin, then waits for 5ms
+   - Measures current on LX2 pin again and pass the value to i_leak100mA_DS
+   - Resets LX2 pin and SW2 pin to 0V, carefully gates off and disconnects to prevent spikes.
+
+6. **Power stage RON: Stress and Post-stress Current Measurements  (only at -40C testing or Quality mode)**
+   - Enables test mode by calling MY.TM_Enable() function
+   - Sets device to Power stage RON test mode using JTAG chain "PS_RON"
+   - Calls MY.SMPS_supply_on() function, likely Connecting power stage supply to SW pins and setting to 12V
+   - Configures measurement settings of CHDR pin (10 samples, 5.1us intervals)
+   - Forces 4.8V on CHDR pin, then waits for 3ms before measuring the current (i_leak)
+   - Forces 0.0V on CHDR pin, then waits for 3ms before measuring the current (i_stress)
+   - Forces 4.8V again, then waits for another 3ms before measuring the current (i_post)
+
+6. **Power stage RON: CHDR Voltage Measurement**
+   - Runs JTAG chain "CHDR" to put device in CHDR test mode
+   - Forces 10mA on CHDR pin, then waits for 5ms before measuring v_chdr
+   - Resets CHDR current to 0uA
+   - Calculates v_chdr relative to SUP pin (v_chdr = 12 - v_chdr)
+
+7. **Wake-up Time Measurement**:
+   - Configures test mode to monitor EN_FILT on TDO pin
+   - Executes wake-up pattern (Pattern name = "wakeup", Label name = "wakeup") and reads pattern fail counter
+   - Converts counter result to time (10ns resolution)
+
+8. **EN Pin Pulldown Currents**:
+   - Safely closes "EN2HVVI" relay, most likely connecting EN pin to HVVI ATE resource on the DUT board
+   - Disconnects EN pin from all digital resources
+   - Configures VI measurement settings for EN pin (samples=10, interval=5.1us)
+   - Forces 3.3V to measure pulldown current at 3.3V (ipd_en), then waits for 5ms
+   - Forces 28V to measure pulldown current at 28V (ipd_en28V)
+   - Resets voltage to 0V and reconnects EN pin to digital resources after measurement
+   - Resets EN2HVVI relay so as to disconnect from HVVI channel
+
+9. **Cleanup and Datalogging**:
+   - Calls MY.Inputs_Low(), likely resetting digital pins to logic low
+   - Powers down DUT with SMPS_supply_off() and PowerOff()
+   - Opens all relays (RDF_USED_CBIT)
+   - Datalogs all measurements with specific test numbers
+
+10. **SMPS Drain Leakage Post-measurement (only at -40C or Quality mode)**
+   - Very similar test procedure as step#5 Drain-source leakage measurement
+   - Powers down DUT again after the measurement
+   - Datalogs the measurements with another set of test numbers
+
+## Important Test Engineering Details
+
+1. **Resources Involved**:
+   - Power supplies:
+     * SUP_HV (main supply, 12V-40V)
+     * VDD_V (internal regulator)
+     * CHDR_V (charge driver)
+   - Digital pins:
+     * EN_HVD, ADR_HVD
+   - Analog pins:
+     * TAO_HV, LX2_V, SW2_V
+
+2. **Measurement Configuration**:
+   - Current measurements with different ranges (500μA to 50mA)
+   - Voltage measurements with different force conditions
+   - Settling times from 0.5ms to 15ms depending on measurement
+   - Special bandwidth settings (20kHz vs 40kHz)
+
+3. **Special Cases**:
+   - Different test flows for wafertest vs. finaltest
+   - Temperature conditional measurements (-40°C skip)
+   - Quality test mode enables additional measurements
+   - Soft trimming capability
+
+4. **Datalogging**:
+   - Comprehensive results storage:
+     * 3000-3003: Sleep and standby currents
+     * 8001-8002: EN pulldown currents
+     * 3030-3050: Voltage measurements
+     * 6200: Wake-up time
+     * 8102-8114: Leakage and stress currents
+
+5. **Device Specifics**:
+   - Tests a power management IC with:
+     * Sleep and standby modes
+     * Multiple voltage regulators
+     * Charge driver circuit
+     * Wake-up functionality
+     * High voltage EN pin
+
+## Recommendations for Further Investigation
+1. Review the 15ms settling time requirement for LX2_V measurement
+2. Verify the wake-up time measurement methodology
+3. Check the need for two different EN pulldown current measurements (3.3V and 28V)
+4. Confirm the stress measurement sequence and conditions
+
+## Summary
+This test thoroughly characterizes the power supply characteristics of a power management IC, including sleep/standby currents, voltage regulation, wake-up timing, and pin leakage. The test provides comprehensive datalogging for production test analysis and includes conditional execution based on temperature, test mode, and device type (wafer vs final test)."
+}
+{
+"instruction": "You are an expert in semiconductor test engineering. Analyze the following piece of testprogram.",
+"input": "#include <Main.h>
+
+using namespace std;
+
+
+TMResultM TS::Osc ( void )
+{
+    if ( PRE.GetPrintComments() ) {
+        cout << "Executing: " << __PRETTY_FUNCTION__ << 
+            " (Entry Subflow: " << RunTime.GetActiveFlowNode().GetName() <<
+            ", Active flow: " << TestProg.GetActiveFlow().GetName() << ")" << endl;
+    }
+    
+    // used for autoprofiler 
+    Profiler p(__PRETTY_FUNCTION__);
+    
+    // declarations
+
+    FloatM  f_tdo(999);    //An TDO wird f_osc/4 ausgegeben
+    FloatM  f_osc50(999);
+    
+    
+    // fill in your source code here
+    
+    TRIGGER(1)
+
+    if((TestTemp == minus40) && (TestMode != Quality))
+    {
+        return ( L2.GetTestStepResult() );
+    }
+        
+    MY.Init_Dutpins();
+    MY.PowerOn (12.0);
+    
+    if((PartType == Wafertest) || Expression("_SoftTrim").GetBoolValue()[ ActiveSites.Begin().GetValue() ])
+    {
+        MY_OTP.SoftTrimming();
+    }
+
+    //TM_set (0xd2, 0x0200);
+    MY.TM_enable();     
+    L3_JT.RunChain("OSC");
+
+    ///* Measure (or retest) f_osc */
+
+    DIGITAL.SetDriveState      ( RDF_TDO_D, DIGITAL_DRV_STATE_OFF               );
+    TMU.MeasureFrequencyByCount( RDF_TDO_D, 5000, 12.5MHz,f_tdo, 12.5MHz        ); //  f_osc/4 
+    TIME.WaitForAllDelays();
+    
+
+    f_osc50 = 4 * f_tdo;
+
+
+
+    MY.PowerOff();
+    L2_CBIT.Open( RDF_USED_CBIT );
+    L2_CBIT.WaitForRelay();    
+
+
+///* Datalogging */
+
+    L2.DatalogPrint (6070, f_osc50);
+
+      
+    
+    return ( L2.GetTestStepResult() );
+}",
+"output": "These texts appear to form an entire source code file implementing part of an ATE test program for semiconductor device testing. It is composed of a suite of tests related to the supply characteristics of an SMPS device.
+
+## File Overview
+- The file is written in C++ and appears to be using the LTX Unison framework.
+- Implements the test block called 'Supply' based on the function name 'TS::Supply()'
+- Based on the test sequence and comments, this test block implements various power supply related measurements including sleep/standby currents, voltage regulation, and wake-up timing.
+- Contains ATE test method calls from 'VI', 'L2', 'DIGITAL', 'L3_JT', 'MY', and 'MY_VI' libraries.
+- The test appears to be for a power management IC with multiple power domains and sleep modes.
+
+## 'TS::Supply()' sequence overview
+1. Initialization and debug printing
+2. Sleep mode current measurement (i_sleep)
+3. Standby mode current measurements (i_stb, i_stb32V)
+4. Voltage regulation measurements (v_sleep, v_vdd, v_chdr)
+5. Wake-up time measurement (t_wake)
+6. EN pin pulldown current measurements (ipd_en, ipd_en28V)
+7. Additional leakage measurements (i_leakDS, i_leak100mA_DS, etc.)
+8. Cleanup and datalogging
+
+## Test Sequence detailed summary
+
+1. **Initial Setup**:
+   - Prints execution info if comments are enabled
+   - Resets most if not all relays (relay group RDF_USED_CBIT likely refers to all used CBITS) to Normally Open position
+   - Initializes DUT pins using MY.Init_Dutpins(), likely setting DCL levels of digital pins
+   - Disconnects RDF_ADR_HVD from all digital resources (driver, comparator, load)
+
+2. **Sleep Mode Current Measurement**:
+   - Powers on DUT in sleep mode (12V) and waits for 5ms.
+   - Configures VI settings for SUP current measurement (500uA range, +/-500μA clamps, 10 samples at 5.1us intervals)
+   - Measures sleep current (i_sleep) on SUP pin with 10μA resolution
+
+3. **Standby Mode Current Measurements**:
+   - Adjusts SUP pin bandwidth to 20kHz to avoid overshoot
+   - Forces 40V on SUP pin with 50mA current limits
+   - Wakes up DUT from sleep to standby mode using MY.Wakeup() function
+   - Performs soft trimming if needed (if wafer test or soft trim enabled)
+   - Measures standby current at 32V (i_stb32V) for final test
+   - Measures standby current at 12V (i_stb) with 40kHz bandwidth
+   - Resets SUP VI clamping settings to 50mA
+
+4. **Voltage Regulation Measurements**:
+   - Connects DCL resources to ADR pin
+   - Enables test mode by calling MY.TM_Enable() function
+   - Sets device to sleep mode using JTAG chain "SLEEP", then waits 0.5ms
+   - Measures sleep regulator voltage (v_sleep) on TAO_HV pin
+   - Set VDD pin measurement samples (10) and interval (5.1us)
+   - Measures VDD regulator voltage (v_vdd) with -5mA to 5mA force current
+   - Assigns the value of v_vdd to global variable (unless it is lower than 3.1V or higher than 3.5V, in which cases the global variable is set to 3.3V)
+
+5. **LX Drain-Source Leakage Measurement (only at -40C testing or Quality mode)**
+   - Forces 12V on SW2 pin
+   - Configures measurement settings of LX2 pin (10 samples, 5.1us intervals)
+   - Forces 0V on LX2 pin at 50uA current clamps, then waits for 15ms
+   - Measures current on LX2 pin and passes the value to i_leakDS
+   - Forces 12V on LX2 pin, then waits for 5ms
+   - Measures current on LX2 pin again and pass the value to i_leak100mA_DS
+   - Resets LX2 pin and SW2 pin to 0V, carefully gates off and disconnects to prevent spikes.
+
+6. **Power stage RON: Stress and Post-stress Current Measurements  (only at -40C testing or Quality mode)**
+   - Enables test mode by calling MY.TM_Enable() function
+   - Sets device to Power stage RON test mode using JTAG chain "PS_RON"
+   - Calls MY.SMPS_supply_on() function, likely Connecting power stage supply to SW pins and setting to 12V
+   - Configures measurement settings of CHDR pin (10 samples, 5.1us intervals)
+   - Forces 4.8V on CHDR pin, then waits for 3ms before measuring the current (i_leak)
+   - Forces 0.0V on CHDR pin, then waits for 3ms before measuring the current (i_stress)
+   - Forces 4.8V again, then waits for another 3ms before measuring the current (i_post)
+
+6. **Power stage RON: CHDR Voltage Measurement**
+   - Runs JTAG chain "CHDR" to put device in CHDR test mode
+   - Forces 10mA on CHDR pin, then waits for 5ms before measuring v_chdr
+   - Resets CHDR current to 0uA
+   - Calculates v_chdr relative to SUP pin (v_chdr = 12 - v_chdr)
+
+7. **Wake-up Time Measurement**:
+   - Configures test mode to monitor EN_FILT on TDO pin
+   - Executes wake-up pattern (Pattern name = "wakeup", Label name = "wakeup") and reads pattern fail counter
+   - Converts counter result to time (10ns resolution)
+
+8. **EN Pin Pulldown Currents**:
+   - Safely closes "EN2HVVI" relay, most likely connecting EN pin to HVVI ATE resource on the DUT board
+   - Disconnects EN pin from all digital resources
+   - Configures VI measurement settings for EN pin (samples=10, interval=5.1us)
+   - Forces 3.3V to measure pulldown current at 3.3V (ipd_en), then waits for 5ms
+   - Forces 28V to measure pulldown current at 28V (ipd_en28V)
+   - Resets voltage to 0V and reconnects EN pin to digital resources after measurement
+   - Resets EN2HVVI relay so as to disconnect from HVVI channel
+
+9. **Cleanup and Datalogging**:
+   - Calls MY.Inputs_Low(), likely resetting digital pins to logic low
+   - Powers down DUT with SMPS_supply_off() and PowerOff()
+   - Opens all relays (RDF_USED_CBIT)
+   - Datalogs all measurements with specific test numbers
+
+10. **SMPS Drain Leakage Post-measurement (only at -40C or Quality mode)**
+   - Very similar test procedure as step#5 Drain-source leakage measurement
+   - Powers down DUT again after the measurement
+   - Datalogs the measurements with another set of test numbers
+
+## Important Test Engineering Details
+
+1. **Resources Involved**:
+   - Power supplies:
+     * SUP_HV (main supply, 12V-40V)
+     * VDD_V (internal regulator)
+     * CHDR_V (charge driver)
+   - Digital pins:
+     * EN_HVD, ADR_HVD
+   - Analog pins:
+     * TAO_HV, LX2_V, SW2_V
+
+2. **Measurement Configuration**:
+   - Current measurements with different ranges (500μA to 50mA)
+   - Voltage measurements with different force conditions
+   - Settling times from 0.5ms to 15ms depending on measurement
+   - Special bandwidth settings (20kHz vs 40kHz)
+
+3. **Special Cases**:
+   - Different test flows for wafertest vs. finaltest
+   - Temperature conditional measurements (-40°C skip)
+   - Quality test mode enables additional measurements
+   - Soft trimming capability
+
+4. **Datalogging**:
+   - Comprehensive results storage:
+     * 3000-3003: Sleep and standby currents
+     * 8001-8002: EN pulldown currents
+     * 3030-3050: Voltage measurements
+     * 6200: Wake-up time
+     * 8102-8114: Leakage and stress currents
+
+5. **Device Specifics**:
+   - Tests a power management IC with:
+     * Sleep and standby modes
+     * Multiple voltage regulators
+     * Charge driver circuit
+     * Wake-up functionality
+     * High voltage EN pin
+
+## Recommendations for Further Investigation
+1. Review the 15ms settling time requirement for LX2_V measurement
+2. Verify the wake-up time measurement methodology
+3. Check the need for two different EN pulldown current measurements (3.3V and 28V)
+4. Confirm the stress measurement sequence and conditions
+
+## Summary
+This test thoroughly characterizes the power supply characteristics of a power management IC, including sleep/standby currents, voltage regulation, wake-up timing, and pin leakage. The test provides comprehensive datalogging for production test analysis and includes conditional execution based on temperature, test mode, and device type (wafer vs final test)."
+}

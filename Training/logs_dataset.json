@@ -1,0 +1,9 @@
+{
+  "text": [
+    "[2023-11-01 12:00:01] LOAD_PATTERN executed on CH01 with pattern PATT_A01",
+    "[2023-11-01 12:00:02] CONFIG_VOLTAGE set to 1.8V on CH02",
+    "[2023-11-01 12:00:03] MEASURE_VOLTAGE result: 1.798V on CH02",
+    "[2023-11-01 12:00:04] DIGITAL_CAPTURE started on CH01",
+    "[2023-11-01 12:00:05] SET_TIMING_WINDOW for CH01: 10ns"
+  ]
+}
